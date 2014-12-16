@@ -184,7 +184,20 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             return rootView;
         }
     }
+    public static void isis(){
 
+
+
+
+
+
+
+        //LEL
+
+
+
+
+    }
     public static class Sunfury
     {
         // AO prendi questo
