@@ -73,6 +73,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+            //Probabilmente basterà cambiare il setTabListener() e per ogni i diverso
+            //quindi i == 0 setteremo i pulsanti
+            //i == 1 faremo un controllo col server per vedere se è stato aggiornato il valore
+            //giornaliero dei punti.
+            //(Magari possiamo inserire che con uno swipe dall'alto verso il basso gli facciamo apparire un popup
+            //con scritto tipo "I punti sono aggiornati giornalmente, torna domani per vedere il tuo nuovo punteggio"
+
         }
     }
 
