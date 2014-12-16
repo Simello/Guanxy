@@ -184,22 +184,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             return rootView;
         }
     }
-    public static void isis(){
+   public static class SimellPippa
+   {
 
-
-
-
-
-
-
-        //LEL
-
-
-
-
-    }
-    public static class Sunfury
-    {
-        // AO prendi questo
-    }
+   }
 }
