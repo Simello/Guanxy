@@ -184,5 +184,4 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             return rootView;
         }
     }
-
 }
