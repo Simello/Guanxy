@@ -185,10 +185,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
-    public static class Paninocoltonno extends Fragment {
-        //BBBBBITCHEEESSSSSS
-        //DI NUOVO BBBBBIIIITCHEEESSSSZ
-    }
     public static class Sunfury
     {
         // AO prendi questo
