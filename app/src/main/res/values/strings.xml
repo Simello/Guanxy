@@ -3,7 +3,10 @@
 
     <string name="app_name">Guanxy</string>
     <string name="title_section1">Guanxy</string>
-    <string name="title_section2">Punteggio</string>
+    <string name="title_section2">Punti</string>
+    <string name="title_section3">Guida</string>
     <string name="action_settings">Settings</string>
-    <color name="blueGuanxy">#6599FF</color>
+    <string name="chiedi_aiuto">Chiedi Aiuto</string>
+    <color name="blueGuanxy">#198cff</color>
+    <color name="white">#FFFFFF</color>
 </resources>
