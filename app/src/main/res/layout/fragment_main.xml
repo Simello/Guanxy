@@ -40,7 +40,6 @@
         android:text="@string/chiedi_aiuto"
         android:textColor="@color/white"
         android:id="@+id/button"
-        android:background="@drawable/button_aiuto"
         android:textAllCaps="false"
         android:textSize="25sp"
         android:shadowRadius="0"
@@ -48,6 +47,12 @@
         android:layout_alignBottom="@+id/imageButton"
         android:layout_toRightOf="@+id/imageButton"
         android:layout_toEndOf="@+id/imageButton"
-        android:layout_alignTop="@+id/imageButton" />
+        android:layout_alignTop="@+id/imageButton"
+        android:background="@null"
+        android:src="@drawable/button_aiuto"
+        style="?android:attr/borderlessButtonStyle"
+
+
+        />
 
 </RelativeLayout>
