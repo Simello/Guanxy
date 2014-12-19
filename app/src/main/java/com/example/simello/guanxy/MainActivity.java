@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (NoSwipeViewPager) findViewById(R.id.pager);
+        //Se vuoi abilitare lo swipe, basta settare a true
         mViewPager.setPagingEnabled(false);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
