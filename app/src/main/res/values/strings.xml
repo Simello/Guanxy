@@ -7,6 +7,7 @@
     <string name="title_section3">Guida</string>
     <string name="action_settings">Settings</string>
     <string name="chiedi_aiuto">Chiedi Aiuto</string>
+    <string name="cerca_aiuti">Aiuta gli Altri</string>
     <color name="blueGuanxy">#198cff</color>
     <color name="white">#FFFFFF</color>
 </resources>

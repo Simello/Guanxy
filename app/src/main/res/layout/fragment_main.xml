@@ -10,9 +10,8 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <ImageButton
-        android:layout_width="250px"
-        android:layout_height="250px"
-        android:text="New Button"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:id="@+id/button4"
         android:src="@drawable/aiuta_gli_altri"
         android:scaleType="fitXY"
@@ -23,8 +22,8 @@
         android:layout_alignParentStart="true" />
 
     <ImageButton
-        android:layout_width="250px"
-        android:layout_height="250px"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:id="@+id/imageButton"
         android:src="@drawable/chiedi_aiuto"
         android:background="@null"
@@ -37,22 +36,38 @@
     <Button
         android:layout_width="250dp"
         android:layout_height="100dp"
+        android:textStyle="bold"
         android:text="@string/chiedi_aiuto"
         android:textColor="@color/white"
         android:id="@+id/button"
+        android:src="@drawable/button_aiuto"
+        android:background="@null"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:shadowRadius="0"
-        android:shadowDy="0"
         android:layout_alignBottom="@+id/imageButton"
         android:layout_toRightOf="@+id/imageButton"
         android:layout_toEndOf="@+id/imageButton"
         android:layout_alignTop="@+id/imageButton"
-        android:background="@null"
-        android:src="@drawable/button_aiuto"
         style="?android:attr/borderlessButtonStyle"
 
 
-        />
+        android:clickable="false" />
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:textStyle="bold"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:text="@string/cerca_aiuti"
+        android:textColor="@color/white"
+        android:id="@+id/button3"
+        android:src="@drawable/button_aiuto"
+        android:background="@null"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_alignTop="@+id/button4" />
 
 </RelativeLayout>
