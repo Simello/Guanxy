@@ -214,6 +214,4 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
-
-    //android.support.v4.view.ViewPager
 }
