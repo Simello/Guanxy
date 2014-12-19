@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -65,7 +66,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mViewPager);
-
     }
 
 
