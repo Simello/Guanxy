@@ -2,6 +2,8 @@ package com.example.simello.guanxy;
 
 import java.util.Locale;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -40,6 +42,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (isOnline())
+        {
+            //@Todo
+            //Registrazione per il primo login o exit
+        }
+        else
+        {
+            //@Todo
+            //Farlo connettere
+        }
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -191,4 +204,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             return rootView;
         }
     }
+    //Metodo per il controllo se il dispositivo è connesso Online
+    public boolean isOnline()
+    {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
 }
