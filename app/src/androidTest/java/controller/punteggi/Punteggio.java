@@ -11,7 +11,7 @@ public class Punteggio
         return valore;
     }
 
-    public void setValore(int valore) {
-        this.valore = valore;
+    public void updatePoints() {
+       //@Todo: "chiamo script per aggiornamento punti"
     }
 }
