@@ -1,3 +1,14 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+   <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/indicator"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        />
 <com.example.simello.guanxy.NoSwipeViewPager
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,3 +19,4 @@
     />
 
 
+</LinearLayout>
