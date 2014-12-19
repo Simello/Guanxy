@@ -16,13 +16,6 @@ public class ControllerPunteggio
     private Utente utente;
 
 
-    public boolean isDailyChecked() {
-        if(dailyCheck){
-            return true;
-        }else
-            return false;
-    }
-
     public Date getContestDateExpiration() {
         return contestDateExpiration;
     }
@@ -50,7 +43,6 @@ public class ControllerPunteggio
             lastUpdatePoints = todayDate;//l'ultimo aggiornamento lo imposto ad oggi
             //è inutile che chiamo l'aggiornamento punti poiche' se non e' mai
             //stato fatto allora l'utente è nuovo e non ha anncora punti
-            dailyCheck=true;
         }
         else
         {
@@ -58,8 +50,9 @@ public class ControllerPunteggio
             {
                 punteggio.updatePoints();
                 lastUpdatePoints=todayDate;
-                dailyCheck=true;
             }
         }
     }
 }
+//ogni volta che verra cliccato il pulsante punteggi, nel metodo onclick verra' richiamato il metodo dell'aggiornamento del punteggio
+//che lo fara' solamente se è passato un giorno dal giorno dell' ultimo aggiornamento
