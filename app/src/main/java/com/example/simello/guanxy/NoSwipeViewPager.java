@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by Sunfury on 19/12/14.
+ * Created by Sunfury & Simello on 19/12/14.
  */
 
 //Classe modificata del ViewPager che impedisce lo swipe a destra e sinistra x il cambio di visuale!
