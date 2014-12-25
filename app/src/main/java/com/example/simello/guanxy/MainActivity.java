@@ -2,6 +2,7 @@ package com.example.simello.guanxy;
 
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -120,7 +122,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return new FragmentGuanxy();
+                case 1:
+                    return new FragmentPunteggi();
+                case 2:
+                    return new FragmentGuida();
+            }
+            return null;
         }
 
         @Override
@@ -172,10 +182,60 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            Bundle args = getArguments();
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
     }
+
+    @SuppressLint("ValidFragment")
+    public class FragmentGuanxy extends Fragment
+    {
+        public FragmentGuanxy()
+        {
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            return rootView;
+        }
+
+    }
+
+    @SuppressLint("ValidFragment")
+    public class FragmentPunteggi extends Fragment
+    {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.punteggi_fragment, container, false);
+            return rootView;
+        }
+
+
+    }
+
+
+
+    @SuppressLint("ValidFragment")
+    public class FragmentGuida extends Fragment
+    {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.guida_fragment, container, false);
+            return rootView;
+        }
+
+
+    }
+
+
+
+
     //Metodo per il controllo se il dispositivo è connesso Online
     public boolean isOnline()
     {
