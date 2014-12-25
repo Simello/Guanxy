@@ -59,6 +59,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         {
             //@Todo
             //Farlo connettere
+            //Idea, prendo dal db i dati (quindi punti, user e giorni mancanti) e li inserisco in un Bundle, così
+            //possiamo portarli in giro
         }
     */
 
