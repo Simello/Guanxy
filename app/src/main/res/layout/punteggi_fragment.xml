@@ -10,9 +10,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="PROVA"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.51" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Utente:"
+        android:id="@+id/utenteView"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="75px"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/user"
+        android:textColor="@color/white"
+        android:textSize="70px"
+        android:textStyle="bold"
+        />
 </LinearLayout>

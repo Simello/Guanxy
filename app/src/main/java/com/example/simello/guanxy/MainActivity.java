@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -68,6 +70,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mViewPager);
+
     }
 
 
@@ -154,40 +157,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            Bundle args = getArguments();
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
-
+ // Creo un fragment per ogni Facciata da creare.
     @SuppressLint("ValidFragment")
     public class FragmentGuanxy extends Fragment
     {
@@ -212,6 +182,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.punteggi_fragment, container, false);
+
+            //Qui verrà implementato tutto il lavoro di Simone,
+            //Quindi con creazione classe ControllerPunteggio dal quale verranno ricavati i campi da stampare
+            //Quando sarà da ripetere per il pulsante Chiedi Aiuto, utilizza TabActivity
+            TextView t = (TextView) rootView.findViewById(R.id.user);
+            t.setText("Sunfury");
             return rootView;
         }
 
@@ -232,8 +208,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
 
     }
-
-
 
 
     //Metodo per il controllo se il dispositivo è connesso Online
