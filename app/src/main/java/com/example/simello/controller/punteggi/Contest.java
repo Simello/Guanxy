@@ -1,5 +1,5 @@
-package controller.punteggi;
-
+package com.example.simello.controller.punteggi;
+import com.example.simello.controller.punteggi.Premio;
 
 
 /**

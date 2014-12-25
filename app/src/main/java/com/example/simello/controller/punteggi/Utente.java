@@ -1,4 +1,4 @@
-package controller.punteggi;
+package com.example.simello.controller.punteggi;
 
 /**
  * Created by simello & sunfury on 19/12/14.
@@ -6,6 +6,11 @@ package controller.punteggi;
 public class Utente
 {
     private String nome;
+
+    public Utente(String nome)
+    {
+        setNome(nome);
+    }
 
 
     public String getNome() {

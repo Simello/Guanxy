@@ -15,7 +15,9 @@
         android:id="@+id/utenteView"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="75px"/>
+        android:textSize="90px"
+        android:layout_marginLeft="25px"
+        android:layout_marginTop="25px"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +25,20 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/user"
         android:textColor="@color/white"
-        android:textSize="70px"
+        android:textSize="80px"
         android:textStyle="bold"
+        android:layout_marginLeft="25px"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Punti Raccolti:"
+        android:id="@+id/punti"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="90px"
+        android:layout_marginLeft="25px"
+        android:layout_marginTop="40px"/>
 </LinearLayout>

@@ -21,8 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.simello.controller.punteggi.Utente;
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
+
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -40,6 +42,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * The {@link ViewPager} that will host the section contents.
      */
     NoSwipeViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +190,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             //Quindi con creazione classe ControllerPunteggio dal quale verranno ricavati i campi da stampare
             //Quando sarà da ripetere per il pulsante Chiedi Aiuto, utilizza TabActivity
             TextView t = (TextView) rootView.findViewById(R.id.user);
-            t.setText("Sunfury");
+            Utente user = new Utente("Sunfury");
+            t.setText(user.getNome());
             return rootView;
         }
 

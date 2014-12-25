@@ -1,4 +1,4 @@
-package controller.punteggi;
+package com.example.simello.controller.punteggi;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +14,13 @@ public class ControllerPunteggio
     private Date lastUpdatePoints;
     private Punteggio punteggio;
     private Utente utente;
+
+    public ControllerPunteggio()
+    {
+
+        //Boh ho fatto una prova
+        this.utente = new Utente("Sunfury");
+    }
 
 
     public Date getContestDateExpiration() {
