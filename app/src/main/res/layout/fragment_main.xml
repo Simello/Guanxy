@@ -16,7 +16,7 @@
         android:src="@drawable/aiuta_gli_altri"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -28,7 +28,7 @@
         android:src="@drawable/chiedi_aiuto"
         android:background="@null"
         android:scaleType="fitXY"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
