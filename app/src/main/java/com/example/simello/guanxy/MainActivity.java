@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.example.simello.controller.punteggi.Punteggio;
 import com.example.simello.controller.punteggi.Utente;
 import com.viewpagerindicator.TabPageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -153,11 +152,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    return getString(R.string.title_section1);
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
+                    return getString(R.string.title_section2);
                 case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
+                    return getString(R.string.title_section3);
             }
             return null;
         }
