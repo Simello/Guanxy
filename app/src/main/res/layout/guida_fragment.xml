@@ -16,7 +16,7 @@ android:background="@color/blueChiaro">
         android:src="@drawable/nato"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="280dp"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@ android:background="@color/blueChiaro">
 
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="170dp"
         android:layout_height="30dp"
         android:textStyle="bold"
         android:text="Usare Guanxy"
@@ -36,8 +36,8 @@ android:background="@color/blueChiaro">
         android:textAllCaps="false"
         android:textSize="25sp"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginTop="15dp"
+
 
         />
 
@@ -49,8 +49,8 @@ android:background="@color/blueChiaro">
         android:src="@drawable/autori"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="185dp"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -58,7 +58,7 @@ android:background="@color/blueChiaro">
 
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="178dp"
         android:layout_height="30dp"
         android:textStyle="bold"
         android:text="Premi in Palio"
@@ -69,8 +69,8 @@ android:background="@color/blueChiaro">
         android:textAllCaps="false"
         android:textSize="25sp"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_marginLeft="195dp"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="15dp"/>
 
 
     <ImageButton
@@ -80,7 +80,7 @@ android:background="@color/blueChiaro">
         android:src="@drawable/usareguanxy"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentStart="true"
@@ -100,7 +100,7 @@ android:background="@color/blueChiaro">
         android:textAllCaps="false"
         android:textSize="25sp"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_marginTop="265dp"
+        android:layout_marginTop="245dp"
         android:layout_marginLeft="10dp"/>
 
     <ImageButton
@@ -110,8 +110,8 @@ android:background="@color/blueChiaro">
         android:src="@drawable/premi"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="185dp"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -129,7 +129,7 @@ android:background="@color/blueChiaro">
         android:textAllCaps="false"
         android:textSize="25sp"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_marginTop="265dp"
-        android:layout_marginLeft="200dp"/>
+        android:layout_marginTop="245dp"
+        android:layout_marginLeft="185dp"/>
 
 </RelativeLayout>
