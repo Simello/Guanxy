@@ -12,13 +12,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.simello.controller.punteggi.Punteggio;
 import com.example.simello.controller.punteggi.Utente;
@@ -35,12 +37,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    static SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    NoSwipeViewPager mViewPager;
+    static NoSwipeViewPager mViewPager;
 
 
     @Override
@@ -132,11 +134,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return FragmentGuanxy.newIstance();
+                    return FragmentGuanxy.newInstance();
                 case 1:
-                    return FragmentPunteggi.newIstance();
+                    return FragmentPunteggi.newInstance();
                 case 2:
-                    return FragmentGuida.newIstance();
+                    return FragmentGuida.newInstance();
             }
             return null;
         }
@@ -165,7 +167,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
  // Creo un fragment per ogni Facciata da creare.
     public static class FragmentGuanxy extends Fragment
     {
-        public static FragmentGuanxy newIstance()
+        public static FragmentGuanxy newInstance()
         {
             return new FragmentGuanxy();
         }
@@ -174,15 +176,38 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            ImageButton btn = (ImageButton) rootView.findViewById(R.id.chiediAiuto);
+            btn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // here you set what you want to do when user clicks your button,
+                    // e.g. launch a new activity
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    //transaction.replace(R.id.pager, FragmentTest.newInstance());
+                    transaction.commit();
+                    Toast.makeText(getActivity(), "Premuto!",Toast.LENGTH_SHORT ).show();
+                    mSectionsPagerAdapter.notifyDataSetChanged();
+
+                    //@Todo Creare una classe per ogni frammento, quindi creare un package di frammenti.
+                    //2 package diversi, 1 per il ViewPager Principale (Guanxy,Punti,Guida)
+                    //e uno per il secondo ViewPager(Richiesta,Mappa,Chat)
+
+                }
+            });
             return rootView;
         }
+
 
     }
 
 
+
+
     public static class FragmentPunteggi extends Fragment
     {
-        public static FragmentPunteggi newIstance()
+        public static FragmentPunteggi newInstance()
         {
             return new FragmentPunteggi();
         }
@@ -212,7 +237,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     public static class FragmentGuida extends Fragment
     {
-        public static FragmentGuida newIstance()
+        public static FragmentGuida newInstance()
         {
             FragmentGuida f = new FragmentGuida();
             return f;
