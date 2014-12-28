@@ -2,7 +2,6 @@ package com.example.simello.guanxy;
 
 import java.util.Locale;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.v7.app.ActionBarActivity;
@@ -132,11 +131,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return new FragmentGuanxy();
+                    return FragmentGuanxy.newIstance();
                 case 1:
-                    return new FragmentPunteggi();
+                    return FragmentPunteggi.newIstance();
                 case 2:
-                    return new FragmentGuida();
+                    return FragmentGuida.newIstance();
             }
             return null;
         }
@@ -163,12 +162,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
  // Creo un fragment per ogni Facciata da creare.
-    @SuppressLint("ValidFragment")
-    public class FragmentGuanxy extends Fragment
+    public static class FragmentGuanxy extends Fragment
     {
-        public FragmentGuanxy()
+        public static FragmentGuanxy newIstance()
         {
-
+            return new FragmentGuanxy();
         }
 
         @Override
@@ -180,9 +178,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
-    @SuppressLint("ValidFragment")
-    public class FragmentPunteggi extends Fragment
+
+    public static class FragmentPunteggi extends Fragment
     {
+        public static FragmentPunteggi newIstance()
+        {
+            return new FragmentPunteggi();
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -206,10 +209,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-
-    @SuppressLint("ValidFragment")
-    public class FragmentGuida extends Fragment
+    public static class FragmentGuida extends Fragment
     {
+        public static FragmentGuida newIstance()
+        {
+            FragmentGuida f = new FragmentGuida();
+            return f;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
