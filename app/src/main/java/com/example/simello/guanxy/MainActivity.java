@@ -12,22 +12,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.simello.controller.punteggi.Punteggio;
-import com.example.simello.controller.punteggi.Utente;
+
+
+import com.example.simello.fragments.Guanxy;
+import com.example.simello.fragments.Guida;
+import com.example.simello.fragments.Punti;
 import com.viewpagerindicator.TabPageIndicator;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener
+{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -134,11 +131,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return FragmentGuanxy.newInstance();
+                    return Guanxy.newInstance();
                 case 1:
-                    return FragmentPunteggi.newInstance();
+                    return Punti.newInstance();
                 case 2:
-                    return FragmentGuida.newInstance();
+                    return Guida.newInstance();
             }
             return null;
         }
@@ -162,95 +159,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
             return null;
         }
-    }
-
- // Creo un fragment per ogni Facciata da creare.
-    public static class FragmentGuanxy extends Fragment
-    {
-        public static FragmentGuanxy newInstance()
-        {
-            return new FragmentGuanxy();
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            ImageButton btn = (ImageButton) rootView.findViewById(R.id.chiediAiuto);
-            btn.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // here you set what you want to do when user clicks your button,
-                    // e.g. launch a new activity
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    //transaction.replace(R.id.pager, FragmentTest.newInstance());
-                    transaction.commit();
-                    Toast.makeText(getActivity(), "Premuto!",Toast.LENGTH_SHORT ).show();
-                    mSectionsPagerAdapter.notifyDataSetChanged();
-
-                    //@Todo Creare una classe per ogni frammento, quindi creare un package di frammenti.
-                    //2 package diversi, 1 per il ViewPager Principale (Guanxy,Punti,Guida)
-                    //e uno per il secondo ViewPager(Richiesta,Mappa,Chat)
-
-                }
-            });
-            return rootView;
-        }
-
-
-    }
-
-
-
-
-    public static class FragmentPunteggi extends Fragment
-    {
-        public static FragmentPunteggi newInstance()
-        {
-            return new FragmentPunteggi();
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.punteggi_fragment, container, false);
-
-            //Qui verrà implementato tutto il lavoro di Simone,
-            //Quindi con creazione classe ControllerPunteggio dal quale verranno ricavati i campi da stampare
-            //Quando sarà da ripetere per il pulsante Chiedi Aiuto, utilizza TabActivity
-            //Problema, come ricava i campi Simone?? La classe di Simone nn è activity e non può esserla, quindi come si fa?
-            TextView tUser = (TextView) rootView.findViewById(R.id.user);
-            TextView tPunti = (TextView) rootView.findViewById(R.id.punti);
-            Punteggio punti = new Punteggio();
-            Utente user = new Utente("Sunfury");
-            tUser.setText(user.getNome());
-            punti.updatePoints();
-            tPunti.setText(""+punti.getValore());
-            return rootView;
-        }
-            //Ricontrolla i metodi onResume() del fragment
-
-    }
-
-
-    public static class FragmentGuida extends Fragment
-    {
-        public static FragmentGuida newInstance()
-        {
-            FragmentGuida f = new FragmentGuida();
-            return f;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.guida_fragment, container, false);
-            return rootView;
-        }
-
-
     }
 
 
