@@ -1,6 +1,5 @@
 package com.example.simello.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,10 +31,10 @@ public class Guanxy extends android.support.v4.app.Fragment
             public void onClick(View v) {
                 // here you set what you want to do when user clicks your button,
                 // e.g. launch a new activity
-                FragmentManager manager = getFragmentManager();
+                FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                //transaction.replace(R.id.pager, FragmentTest.newInstance());
+                transaction.replace(R.id.pager, ChiediAiuto.newInstance());
                 transaction.commit();
                 Toast.makeText(getActivity(), "Premuto!", Toast.LENGTH_SHORT).show();
 

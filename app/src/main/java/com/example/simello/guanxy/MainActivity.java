@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -34,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    static SectionsPagerAdapter mSectionsPagerAdapter;
+    static public SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -119,7 +120,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -162,10 +163,4 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-    //Metodo per il controllo se il dispositivo è connesso Online
-    public boolean isOnline()
-    {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
-    }
 }
