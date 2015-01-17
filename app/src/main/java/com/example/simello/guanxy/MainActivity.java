@@ -2,8 +2,6 @@ package com.example.simello.guanxy;
 
 import java.util.Locale;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;

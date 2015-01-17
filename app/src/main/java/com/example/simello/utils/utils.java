@@ -26,7 +26,4 @@ public class utils
     //Questo metodo  avrà new MyAsyncTask(getActivity(),"Altri campi").execute("");
     //nel mio asyncTask ora avrò il costruttore con i parametri "Altri Campi" e poi i 3 metodi dell'asynctask
     //infine nell'onCreateView avrò il return.
-
-
-
 }
