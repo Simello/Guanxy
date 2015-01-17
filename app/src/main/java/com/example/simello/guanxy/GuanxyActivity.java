@@ -53,6 +53,8 @@ public class GuanxyActivity extends ActionBarActivity
         //Prendo il singolo bottone
         final Button punti = (Button) findViewById(R.id.punti);
 
+        final Button guida = (Button) findViewById(R.id.guida);
+
         //GESTIONE COLORE BOTTONI
         guanxy.setPressed(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
