@@ -2,7 +2,6 @@ package com.example.simello.guanxy;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,7 +84,18 @@ public class GuanxyActivity extends ActionBarActivity
             };
         });
 
+        guida.setOnClickListener( new View.OnClickListener() {
 
+            public void onClick(View v){
+                v.setSelected(true);
+
+                guanxy.setSelected(false);
+                guanxy.setPressed(false);
+
+                Intent myIntent = new Intent(GuanxyActivity.this, GuidaActivity.class);
+                GuanxyActivity.this.startActivity(myIntent);
+            }
+        });
 
         //Creo una nuova dimensione per il bottone
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width/3, 100);
