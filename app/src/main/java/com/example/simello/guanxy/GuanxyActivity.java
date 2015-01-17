@@ -109,9 +109,10 @@ public class GuanxyActivity extends ActionBarActivity
         puntiParams.addRule(RelativeLayout.RIGHT_OF, guanxy.getId());
         punti.setLayoutParams(puntiParams);
 
-        //
-        //Manca l'interfaccia per il terzo bottone
-        //
+        RelativeLayout.LayoutParams guidaParams = new RelativeLayout.LayoutParams(width/3, 100);
+        guidaParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        guidaParams.addRule(RelativeLayout.RIGHT_OF, punti.getId());
+        guida.setLayoutParams(guidaParams);
 
 
     }

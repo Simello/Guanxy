@@ -32,6 +32,8 @@ public class PuntiActivity extends ActionBarActivity
         //Prendo il singolo bottone
         final Button punti = (Button) findViewById(R.id.punti);
 
+        final Button guida = (Button) findViewById(R.id.guida);
+
         //GESTIONE COLORE BOTTONI
         punti.setPressed(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +81,10 @@ public class PuntiActivity extends ActionBarActivity
         puntiParams.addRule(RelativeLayout.RIGHT_OF, guanxy.getId());
         punti.setLayoutParams(puntiParams);
 
-        //
-        //Manca l'interfaccia per il terzo bottone
-        //
+        RelativeLayout.LayoutParams guidaParams = new RelativeLayout.LayoutParams(width/3, 100);
+        guidaParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        guidaParams.addRule(RelativeLayout.RIGHT_OF, punti.getId());
+        guida.setLayoutParams(guidaParams);
 
     }
 }

@@ -18,12 +18,14 @@ public class GuidaActivity extends ActionBarActivity
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guida_fragment);
+
         int width = getWindowManager().getDefaultDisplay().getWidth();
         final Button guanxy = (Button) findViewById(R.id.guanxy);
         final Button punti = (Button) findViewById(R.id.punti);
         final Button guida = (Button) findViewById(R.id.guida);
 
-        punti.setPressed(true);
+        guida.setPressed(true);
+
         guanxy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +66,11 @@ public class GuidaActivity extends ActionBarActivity
         puntiParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         puntiParams.addRule(RelativeLayout.RIGHT_OF, guanxy.getId());
         punti.setLayoutParams(puntiParams);
+
+        RelativeLayout.LayoutParams guidaParams = new RelativeLayout.LayoutParams(width/3, 100);
+        guidaParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        guidaParams.addRule(RelativeLayout.RIGHT_OF, punti.getId());
+        guida.setLayoutParams(guidaParams);
 
 
 
