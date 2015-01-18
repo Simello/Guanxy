@@ -26,6 +26,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity android:name=".GuidaActivity"
+            android:label="Guanxy"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
     <!-- Permessi -->
