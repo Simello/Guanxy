@@ -69,22 +69,7 @@ public class PuntiActivity extends ActionBarActivity
 
 
 
-        //Creo una nuova dimensione per il bottone
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width/3, 100);
-        //Gli do la regola, dato che quelle dell'xml sono sovrascritte
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        //Applico la nuova interfaccia al singolo bottone
-        guanxy.setLayoutParams(layoutParams);
-        //Creo una nuova interfaccia per il secondo bottone
-        RelativeLayout.LayoutParams puntiParams = new RelativeLayout.LayoutParams(width/3, 100);
-        puntiParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        puntiParams.addRule(RelativeLayout.RIGHT_OF, guanxy.getId());
-        punti.setLayoutParams(puntiParams);
 
-        RelativeLayout.LayoutParams guidaParams = new RelativeLayout.LayoutParams(width/3, 100);
-        guidaParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        guidaParams.addRule(RelativeLayout.RIGHT_OF, punti.getId());
-        guida.setLayoutParams(guidaParams);
 
     }
 }

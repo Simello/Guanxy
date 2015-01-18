@@ -58,19 +58,6 @@ public class GuidaActivity extends ActionBarActivity
 
 
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width/3, 100);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        guanxy.setLayoutParams(layoutParams);
-
-        RelativeLayout.LayoutParams puntiParams = new RelativeLayout.LayoutParams(width/3, 100);
-        puntiParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        puntiParams.addRule(RelativeLayout.RIGHT_OF, guanxy.getId());
-        punti.setLayoutParams(puntiParams);
-
-        RelativeLayout.LayoutParams guidaParams = new RelativeLayout.LayoutParams(width/3, 100);
-        guidaParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        guidaParams.addRule(RelativeLayout.RIGHT_OF, punti.getId());
-        guida.setLayoutParams(guidaParams);
 
 
 
