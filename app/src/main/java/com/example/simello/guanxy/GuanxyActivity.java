@@ -80,6 +80,7 @@ public class GuanxyActivity extends ActionBarActivity
 
                 Intent myIntent = new Intent(GuanxyActivity.this, PuntiActivity.class);
                 GuanxyActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
             };
         });
@@ -94,6 +95,8 @@ public class GuanxyActivity extends ActionBarActivity
 
                 Intent myIntent = new Intent(GuanxyActivity.this, GuidaActivity.class);
                 GuanxyActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
             }
         });
 

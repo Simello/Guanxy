@@ -50,19 +50,24 @@ public class PuntiActivity extends ActionBarActivity
                 Intent myIntent = new Intent(PuntiActivity.this, GuanxyActivity.class);
                 //mando in avvio l'activity
                 PuntiActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
 
             };
         });
 
-        punti.setOnClickListener(new View.OnClickListener() {
+        guida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.setSelected(true);
 
                 //Con queste due righe, quando premo Punti, cambia il colore di Guanxy/Guida(da aggiungere)
-                guanxy.setSelected(false);
-                guanxy.setPressed(false);
+                punti.setSelected(false);
+                punti.setPressed(false);
 
+                Intent myIntent = new Intent(PuntiActivity.this, GuidaActivity.class);
+                PuntiActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
             };
         });

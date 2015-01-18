@@ -37,6 +37,8 @@ public class GuidaActivity extends ActionBarActivity
                 Intent myIntent = new Intent(GuidaActivity.this, GuanxyActivity.class);
 
                 GuidaActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
 
             };
         });
@@ -52,6 +54,8 @@ public class GuidaActivity extends ActionBarActivity
                 Intent myIntent = new Intent(GuidaActivity.this, PuntiActivity.class);
 
                 GuidaActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
 
             };
         });
