@@ -72,6 +72,14 @@ public class PuntiActivity extends ActionBarActivity
             };
         });
 
+        punti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setSelected(true);
+
+            };
+        });
+
 
 
 

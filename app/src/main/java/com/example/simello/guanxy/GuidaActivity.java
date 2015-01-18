@@ -60,6 +60,16 @@ public class GuidaActivity extends ActionBarActivity
             };
         });
 
+        guida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setSelected(true);
+
+
+
+            };
+        });
+
 
 
 
