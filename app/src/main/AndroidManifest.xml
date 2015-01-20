@@ -30,6 +30,10 @@
             android:label="Guanxy"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".ChiediAiuto"
+            android:label="Guanxy"
+            android:screenOrientation="portrait"
+            />
 
     </application>
 

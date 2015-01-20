@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 
@@ -34,15 +35,21 @@ public class GuanxyActivity extends ActionBarActivity
 
 
 
+        ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);
+        chiediAiuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(GuanxyActivity.this, ChiediAiuto.class);
+                GuanxyActivity.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
 
+            }
+
+            ;
+        });
 
 
-
-
-
-        //Prendo la dimensione dello schermo
-        int width = getWindowManager().getDefaultDisplay().getWidth();
 
         //REPARTO BOTTONI
         //Prendo il bottone e setto a true x lasciare il colore blue
