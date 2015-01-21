@@ -70,7 +70,7 @@ public class GuanxyActivity extends ActionBarActivity
             public void onClick(View v) {
                 v.setSelected(true);
 
-                //Con queste due righe, quando premo Guanxy, cambia il colore di Punti/Guida(da aggiungere)
+                //Con queste due righ, quando premo Guanxy, cambia il colore di Punti/Guida(da aggiungere)
                 punti.setPressed(false);
                 punti.setSelected(false);
 
