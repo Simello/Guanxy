@@ -24,6 +24,7 @@ public class GuidaActivity extends ActionBarActivity
         final Button guida = (Button) findViewById(R.id.guida);
 
         guida.setPressed(true);
+        guida.setSelected(true);
 
         guanxy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,7 @@ public class GuidaActivity extends ActionBarActivity
                 guida.setPressed(false);
                 guida.setSelected(false);
                 Intent myIntent = new Intent(GuidaActivity.this, GuanxyActivity.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 GuidaActivity.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
@@ -74,5 +76,17 @@ public class GuidaActivity extends ActionBarActivity
 
 
 
+    }
+
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+        findViewById(R.id.guida).setPressed(false);
+        findViewById(R.id.guida).setPressed(false);
+
+        Intent myIntent = new Intent(this, GuanxyActivity.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(myIntent);
     }
 }

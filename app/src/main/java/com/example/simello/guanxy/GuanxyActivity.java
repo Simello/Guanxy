@@ -3,6 +3,7 @@ package com.example.simello.guanxy;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +64,7 @@ public class GuanxyActivity extends ActionBarActivity
 
         //GESTIONE COLORE BOTTONI
         guanxy.setPressed(true);
+        guanxy.setSelected(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +137,17 @@ public class GuanxyActivity extends ActionBarActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+//Serve per sistemare i bottoni quando viene premuto il tasto "back" fisico
+    //Per evitare problemi, crea una nuova activity
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+     //Se sono già a Guanxy, esco
+    }
+
+
 
 
 }

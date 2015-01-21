@@ -2,7 +2,9 @@ package com.example.simello.guanxy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +18,8 @@ public class ChiediAiuto extends ActionBarActivity
         Intent myIntent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chiedi_aiuto);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -32,6 +36,7 @@ public class ChiediAiuto extends ActionBarActivity
 
         //GESTIONE COLORE BOTTONI
         guanxy.setPressed(true);
+        guanxy.setSelected(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +47,7 @@ public class ChiediAiuto extends ActionBarActivity
                 punti.setSelected(false);
 
                 Intent myIntent = new Intent(ChiediAiuto.this, GuanxyActivity.class);
+
                 ChiediAiuto.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
 
@@ -74,10 +80,34 @@ public class ChiediAiuto extends ActionBarActivity
                 guanxy.setPressed(false);
 
                 Intent myIntent = new Intent(ChiediAiuto.this, GuidaActivity.class);
+
                 ChiediAiuto.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+
+        Intent myIntent = new Intent(this, GuanxyActivity.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(myIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                overridePendingTransition(0, 0);
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -35,6 +35,7 @@ public class PuntiActivity extends ActionBarActivity
 
         //GESTIONE COLORE BOTTONI
         punti.setPressed(true);
+        punti.setSelected(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +48,9 @@ public class PuntiActivity extends ActionBarActivity
                 //Boh l'intent tocca crearlo non so x quale motivo
                 //Cmq gli si passa l'activity attuale, e quella a cui voglio arrivare
                 Intent myIntent = new Intent(PuntiActivity.this, GuanxyActivity.class);
+                //gli dico che se preme BACK FISICO, allora chiude app.
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 //mando in avvio l'activity
                 PuntiActivity.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
@@ -65,6 +69,7 @@ public class PuntiActivity extends ActionBarActivity
                 punti.setPressed(false);
 
                 Intent myIntent = new Intent(PuntiActivity.this, GuidaActivity.class);
+
                 PuntiActivity.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
 
@@ -83,5 +88,18 @@ public class PuntiActivity extends ActionBarActivity
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+        findViewById(R.id.punti).setPressed(false);
+        findViewById(R.id.punti).setPressed(false);
+
+
+        Intent myIntent = new Intent(this, GuanxyActivity.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(myIntent);
     }
 }

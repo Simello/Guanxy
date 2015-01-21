@@ -33,6 +33,7 @@
         <activity android:name=".ChiediAiuto"
             android:label="Guanxy"
             android:screenOrientation="portrait"
+            android:parentActivityName=".GuanxyActivity"
             />
 
     </application>
