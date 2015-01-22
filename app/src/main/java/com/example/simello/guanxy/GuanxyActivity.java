@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 public class GuanxyActivity extends ActionBarActivity
@@ -145,7 +146,11 @@ public class GuanxyActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.settingsGuanxy) {
+            Toast.makeText(this,"Premuto",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            overridePendingTransition(0, 0);
             return true;
         }
 

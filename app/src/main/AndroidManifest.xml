@@ -41,6 +41,11 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".GuanxyActivity"
             />
+        <activity android:name=".SettingsActivity"
+            android:label="Guanxy"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GuanxyActivity"
+            />
 
     </application>
 
