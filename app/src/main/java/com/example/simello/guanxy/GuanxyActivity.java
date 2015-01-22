@@ -1,15 +1,13 @@
 package com.example.simello.guanxy;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -77,7 +75,7 @@ public class GuanxyActivity extends ActionBarActivity
 
         final Button guida = (Button) findViewById(R.id.guida);
 
-        //GESTIONE COLORE BOTTONI
+        //GESTIONE COLORE BOTTONILEL
         guanxy.setPressed(true);
         guanxy.setSelected(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
