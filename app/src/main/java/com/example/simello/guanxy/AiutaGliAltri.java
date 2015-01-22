@@ -35,7 +35,7 @@ public class AiutaGliAltri extends ActionBarActivity
         panel4 = (LinearLayout) findViewById(R.id.panel4);
         panel5 = (LinearLayout) findViewById(R.id.panel5);
 
-//panel1.setVisibility(View.VISIBLE);
+//panel1.setVisibility(View.VISIBLE); OVERLOLLING
 
 //panel1.setVisibility(View.VISIBLE);
 
