@@ -13,7 +13,7 @@
         android:layout_width="145dp"
         android:layout_height="145dp"
         android:id="@+id/button3guida"
-        android:src="@drawable/nato"
+        android:src="@drawable/trofei"
         android:scaleType="fitXY"
         android:background="@null"
         android:layout_marginTop="270dp"
@@ -28,7 +28,7 @@
         android:layout_width="170dp"
         android:layout_height="30dp"
         android:textStyle="bold"
-        android:text="Usare Guanxy"
+        android:text="@string/usare_guanxy"
         android:textColor="@color/white"
         android:id="@+id/button2"
         android:src="@drawable/button_aiuto"
@@ -61,7 +61,7 @@
         android:layout_width="178dp"
         android:layout_height="30dp"
         android:textStyle="bold"
-        android:text="Premi in Palio"
+        android:text="@string/premi"
         android:textColor="@color/white"
         android:id="@+id/aiutaGliAltri"
         android:src="@drawable/button_aiuto"
@@ -92,7 +92,7 @@
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:textStyle="bold"
-        android:text="Com'è Nata"
+        android:text="@string/trofei"
         android:textColor="@color/white"
         android:id="@+id/button8"
         android:src="@drawable/button_aiuto"
@@ -121,7 +121,7 @@
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:textStyle="bold"
-        android:text="Autori"
+        android:text="@string/autori"
         android:textColor="@color/white"
         android:id="@+id/button6"
         android:src="@drawable/button_aiuto"
@@ -133,7 +133,7 @@
         android:layout_marginLeft="185dp"/>
 
     <Button
-        android:text="Guanxy"
+        android:text="@string/title_section1"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -154,7 +154,7 @@
         android:background="@drawable/divider"/>
 
     <Button
-        android:text="Punti"
+        android:text="@string/title_section2"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -170,7 +170,7 @@
         android:layout_toEndOf="@+id/divider1" />
 
     <Button
-        android:text="Guida"
+        android:text="@string/title_section3"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"

@@ -8,6 +8,11 @@
     <string name="action_settings">Settings</string>
     <string name="chiedi_aiuto">Chiedi Aiuto</string>
     <string name="cerca_aiuti">Aiuta gli Altri</string>
+    <string name="premi">Premi in palio</string>
+    <string name="trofei">Trofei</string>
+    <string name="usare_guanxy">Usare Guanxy</string>
+    <string name="autori">Autori</string>
+    <string name="punti">Punti</string>
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
     <color name="biancoOminoRichiesta">#e6e6e6</color>
