@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Scrivi la tua richiesta:"
+        android:text="@string/richiesta"
         android:id="@+id/scriviRichiesta"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -19,7 +19,7 @@
         android:textSize="25sp" />
 
     <Button
-        android:text="Guanxy"
+        android:text="@string/title_section1"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -38,7 +38,7 @@
         android:layout_alignEnd="@+id/guanxy"
         android:background="@drawable/divider"/>
     <Button
-        android:text="Punti"
+        android:text="@string/title_section2"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -63,7 +63,7 @@
         android:layout_toEndOf="@+id/punti"
         android:layout_alignTop="@+id/punti" />
     <Button
-        android:text="Guida"
+        android:text="@string/title_section3"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"

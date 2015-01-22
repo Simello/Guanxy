@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Utente:"
+        android:text="@string/utente"
         android:id="@+id/utenteView"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -41,7 +41,7 @@
         android:background="@drawable/divider"/>
 
     <Button
-        android:text="Guanxy"
+        android:text="@string/title_section1"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -62,7 +62,7 @@
         android:background="@drawable/divider"/>
 
     <Button
-        android:text="Punti"
+        android:text="@string/title_section2"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -78,7 +78,7 @@
         android:layout_toEndOf="@+id/divider1" />
 
     <Button
-        android:text="Guida"
+        android:text="@string/title_section3"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold"

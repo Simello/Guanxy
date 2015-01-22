@@ -36,6 +36,9 @@ public class GuanxyActivity extends ActionBarActivity
 
 
 
+
+
+
         ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);
         chiediAiuto.setOnClickListener(new View.OnClickListener() {
             @Override
