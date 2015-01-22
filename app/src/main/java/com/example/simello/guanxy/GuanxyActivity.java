@@ -53,6 +53,17 @@ public class GuanxyActivity extends ActionBarActivity
             ;
         });
 
+        ImageButton aiutaGliAltri = (ImageButton)findViewById(R.id.aiutaGliAltri);
+        aiutaGliAltri.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v){
+                Intent myIntent = new Intent(GuanxyActivity.this, AiutaGliAltri.class);
+                GuanxyActivity.this.startActivity(myIntent);
+                overridePendingTransition(0,0);
+            }
+        });
+
+
 
 
         //REPARTO BOTTONI
