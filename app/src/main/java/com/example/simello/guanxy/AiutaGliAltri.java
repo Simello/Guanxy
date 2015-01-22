@@ -56,7 +56,7 @@ public class AiutaGliAltri extends ActionBarActivity
                     text1.setBackgroundResource(R.drawable.freccia_aperto);
                     flagSimelloFreccia = 1;
                 }
-                if(flagSimelloFreccia == 1) {
+                else if(flagSimelloFreccia == 1) {
                     text1.setBackgroundResource((R.drawable.freccia_chiusa));
                     flagSimelloFreccia = 0;
                 }
