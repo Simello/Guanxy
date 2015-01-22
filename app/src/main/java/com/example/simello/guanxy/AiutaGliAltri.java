@@ -40,7 +40,7 @@ public class AiutaGliAltri extends ActionBarActivity
 
 //panel1.setVisibility(View.VISIBLE);
 
-//Log.v("CZ","height at first ..." + panel1.getMeasuredHeight());
+//Log.v("CZ","height at first ..." + panel1.getMeasuredHeight()); OVERLOLLING MADLY AROUNd
 
         text1 = (TextView) findViewById(R.id.text1);
         text2 = (TextView) findViewById(R.id.text2);
