@@ -19,6 +19,7 @@ import android.widget.TextView;
  */
 public class AiutaGliAltri extends ActionBarActivity
 {
+    private int flagSimelloFreccia = 0;
     public OnLongClickListener longClickListner;
     LinearLayout panel1,panel2,panel3,panel4,panel5;
     TextView text1,text2,text3,text4,text5;
@@ -51,7 +52,14 @@ public class AiutaGliAltri extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                text1.setBackgroundResource(R.drawable.freccia_aperto);
+                if(flagSimelloFreccia == 0) {
+                    text1.setBackgroundResource(R.drawable.freccia_aperto);
+                    flagSimelloFreccia = 1;
+                }
+                if(flagSimelloFreccia == 1) {
+                    text1.setBackgroundResource((R.drawable.freccia_chiusa));
+                    flagSimelloFreccia = 0;
+                }
                 hideOthers(v);
             }
         });
