@@ -17,9 +17,15 @@ import android.widget.TextView;
 /**
  * Created by sunfury & simello on 22/01/15.
  */
+
+//TODO pull down aggiorna con altri cinque utenti
+//TODO aggiornare distanza e tempo tramite script ( attenzione al textfield con lo \n )
+//TODO estendere l'xml del primo utente agli altri quattro
+//TODO aggiungere i bottoni in basso guanxy punti guida
 public class AiutaGliAltri extends ActionBarActivity
 {
     private int flagSimelloFreccia = 0;
+
     public OnLongClickListener longClickListner;
     LinearLayout panel1,panel2,panel3,panel4,panel5;
     TextView text1,text2,text3,text4,text5;
