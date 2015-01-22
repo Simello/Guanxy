@@ -51,6 +51,7 @@ public class AiutaGliAltri extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                text1.setBackgroundResource(R.drawable.freccia_aperto);
                 hideOthers(v);
             }
         });

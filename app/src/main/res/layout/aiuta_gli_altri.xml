@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="fill_parent" android:background="@color/blueChiaro"
     android:layout_height="fill_parent">
     <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_gravity="center">
-        <TextView android:text="Utente 1" android:id="@+id/text1" android:textSize="14dp" android:textColor="@color/white" android:textStyle="bold" android:paddingLeft="25dp" android:paddingTop="5dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"
+        <TextView android:text="Utente 1" android:id="@+id/text1" android:textSize="17dp" android:textColor="@color/white" android:textStyle="bold" android:paddingLeft="25dp" android:paddingTop="3dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"
             android:clickable="false" />
         <LinearLayout android:id="@+id/panel1" android:visibility="gone"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
             <TextView android:layout_margin="2dip" android:textStyle="bold" android:text="Sono stato bocciato all' esame di malvestuto, come posso fare?" android:textSize="17dp" android:id="@+id/stringaUtente1" android:paddingLeft="130dp" android:paddingTop="25dp" android:background="@drawable/sfondo_nuvoletta"  android:layout_width="fill_parent" android:textColor="@color/white"  android:layout_height="200dp" />
