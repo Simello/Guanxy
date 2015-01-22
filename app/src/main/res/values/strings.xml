@@ -15,6 +15,10 @@
     <string name="punti">Punti</string>
     <string name="richiesta">Scrivi la tua richiesta:</string>
     <string name="utente">Utente:</string>
+    <string name="notifiche">Notifiche</string>
+    <string name="batteria">Risparmio Batteria</string>
+    <string name="lingua">Imposta Lingua</string>
+    <string name="username">Cambia Username</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>

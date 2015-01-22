@@ -145,7 +145,6 @@ public class GuanxyActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.settingsGuanxy) {
-            Toast.makeText(this,"Premuto",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             overridePendingTransition(0, 0);

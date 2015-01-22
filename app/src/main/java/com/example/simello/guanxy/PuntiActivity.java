@@ -1,14 +1,19 @@
 package com.example.simello.guanxy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.simello.controller.punteggi.Utente;
 
 /**
- * Created by Sunfury on 17/01/15.
+ * Created by Sunfury & Simello on 17/01/15.
  */
 public class PuntiActivity extends ActionBarActivity
 {
@@ -18,6 +23,16 @@ public class PuntiActivity extends ActionBarActivity
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.punteggi_fragment);
+
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+        String userRef = prefs.getString("username","default");
+
+
+        Utente user = new Utente(userRef);
+        //Stampa a video l'username dell'utente
+        TextView username = (TextView) findViewById(R.id.user);
+        username.setText(user.getNome());
 
 
 

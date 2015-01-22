@@ -1,23 +1,33 @@
 package com.example.simello.controller.punteggi;
 
+
 /**
  * Created by simello & sunfury on 19/12/14.
  */
 public class Utente
 {
-    private String nome;
+    private static String nome;
+    private static Utente user = null;
 
+//@Todo è da completare la parte dell'user
     public Utente(String nome)
     {
-        setNome(nome);
+
+        this.nome = nome;
     }
 
+    public static void setNome(String nome)
+    {
+        user.nome = nome;
+    }
 
-    public String getNome() {
+    public static String getNome()
+    {
         return nome;
     }
 
-    private void setNome(String nome) {
-        this.nome = nome;
+    public static Utente getUser()
+    {
+        return user;
     }
 }
