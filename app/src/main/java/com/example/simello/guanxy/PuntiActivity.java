@@ -26,7 +26,7 @@ public class PuntiActivity extends ActionBarActivity
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
-        String userRef = prefs.getString("username","default");
+        String userRef = prefs.getString("username","");
 
 
         Utente user = new Utente(userRef);

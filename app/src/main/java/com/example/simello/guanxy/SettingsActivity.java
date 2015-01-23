@@ -28,24 +28,46 @@ public class SettingsActivity extends PreferenceActivity
     Utente user = Utente.getUser();
 
 
+
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         setContentView(R.layout.settings);
 
+        SharedPreferences prefs = getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor  editor = prefs.edit();
+
         //@Todo è da sistemare il toggle delle notifiche e della batteria
-        ToggleButton notifiche = (ToggleButton) findViewById(R.id.toggleNotifiche);
+        final ToggleButton notifiche = (ToggleButton) findViewById(R.id.toggleNotifiche);
         //QUI POSSO SETTARE IL METODO REALE DEL TOGGLE BUTTON DELLE NOTIFICHE
+        String statoNotifiche = prefs.getString("notifiche","");
+        if(statoNotifiche.compareTo("true") == 0)
+            notifiche.setChecked(true);
+        else
+            notifiche.setChecked(false);
+
         notifiche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 Toast.makeText(SettingsActivity.this,"Cambiato",Toast.LENGTH_SHORT).show();
+
             }
         });
+
+
+
         //QUI INVECE SETTO IL TOGGLE DELLA BATTERIA
-        ToggleButton batteria = (ToggleButton) findViewById(R.id.toggleBatteria);
+        final ToggleButton batteria = (ToggleButton) findViewById(R.id.toggleBatteria);
+        String statoBatteria = prefs.getString("batteria","");
+        if(statoBatteria.compareTo("true") == 0)
+            batteria.setChecked(true);
+        else
+            batteria.setChecked(false);
+
         batteria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,15 +96,7 @@ public class SettingsActivity extends PreferenceActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         m_Text = input.getText().toString();
-                        user.setNome(m_Text);
 
-                        SharedPreferences prefs = getSharedPreferences(
-                                "com.example.app", Context.MODE_PRIVATE);
-                        //Cambio lo username già salvato in anticipo in locale
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("username", m_Text);
-                        editor.commit();
-                        Toast.makeText(SettingsActivity.this, "Username cambiato!",Toast.LENGTH_SHORT).show();
                     }
                 });
                 //crea il tasto cancella
@@ -95,6 +109,48 @@ public class SettingsActivity extends PreferenceActivity
 
                 builder.show();
 
+
+            }
+        });
+
+        //Se l'utente preme Salva, salva le impostazioni e torna alla schermata Guanxy
+        final Button salva = (Button) findViewById(R.id.button_setting_salva);
+        salva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                //Setta il nome dell'user
+                user.setNome(m_Text);
+                //Serve per salvare lo stato del toggle sia di batteria che notifica
+                editor.putString("notifiche",""+notifiche.isChecked());
+                editor.putString("batteria", ""+batteria.isChecked());
+
+
+                //Cambio lo username già salvato in anticipo in locale
+                editor.putString("username", m_Text);
+                //Appica le modifiche e le salva
+                editor.apply();
+
+                Toast.makeText(SettingsActivity.this, "Salvato!",Toast.LENGTH_SHORT).show();
+
+                Intent myIntent = new Intent(SettingsActivity.this, GuanxyActivity.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
+            }
+        });
+        //Se l'utente preme cancella, torna indietro senza cambiare nulla
+        final Button cancella = (Button) findViewById(R.id.button_setting_cancella);
+        cancella.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent myIntent = new Intent(SettingsActivity.this, GuanxyActivity.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
             }
         });
