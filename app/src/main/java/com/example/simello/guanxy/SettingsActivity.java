@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -53,7 +54,9 @@ public class SettingsActivity extends PreferenceActivity
             }
         });
 
-        Button username = (Button) findViewById(R.id.username);
+
+//@Todo aggiungere l'aggiornamento al db quando viene cambiato l'username!
+        ImageButton username = (ImageButton) findViewById(R.id.username);
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

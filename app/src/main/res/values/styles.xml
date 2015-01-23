@@ -7,6 +7,8 @@
         <item name="android:windowBackground">@color/blueScuro</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
+
+
     </style>
     <!-- Base application theme. -->
 
@@ -16,6 +18,17 @@
         <item name="android:background">@color/blueChiaro</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="background">@color/blueChiaro</item>
+    </style>
+
+    <style name="Widget.Button.Toggle" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleButton"  parent="android:Theme">
+        <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
     </style>
 
 </resources>
