@@ -148,7 +148,6 @@ public class GuanxyActivity extends ActionBarActivity
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-
             return true;
         }
 
