@@ -150,7 +150,7 @@ public class SettingsActivity extends PreferenceActivity
                 Intent myIntent = new Intent(SettingsActivity.this, GuanxyActivity.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(myIntent);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 
             }
         });
