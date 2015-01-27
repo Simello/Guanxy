@@ -13,6 +13,7 @@ public class utils
     {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+
     }
 
     //Per il metodo dell'uso degli script php/connessioni http, usano tutti l'AsyncTask
@@ -27,3 +28,5 @@ public class utils
     //nel mio asyncTask ora avrò il costruttore con i parametri "Altri Campi" e poi i 3 metodi dell'asynctask
     //infine nell'onCreateView avrò il return.
 }
+
+

@@ -3,28 +3,52 @@ package com.example.simello.guanxy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.simello.utils.AsyncConnection;
+import com.example.simello.utils.utils;
+
 
 public class GuanxyActivity extends ActionBarActivity
 {
+
+    private String mPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
 
-        /*
-        if (isOnline())
+
+        if (utils.isConnected(this))
         {
             //@Todo
             //Registrazione per il primo login o exit
+            /*
+            if utente non registrato, registra utente
+
+            if()
+            {
+
+
+            }
+            else
+                altrimenti mostra schermata principale
+
+             */
+            TelephonyManager tMgr =(TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);
+            mPhoneNumber = tMgr.getLine1Number();
+            Toast.makeText(this, "Connesso" + mPhoneNumber,Toast.LENGTH_SHORT).show();
+            AsyncConnection cnt = new AsyncConnection(this);
+            cnt.execute("http://www.google.com");
+
+
         }
         else
         {
@@ -32,8 +56,10 @@ public class GuanxyActivity extends ActionBarActivity
             //Farlo connettere
             //Idea, prendo dal db i dati (quindi punti, user e giorni mancanti) e li inserisco in un Bundle, così
             //possiamo portarli in giro
+            Toast.makeText(this, "Non connesso",Toast.LENGTH_SHORT).show();
+
         }
-    */
+
 
 
 
