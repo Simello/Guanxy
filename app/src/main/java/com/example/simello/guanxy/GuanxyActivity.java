@@ -30,9 +30,12 @@ public class GuanxyActivity extends ActionBarActivity
         {
             //@Todo
             //Registrazione per il primo login o exit
+
             /*
             if utente non registrato, registra utente
-
+            per la prima connessione utilizzare lo shared preferences, dove prima controllo
+            se la variabile è != null, se è diversa è già installata,
+            altrimenti eseguo script di registrazione isi pisi
             if()
             {
 
@@ -80,7 +83,7 @@ public class GuanxyActivity extends ActionBarActivity
             ;
         });
 
-        ImageButton aiutaGliAltri = (ImageButton)findViewById(R.id.aiutaGliAltri);
+        ImageButton aiutaGliAltri = (ImageButton)findViewById(R.id.buttonTextPremi);
         aiutaGliAltri.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v){

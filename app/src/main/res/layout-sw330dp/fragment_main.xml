@@ -12,7 +12,7 @@
     <ImageButton
         android:layout_width="145dp"
         android:layout_height="145dp"
-        android:id="@+id/aiutaGliAltri"
+        android:id="@+id/buttonTextPremi"
         android:src="@drawable/aiuta_gli_altri"
         android:scaleType="fitXY"
         android:background="@null"
@@ -63,10 +63,10 @@
         android:background="@null"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:layout_alignBottom="@+id/aiutaGliAltri"
+        android:layout_alignBottom="@+id/buttonTextPremi"
         android:layout_alignLeft="@+id/chiediAiutoString"
         android:layout_alignStart="@+id/chiediAiutoString"
-        android:layout_alignTop="@+id/aiutaGliAltri"
+        android:layout_alignTop="@+id/buttonTextPremi"
         android:layout_marginStart="0px"/>
 
     <Button

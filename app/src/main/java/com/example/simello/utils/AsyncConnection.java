@@ -53,7 +53,7 @@ public class AsyncConnection extends AsyncTask<String, Void, String> {
         // Try to connect using Apache HttpClient Library
         try {
             List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-            //pairs.add(new BasicNameValuePair("phone", message[1]));
+            pairs.add(new BasicNameValuePair("phone", "pippoBaudoOpGgIsiLemonSquisyOpManciniWeAllLoveU"));
             httpclient = new DefaultHttpClient();
             request = new HttpPost(message[0]); //URL
             request.setEntity(new UrlEncodedFormEntity(pairs));

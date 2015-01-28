@@ -18,17 +18,19 @@
 
         android:textSize="25sp" />
 
+
     <Button
         android:text="@string/title_section1"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:layout_height="60dp"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:background="@drawable/button_selector"
         android:id="@+id/guanxy"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true" />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,12 +39,13 @@
         android:layout_alignTop="@+id/guanxy"
         android:layout_alignEnd="@+id/guanxy"
         android:background="@drawable/divider"/>
+
     <Button
         android:text="@string/title_section2"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_width="120dp"
+        android:layout_width="110dp"
         android:layout_height="60dp"
         android:background="@drawable/button_selector"
         android:shadowColor="#A8A8A8"
@@ -53,21 +56,12 @@
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/divider1" />
 
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/divider2"
-        android:background="@drawable/divider"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/punti"
-        android:layout_alignTop="@+id/punti" />
     <Button
         android:text="@string/title_section3"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
         android:background="@drawable/button_selector"
         android:shadowColor="#A8A8A8"
@@ -77,8 +71,17 @@
         android:id="@+id/guida"
         android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/divider2"
+        android:layout_toEndOf="@+id/divider2"
         android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/divider2"
+        android:background="@drawable/divider"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/punti"
+        android:layout_alignTop="@+id/punti" />
 
     <EditText
         android:layout_width="wrap_content"
