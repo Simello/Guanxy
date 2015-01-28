@@ -46,7 +46,7 @@ public class GuanxyActivity extends ActionBarActivity
             mPhoneNumber = tMgr.getLine1Number();
             Toast.makeText(this, "Connesso" + mPhoneNumber,Toast.LENGTH_SHORT).show();
             AsyncConnection cnt = new AsyncConnection(this);
-            cnt.execute("http://www.google.com");
+            cnt.execute("http://192.168.1.64:8080/guanxy/registration/presente",mPhoneNumber);
 
 
         }

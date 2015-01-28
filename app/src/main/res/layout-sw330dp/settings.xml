@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/blueChiaro">
+
+  <ImageButton
+      android:layout_width="275dp"
+      android:layout_height="60dp"
+      android:background="@drawable/button_lingua"
+      android:id="@+id/lingua"
+      android:layout_marginTop="77dp"
+      android:layout_below="@+id/toggleBatteria"
+      android:layout_centerHorizontal="true" />
+  <ImageButton
+      android:layout_width="275dp"
+      android:layout_height="60dp"
+      android:background="@drawable/button_username"
+      android:id="@+id/username"
+      android:layout_below="@+id/lingua"
+      android:layout_alignEnd="@+id/toggleNotifiche" />
+
+
+    <ToggleButton
+        android:id="@+id/toggleNotifiche"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        style="@style/toggleButton"
+        android:background="@drawable/ic_toggle_bg"
+        android:layout_marginTop="71dp"
+        android:layout_below="@android:id/list"
+        android:layout_alignStart="@+id/toggleBatteria" />
+
+    <ToggleButton
+        android:id="@+id/toggleBatteria"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        style="@style/toggleButton"
+        android:background="@drawable/ic_toggle_bg"
+        android:layout_below="@+id/toggleNotifiche"
+        android:layout_alignEnd="@+id/lingua" />
+
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp">
+    </ListView>
+
+    <ImageButton
+        android:layout_width="225dp"
+        android:layout_height="60dp"
+        android:id="@+id/button_notifiche"
+        android:background="@drawable/button_notifiche"
+        android:layout_alignTop="@+id/toggleNotifiche"
+        android:layout_toStartOf="@+id/toggleNotifiche" />
+
+    <ImageButton
+        android:layout_width="225dp"
+        android:layout_height="60dp"
+        android:id="@+id/button_batteria"
+        android:layout_below="@+id/toggleNotifiche"
+        android:layout_toStartOf="@+id/toggleNotifiche"
+        android:background="@drawable/button_batteria"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salva"
+        android:id="@+id/button_setting_salva"
+        android:layout_below="@+id/username"
+        android:layout_alignEnd="@+id/username"
+        android:layout_marginTop="55dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancella"
+        android:id="@+id/button_setting_cancella"
+        android:layout_alignBottom="@+id/button_setting_salva"
+        android:layout_alignStart="@+id/username" />
+
+</RelativeLayout>
