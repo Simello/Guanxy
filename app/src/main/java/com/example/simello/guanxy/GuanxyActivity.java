@@ -1,9 +1,12 @@
 package com.example.simello.guanxy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.utils;
+
+import java.util.HashMap;
 
 
 public class GuanxyActivity extends ActionBarActivity
@@ -30,7 +35,33 @@ public class GuanxyActivity extends ActionBarActivity
         {
             //@Todo
             //Registrazione per il primo login o exit
+            SharedPreferences prefs = this.getSharedPreferences(
+                    "com.example.app", Context.MODE_PRIVATE);
+            String code = prefs.getString("codiceSegreto","codiceSegreto");
+            if (code.compareTo("codiceSegreto") == 0)
+            {
+                //Inserisco nella mappa il valore dell'url
+                //Chiave -> url
+                //Valore -> url reale
+                HashMap<String,String> values = new HashMap<String,String>();
+                values.put("url","http://192.168.1.64:8080/guanxy/registration/iscrivi");
 
+                //Prendo il numero di telefono
+                TelephonyManager tMgr =(TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);
+                mPhoneNumber = tMgr.getLine1Number();
+
+                //Lo aggiungo alla mappa
+                values.put("phone","3208814625");
+                AsyncConnection cnt = new AsyncConnection(this);
+
+                //Aggiungo anche l'username
+                String userName = prefs.getString("username","");
+                values.put("username",userName);
+
+                //Infine lo invio alla classe AsyncConnection
+                //La quale richiede una mappa di String,String (Chiave,Valore)
+                cnt.execute(values);
+            }
             /*
             if utente non registrato, registra utente
             per la prima connessione utilizzare lo shared preferences, dove prima controllo
@@ -45,11 +76,6 @@ public class GuanxyActivity extends ActionBarActivity
                 altrimenti mostra schermata principale
 
              */
-            TelephonyManager tMgr =(TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);
-            mPhoneNumber = tMgr.getLine1Number();
-            Toast.makeText(this, "Connesso" + mPhoneNumber,Toast.LENGTH_SHORT).show();
-            AsyncConnection cnt = new AsyncConnection(this);
-            cnt.execute("http://192.168.1.64:8080/guanxy/registration/presente",mPhoneNumber);
 
 
         }
