@@ -35,8 +35,6 @@ public class AsyncConnection extends AsyncTask<HashMap<String,String>, Void, Str
         context = cxt;
     }
 
-    //params[0] -> mappa contenente i valori sotto le chiavi proprie
-
 
     protected String doInBackground(HashMap<String,String>... params) {
         HttpClient httpclient;
