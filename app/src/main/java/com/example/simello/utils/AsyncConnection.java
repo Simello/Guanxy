@@ -45,12 +45,11 @@ public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,Str
         // TextView to display result
         HashMap invio = params[0].get("Invio");
         HashMap ritorno = params[0].get("Ritorno");
-        String s = invio.get("url");
 
         // Try to connect using Apache HttpClient Library
         try {
             httpclient = new DefaultHttpClient();
-            request = new HttpPost(invio.get("url")); //URL
+            request = new HttpPost((String) invio.get("url")); //URL
 
             //Preparo la mappa
             List<NameValuePair> pairs = new ArrayList<NameValuePair>();
