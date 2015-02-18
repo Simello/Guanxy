@@ -40,6 +40,8 @@ public class GuanxyActivity extends ActionBarActivity
             String code = prefs.getString("codiceSegreto","codiceSegreto");
             if (code.compareTo("codiceSegreto") == 0)
             {
+                //Creazione HashMap Iniziale
+                HashMap<String, HashMap<String,String>> registrazione = new HashMap<String, HashMap<String,String>>();
                 //Inserisco nella mappa il valore dell'url
                 //Chiave -> url
                 //Valore -> url reale
@@ -60,7 +62,9 @@ public class GuanxyActivity extends ActionBarActivity
 
                 //Infine lo invio alla classe AsyncConnection
                 //La quale richiede una mappa di String,String (Chiave,Valore)
-                cnt.execute(values);
+
+                registrazione.put("Invio",values);
+                cnt.execute(registrazione);
             }
             /*
             if utente non registrato, registra utente
