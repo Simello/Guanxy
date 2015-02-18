@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Created by Simello & Sunfury on 27/01/15.
  */
-public class AsyncConnection extends AsyncTask<HashMap<String,String>, Void, String> {
+public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,String>>, Void, String> {
 
     private Context context;
 
@@ -36,18 +36,20 @@ public class AsyncConnection extends AsyncTask<HashMap<String,String>, Void, Str
     }
 
 
-    protected String doInBackground(HashMap<String,String>... params) {
+    protected String doInBackground(HashMap<String,HashMap<String,String>>... params) {
         HttpClient httpclient;
         HttpPost request;
         HttpResponse response = null;
         String result = "";
         JSONArray jArray = null;
         // TextView to display result
+        HashMap invio = params[0].get("Invio");
+        String s = invio.get("url");
 
         // Try to connect using Apache HttpClient Library
         try {
             httpclient = new DefaultHttpClient();
-            request = new HttpPost(params[0].get("url")); //URL
+            request = new HttpPost(invio.get("url")); //URL
 
             //Preparo la mappa
             List<NameValuePair> pairs = new ArrayList<NameValuePair>();
