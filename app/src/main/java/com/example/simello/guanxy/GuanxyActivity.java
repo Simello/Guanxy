@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.simello.controller.punteggi.Utente;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
@@ -32,19 +34,26 @@ public class GuanxyActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
 
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+
+
 
         GPSManager gpsManager = new GPSManager(this);
+
         if(gpsManager.canGetLocation())
-            Log.e("GPS", "Lat :" + gpsManager.getLatitude()+ " Lon :" + gpsManager.getLongitude() );
+        {
+            Log.i("GPS",""+ gpsManager.getLatitude());
+        }
         else
+        {
             gpsManager.showSettingsAlert();
+        }
 
         if (utils.isConnected(this))
         {
             //@Todo
             //Registrazione per il primo login o exit
-            SharedPreferences prefs = this.getSharedPreferences(
-                    "com.example.app", Context.MODE_PRIVATE);
             String code = prefs.getString("codiceSegreto","codiceSegreto");
             if (code.compareTo("codiceSegreto") == 0)
             {

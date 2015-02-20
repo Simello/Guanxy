@@ -1,5 +1,7 @@
 package com.example.simello.utils;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -8,14 +10,23 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.example.simello.controller.punteggi.Utente;
 import com.example.simello.guanxy.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GPSManager extends Service implements LocationListener {
+
+    GPSManager gpsManager;
+
+    Timer timer = new Timer();
 
     private final Context mContext;
 
@@ -36,7 +47,7 @@ public class GPSManager extends Service implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 100 * 60 * 5; // 5 minute
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
@@ -45,6 +56,7 @@ public class GPSManager extends Service implements LocationListener {
         this.mContext = context;
         getLocation();
     }
+
 
     public Location getLocation() {
         try {
@@ -159,7 +171,7 @@ public class GPSManager extends Service implements LocationListener {
         alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
 
         // Setting Dialog Message
-        alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText));
+        alertDialog.setMessage("Ciao "+ Utente.getNome() +" io sono Guanxy. Non posso funzionare senza Gps. Lo attivi per favore?");
 
         // On pressing Settings button
         alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioni), new DialogInterface.OnClickListener() {
@@ -168,7 +180,6 @@ public class GPSManager extends Service implements LocationListener {
                 mContext.startActivity(intent);
             }
         });
-
 
 
         // Showing Alert Message
@@ -195,6 +206,44 @@ public class GPSManager extends Service implements LocationListener {
     public IBinder onBind(Intent arg0) {
         return null;
     }
+
+
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        gpsManager = new GPSManager(this);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // TODO Auto-generated method stub
+        doTimerThings();
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void doTimerThings()
+    {
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            @SuppressLint("DefaultLocale")
+            @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+            @Override
+            public void run() {
+
+                latitude = gpsManager.getLatitude();
+                longitude = gpsManager.getLongitude();
+
+                // you get the lat and lng , do your server stuff here-----
+
+                Log.i("GPS","lat------ "+latitude);
+                Log.i("GPS","lng-------- "+longitude);
+            }
+
+        }, 0, MIN_TIME_BW_UPDATES);
+
+    }
+
 
 }
 

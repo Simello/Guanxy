@@ -19,7 +19,7 @@ public class ControllerPunteggio
     {
 
         //Boh ho fatto una prova
-        this.utente = new Utente("Sunfury");
+        //this.utente = new Utente("Sunfury",th);
     }
 
 

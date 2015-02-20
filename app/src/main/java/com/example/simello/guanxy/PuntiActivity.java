@@ -29,7 +29,7 @@ public class PuntiActivity extends ActionBarActivity
         String userRef = prefs.getString("username","");
 
 
-        Utente user = new Utente(userRef);
+        Utente user = Utente.getIstance(userRef);
         //Stampa a video l'username dell'utente
         TextView username = (TextView) findViewById(R.id.user);
         username.setText(user.getNome());

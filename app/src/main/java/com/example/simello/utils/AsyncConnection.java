@@ -61,8 +61,8 @@ public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,Str
                 {
                     pairs.add(new BasicNameValuePair(key, value));
                 }
-                Log.i("Key",key);
-                Log.i("Value",value);
+                //Log.e("Key",key);
+                //Log.e("Value",value);
             }
 
             request.setEntity(new UrlEncodedFormEntity(pairs));

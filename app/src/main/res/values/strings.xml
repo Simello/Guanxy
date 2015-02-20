@@ -20,7 +20,7 @@
     <string name="lingua">Imposta Lingua</string>
     <string name="username">Cambia Username</string>
     <string name="gpsOff">Gps disattivato</string>
-    <string name="gpsOffText">Per favore, attiva il GPS</string>
+    <string name="gpsOffText">Quest\'applicazione vorrebbe usare la tua posizione.</string>
     <string name="impostazioni">Impostazioni</string>
 
     <color name="blueChiaro">#3fa9f5</color>
