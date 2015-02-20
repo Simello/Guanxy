@@ -58,6 +58,7 @@ public class Utente
         SharedPreferences.Editor  editor = prefs.edit();
         editor.putString("username", nome);
         Utente.nome = nome;
+        editor.apply();
 
     }
 

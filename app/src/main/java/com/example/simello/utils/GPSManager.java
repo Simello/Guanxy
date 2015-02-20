@@ -171,7 +171,7 @@ public class GPSManager extends Service implements LocationListener {
         alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
 
         // Setting Dialog Message
-        alertDialog.setMessage("Ciao "+ Utente.getUser().getNome() +" io sono Guanxy. Non posso funzionare senza Gps. Lo attivi per favore?");
+        alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1)+" "+ Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
 
         // On pressing Settings button
         alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioni), new DialogInterface.OnClickListener() {

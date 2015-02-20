@@ -19,9 +19,10 @@
     <string name="batteria">Risparmio Batteria</string>
     <string name="lingua">Imposta Lingua</string>
     <string name="username">Cambia Username</string>
-    <string name="gpsOff">Gps disattivato</string>
-    <string name="gpsOffText">Quest\'applicazione vorrebbe usare la tua posizione.</string>
+    <string name="gpsOff">Gps disattivato!</string>
     <string name="impostazioni">Impostazioni</string>
+    <string name="gpsOffText1">Ciao</string>
+    <string name="gpsOffText2">, Io sono Guanxy!\nNon posso funzionare senza GPS :(.\nLo attivi per favore?</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
