@@ -3,6 +3,7 @@ package com.example.simello.guanxy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.simello.utils.AsyncConnection;
+import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
 
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class GuanxyActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
+
 
 
         if (utils.isConnected(this))
