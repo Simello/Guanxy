@@ -127,8 +127,6 @@ public class SettingsActivity extends PreferenceActivity
                 editor.putString("batteria", ""+batteria.isChecked());
 
 
-                //Cambio lo username già salvato in anticipo in locale
-                editor.putString("username", m_Text);
                 //Appica le modifiche e le salva
                 editor.apply();
 

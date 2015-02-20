@@ -36,7 +36,7 @@ public class GuanxyActivity extends ActionBarActivity
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
-
+        Utente user = Utente.getIstance(prefs.getString("username",""), this);
 
 
         GPSManager gpsManager = new GPSManager(this);
