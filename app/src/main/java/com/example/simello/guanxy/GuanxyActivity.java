@@ -33,6 +33,11 @@ public class GuanxyActivity extends ActionBarActivity
         setContentView(R.layout.fragment_main);
 
 
+        GPSManager gpsManager = new GPSManager(this);
+        if(gpsManager.canGetLocation())
+            Log.e("GPS", "Lat :" + gpsManager.getLatitude()+ " Lon :" + gpsManager.getLongitude() );
+        else
+            gpsManager.showSettingsAlert();
 
         if (utils.isConnected(this))
         {

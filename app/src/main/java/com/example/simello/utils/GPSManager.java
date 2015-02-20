@@ -1,220 +1,208 @@
 package com.example.simello.utils;
+
+import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
-import android.location.Criteria;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 
+public class GPSManager extends Service implements LocationListener {
 
+    private final Context mContext;
 
-/**
- * Created by Sunfury & Simello on 19/02/15.
- */
+    // flag for GPS status
+    boolean isGPSEnabled = false;
 
+    // flag for network status
+    boolean isNetworkEnabled = false;
 
+    // flag for GPS status
+    boolean canGetLocation = false;
 
-public class GPSManager {
+    Location location; // location
+    double latitude; // latitude
+    double longitude; // longitude
 
-    private static GPSManager manager = null;
-    long TIME_GPS_LIFE = 1000000000L*60*15;			//15 minuti
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
-    /** L'ultima locazione acquisita */ private Location location = null;
-    /** L'oggetto LocationManager */ private LocationManager lm = null;
-    /** Tempo di validit� della locazione */ private long locationLife = -1;
-    /** Modalit� update */ private boolean searching = false;
+    // Declaring a Location Manager
+    protected LocationManager locationManager;
 
-    /**
-     * Restituisce l'instanza singletone della classe Con_GPSManager
-     * @return Un oggetto Con_GPSManager
-     */
-    public static GPSManager getInstance(Context context) {
-        if (manager == null){
-            manager = new GPSManager(context.getApplicationContext());
-        }
-        return manager;
+    public GPSManager(Context context) {
+        this.mContext = context;
+        getLocation();
     }
 
-    /**
-     * Crea un oggetto Con_GPSManager
-     */
-    private GPSManager(Context context) {
-        lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        manager = this;
-    }
+    public Location getLocation() {
+        try {
+            locationManager = (LocationManager) mContext
+                    .getSystemService(LOCATION_SERVICE);
 
-    /**
-     * Chiede al GPS di aggiornare la posizione. Restituisce l'ultima posizione trovata, se � ancora valida, altrimenti null
-     * @return	L'ultima posizione trovata, se ancora valida, altrimenti null
-     * @throws GPSException	Se il servizio di localizzazione non � attivo
-     */
-    public void updateLocation() {
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        criteria.setAltitudeRequired(false);
-        criteria.setVerticalAccuracy(Criteria.NO_REQUIREMENT);
-        criteria.setSpeedRequired(false);
-        criteria.setSpeedAccuracy(Criteria.NO_REQUIREMENT);
-        criteria.setCostAllowed(false);
-        lm.requestSingleUpdate(criteria, locationListener, null);
-        setLocation(null);
-        searching = true;
-    }
+            // getting GPS status
+            isGPSEnabled = locationManager
+                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-    /**
-     * Restituisce l'ultima posizione trovata
-     * @return	L'ultima posizione trovata
-     * @throws GPSException
-     */
-    public Location getLocation() throws GPSException {
-        if (location != null){
-            if (System.nanoTime() < locationLife){
-                return location;
+            // getting network status
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!isGPSEnabled && !isNetworkEnabled) {
+                // no network provider is enabled
+            } else {
+                this.canGetLocation = true;
+                // First get location from Network Provider
+                if (isNetworkEnabled) {
+                    locationManager.requestLocationUpdates(
+                            LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    Log.d("Network", "Network");
+                    if (locationManager != null) {
+                        location = locationManager
+                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                }
+                // if GPS Enabled get lat/long using GPS Services
+                if (isGPSEnabled) {
+                    if (location == null) {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.GPS_PROVIDER,
+                                MIN_TIME_BW_UPDATES,
+                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        Log.d("GPS Enabled", "GPS Enabled");
+                        if (locationManager != null) {
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (location != null) {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                            }
+                        }
+                    }
+                }
             }
-            setLocation(null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        switch(getStatus()){
-            case 0: updateLocation(); throw new GPSException("Avviata ricerca", 0);
-            case 1: throw new GPSException("Ricerca in corso...", 1);
-            case 2: throw new GPSException("Servizi disattivati", 2);
-            case 3: throw new GPSException("Servizi disattivi", 3);
-            default: throw new IllegalStateException("Il valore deve esssere tra 0 e 3");
+
+        return location;
+    }
+
+    /**
+     * Stop using GPS listener
+     * Calling this function will stop using GPS in your app
+     * */
+    public void stopUsingGPS(){
+        if(locationManager != null){
+            locationManager.removeUpdates(GPSManager.this);
         }
     }
 
     /**
-     * Controlla lo stato del servizio di localizzazione
-     * @return
-     * 0: servizi in attesa
-     * 1: servizi in ricerca
-     * 2: servizi interrotti
-     * 3: servizi non attivi
-     */
-    public int getStatus(){
-        if (isGPSAvailable() || isNetworkAvailable()){
-            return (searching ? 1 : 0);
-        } else {
-            return (searching ? 2 : 3);
+     * Function to get latitude
+     * */
+    public double getLatitude(){
+        if(location != null){
+            latitude = location.getLatitude();
         }
+
+        // return latitude
+        return latitude;
     }
 
     /**
-     * Controlla se il GPS � abilitato
-     * @return true se il GPS � abilitato, false altrimenti
-     */
-    private boolean isGPSAvailable(){
-        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+     * Function to get longitude
+     * */
+    public double getLongitude(){
+        if(location != null){
+            longitude = location.getLongitude();
+        }
+
+        // return longitude
+        return longitude;
     }
 
     /**
-     * Controlla se la localizzazione tramite rete � abilitata
-     * @return true la localizzazione tramite rete � abilitata, false altrimenti
-     */
-    private boolean isNetworkAvailable(){
-        return lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+     * Function to check GPS/wifi enabled
+     * @return boolean
+     * */
+    public boolean canGetLocation() {
+        return this.canGetLocation;
     }
 
     /**
-     * Interrompe la ricerca della posizione
-     */
-    public void stop(){
-        lm.removeUpdates(locationListener);
-    }
+     * Function to show settings alert dialog
+     * On pressing Settings button will lauch Settings Options
+     * */
+    public void showSettingsAlert(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
+        // Setting Dialog Title
+        alertDialog.setTitle("GPS is settings");
 
-    /**
-     * Imposta la locazione
-     * @param location	La nuova locazione
-     */
-    private synchronized void setLocation(Location location){
-        this.location = location;
-    }
+        // Setting Dialog Message
+        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
-
-
-
-
-
-
-
-    public LocationListener locationListener = new LocationListener(){
-        @Override
-        public void onLocationChanged(Location newLocation){
-            setLocation(newLocation);
-            locationLife = System.nanoTime() + TIME_GPS_LIFE;
-            searching = false;
-        }
-        @Override
-        public void onProviderDisabled(String arg0){
-            //
-        }
-        @Override
-        public void onProviderEnabled(String arg0){
-            //
-        }
-        @Override
-        public void onStatusChanged(String arg0, int arg1, Bundle arg2){
-            if (arg1 == LocationProvider.OUT_OF_SERVICE){
-                lm.removeUpdates(this);
+        // On pressing Settings button
+        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mContext.startActivity(intent);
             }
-        }
-    };
+        });
 
-    public class GPSException extends Exception {
+        // on pressing cancel button
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
-        /**
-         *
-         */
-        //private static final long serialVersionUID = 5346257514969992915L;
+        // Showing Alert Message
+        alertDialog.show();
+    }
 
-        private int code;
+    @Override
+    public void onLocationChanged(Location location) {
+    }
 
-        public GPSException(String message, int code){
-            super(message);
-            this.code = code;
-        }
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
 
-        public int getCode(){
-            return code;
-        }
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public IBinder onBind(Intent arg0) {
+        return null;
     }
 
 }
 
 
 /*
-Creazione e utilizzo della classe GPSManager
-
--Creazione dell oggetto:
-GPSManager gpsManager = GPSManager.getInstance(this);
-
--Controllo disponibilità GPS:
-        if(gpsManager.getStatus() == 0)
-        {
-            Log.i("GPS", "In Attesa");
-        }
-
-
-        //Altro codice
-           GPSManager gpsManager = GPSManager.getInstance(this);
-// DA CONTROLLARE IL GETPOSITION
-        if(gpsManager.getStatus() == 0)
-        {
-            try {
-                gpsManager.updateLocation();
-                Location loc = gpsManager.getLocation();
-                Log.i("GPS", "Lat "+ loc.getLatitude() + " Long " + loc.getLongitude());
-
-            }catch(GPSManager.GPSException e)
-                {
-                    e.printStackTrace();
-                }
-        }
-
+Link Guida GPS, op gg isi best EU
+http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
  */
-
