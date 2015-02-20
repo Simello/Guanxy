@@ -166,24 +166,32 @@ public class GPSManager extends Service implements LocationListener {
      * */
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog builder = alertDialog.create();
 
-        // Setting Dialog Title
-        alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
+        if(builder.isShowing())
+        {
+            builder.dismiss();
+        }
+        else {
 
-        // Setting Dialog Message
-        alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1)+" "+ Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
+            // Setting Dialog Title
+            alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
 
-        // On pressing Settings button
-        alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioni), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
-        });
+            // Setting Dialog Message
+            alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
 
+            // On pressing Settings button
+            alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioni), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
 
-        // Showing Alert Message
-        alertDialog.show();
+            alertDialog.setCancelable(false);
+            // Showing Alert Message
+            alertDialog.show();
+        }
     }
 
     @Override

@@ -243,18 +243,15 @@ public class GuanxyActivity extends ActionBarActivity
 
 
     //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
-    public void onResume()
-    {
-        super.onResume();
-        GPSManager gpsManager = new GPSManager(this);
-
-        if(gpsManager.canGetLocation())
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus)
         {
-            Log.i("GPS",""+ gpsManager.getLatitude());
-        }
-        else
-        {
-            gpsManager.showSettingsAlert();
+           GPSManager gpsManager = new GPSManager(this);
+           if (!gpsManager.canGetLocation())
+               gpsManager.showSettingsAlert();
         }
     }
 
