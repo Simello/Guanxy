@@ -74,8 +74,9 @@ public class GuanxyActivity extends ActionBarActivity
                 AsyncConnection cnt = new AsyncConnection(this);
 
                 //Aggiungo anche l'username
-                String userName = prefs.getString("username","");
+                String userName = Utente.getNome();
                 values.put("username",userName);
+                Log.i("Al",userName);
 
                 //Infine lo invio alla classe AsyncConnection
                 //La quale richiede una mappa di String,String (Chiave,Valore)

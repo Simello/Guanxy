@@ -184,13 +184,11 @@ public class GPSManager extends Service implements LocationListener {
                 // Setting Dialog Message
                 alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
                 notFirstTime = true;
-                Log.i("Alert","Pippo "+notFirstTime);
             }
             else
             {
 
                 alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffTextNoHello));
-                Log.i("Alert","Puppa "+notFirstTime);
             }
 
             // On pressing Settings button
