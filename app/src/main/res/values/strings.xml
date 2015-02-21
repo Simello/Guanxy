@@ -23,8 +23,7 @@
     <string name="impostazioni">Impostazioni</string>
     <string name="gpsOffText1">Ciao</string>
     <string name="gpsOffText2">, Io sono Guanxy!\nNon posso funzionare senza GPS.\nLo attivi per favore?</string>
-    <string name="gpsOffTextNoHello">.\nNon posso funzionare senza GPS.\nLo attivi per favore?</string>
-
+    <string name="gpsOffTextNoHello">, non posso funzionare senza GPS.\nLo attivi per favore?</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
