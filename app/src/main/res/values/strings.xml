@@ -25,6 +25,7 @@
     <string name="gpsOffText2">, Io sono Guanxy!\nNon posso funzionare senza GPS.\nLo attivi per favore?</string>
     <string name="gpsOffTextNoHello">.\nNon posso funzionare senza GPS.\nLo attivi per favore?</string>
 
+
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
     <color name="biancoOminoRichiesta">#e6e6e6</color>
