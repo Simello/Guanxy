@@ -29,7 +29,7 @@ public class GPSManager extends Service implements LocationListener {
     Timer timer = new Timer();
 
     private final Context mContext;
-
+    //Lelling
     //flag for Text on Alert
     boolean notFirstTime = false;
 
@@ -180,13 +180,15 @@ public class GPSManager extends Service implements LocationListener {
             // Setting Dialog Title
             alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
 
-            if(!notFirstTime) {
+            if(!notFirstTime)
+            {
                 // Setting Dialog Message
                 alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
                 notFirstTime = true;
             }
             else
             {
+
                 alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffTextNoHello));
             }
 
