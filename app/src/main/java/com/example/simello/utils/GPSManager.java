@@ -30,6 +30,9 @@ public class GPSManager extends Service implements LocationListener {
 
     private final Context mContext;
 
+    //flag for Text on Alert
+    boolean notFirstTime = false;
+
     // flag for GPS status
     boolean isGPSEnabled = false;
 
@@ -177,8 +180,15 @@ public class GPSManager extends Service implements LocationListener {
             // Setting Dialog Title
             alertDialog.setTitle(mContext.getResources().getString(R.string.gpsOff));
 
-            // Setting Dialog Message
-            alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
+            if(!notFirstTime) {
+                // Setting Dialog Message
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
+                notFirstTime = true;
+            }
+            else
+            {
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffTextNoHello));
+            }
 
             // On pressing Settings button
             alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioni), new DialogInterface.OnClickListener() {
