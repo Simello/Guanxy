@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.simello.utils.GPSManager;
+
 /**
  * Created by Sunfury on 20/01/15.
  */
@@ -109,5 +111,18 @@ public class ChiediAiuto extends ActionBarActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus)
+        {
+            //Controlla il GPS ogni volta che cambia il focus
+            GPSManager gpsManager = new GPSManager(this);
+            if (!gpsManager.canGetLocation())
+                gpsManager.showSettingsAlert();
+        }
     }
 }

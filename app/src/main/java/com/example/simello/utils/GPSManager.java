@@ -29,7 +29,6 @@ public class GPSManager extends Service implements LocationListener {
     Timer timer = new Timer();
 
     private final Context mContext;
-    //Lelling
     //flag for Text on Alert
     static boolean notFirstTime = false;
 

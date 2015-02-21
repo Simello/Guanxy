@@ -249,6 +249,7 @@ public class GuanxyActivity extends ActionBarActivity
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus)
         {
+            //Controlla il GPS ogni volta che cambia il focus
            GPSManager gpsManager = new GPSManager(this);
            if (!gpsManager.canGetLocation())
                gpsManager.showSettingsAlert();

@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.simello.controller.punteggi.Utente;
+import com.example.simello.utils.GPSManager;
 
 /**
  * Created by Sunfury & Simello on 17/01/15.
@@ -116,5 +117,18 @@ public class PuntiActivity extends ActionBarActivity
         Intent myIntent = new Intent(this, GuanxyActivity.class);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(myIntent);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus)
+        {
+            //Controlla il GPS ogni volta che cambia il focus
+            GPSManager gpsManager = new GPSManager(this);
+            if (!gpsManager.canGetLocation())
+                gpsManager.showSettingsAlert();
+        }
     }
 }

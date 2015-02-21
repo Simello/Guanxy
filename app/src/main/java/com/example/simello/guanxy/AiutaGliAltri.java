@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.example.simello.utils.GPSManager;
+
 /**
  * Created by sunfury & simello on 22/01/15.
  */
@@ -274,5 +276,18 @@ public class AiutaGliAltri extends ActionBarActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus)
+        {
+            //Controlla il GPS ogni volta che cambia il focus
+            GPSManager gpsManager = new GPSManager(this);
+            if (!gpsManager.canGetLocation())
+                gpsManager.showSettingsAlert();
+        }
     }
 }
