@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -54,20 +55,21 @@ public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,Str
             request = new HttpPost(invio.get("url")); //URL
 
             //Preparo la mappa
-            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectWriter objectWriter = objectMapper.writer();
 
             for(Map.Entry<String, String> e : invio.entrySet()) {
                 String key = e.getKey();
                 String value = e.getValue();
                 if(key.compareTo("url") != 0)  //Prendi i valori diversi dall'"url"
                 {
-                    pairs.add(new BasicNameValuePair(key, value));
+                   // pairs.add(new BasicNameValuePair(key, value));
                 }
                 //Log.e("Key",key);
                 //Log.e("Value",value);
             }
 
-            request.setEntity(new UrlEncodedFormEntity(pairs));
+            //request.setEntity(new UrlEncodedFormEntity(pairs));
             response = httpclient.execute(request);
             Log.i("Invio","fatto");
 

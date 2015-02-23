@@ -36,8 +36,6 @@ public class GuanxyActivity extends ActionBarActivity
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
-        Utente user = Utente.getIstance(prefs.getString("username",""), this);
-
 
         GPSManager gpsManager = new GPSManager(this);
 
@@ -76,7 +74,6 @@ public class GuanxyActivity extends ActionBarActivity
                 //Aggiungo anche l'username
                 String userName = Utente.getNome();
                 values.put("username",userName);
-                Log.i("Al",userName);
 
                 //Infine lo invio alla classe AsyncConnection
                 //La quale richiede una mappa di String,String (Chiave,Valore)
@@ -103,6 +100,7 @@ public class GuanxyActivity extends ActionBarActivity
         }
         else
         {
+            Log.i("Off","Offline");
             //@Todo
             //Farlo connettere
             //Idea, prendo dal db i dati (quindi punti, user e giorni mancanti) e li inserisco in un Bundle, così
@@ -154,7 +152,7 @@ public class GuanxyActivity extends ActionBarActivity
 
         final Button guida = (Button) findViewById(R.id.guida);
 
-        //GESTIONE COLORE BOTTONILEL
+        //GESTIONE COLORE BOTTONI
         guanxy.setPressed(true);
         guanxy.setSelected(true);
         guanxy.setOnClickListener(new View.OnClickListener() {
@@ -243,18 +241,17 @@ public class GuanxyActivity extends ActionBarActivity
     }
 
 
+    /**
+     * Metodo che controlla la perdita del FOCUS della schermata attuale
+     * @param hasFocus
+     */
     //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         // TODO Auto-generated method stub
+
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus)
-        {
-            //Controlla il GPS ogni volta che cambia il focus
-           GPSManager gpsManager = new GPSManager(this);
-           if (!gpsManager.canGetLocation())
-               gpsManager.showSettingsAlert();
-        }
+        utils.GPSConnect(hasFocus,this);
     }
 
 

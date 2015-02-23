@@ -8,12 +8,34 @@ import android.net.ConnectivityManager;
  */
 public class utils
 {
-    //Metodo per il controllo se il dispositivo è connesso Online
+
+    /**
+     * Metodo per il controllo se il dispositivo è Online
+     * @param context
+     * @return
+     */
     public static boolean isConnected(Context context)
     {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
 
+    }
+
+    /**
+     * Metodo per il controllo del GPS quando viene perso il focus alla finestra
+     * @param hasFocus
+     * @param cnt
+     */
+    public static void GPSConnect(boolean hasFocus, Context cnt)
+    {
+        // TODO Auto-generated method stub
+        if (hasFocus)
+        {
+            //Controlla il GPS ogni volta che cambia il focus
+            GPSManager gpsManager = new GPSManager(cnt);
+            if (!gpsManager.canGetLocation())
+                gpsManager.showSettingsAlert();
+        }
     }
 
     //Per il metodo dell'uso degli script php/connessioni http, usano tutti l'AsyncTask

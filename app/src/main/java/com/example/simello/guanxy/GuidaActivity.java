@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.simello.utils.GPSManager;
+import com.example.simello.utils.utils;
 
 /**
  * Created by Sunfury & Simello on 17/01/15.
@@ -92,16 +93,17 @@ public class GuidaActivity extends ActionBarActivity
         startActivity(myIntent);
     }
 
+    /**
+     * Metodo per evitare l inutilizzo del GPS durante l'esecuzione di Guanxy.
+     * Controlla il GPS ogni volta che viene perso il focus alla schermata
+     * @param hasFocus
+     */
+    //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         // TODO Auto-generated method stub
+
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus)
-        {
-            //Controlla il GPS ogni volta che cambia il focus
-            GPSManager gpsManager = new GPSManager(this);
-            if (!gpsManager.canGetLocation())
-                gpsManager.showSettingsAlert();
-        }
+        utils.GPSConnect(hasFocus, this);
     }
 }
