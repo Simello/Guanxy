@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.simello.controller.punteggi.Utente;
-import com.example.simello.utils.GPSManager;
+import com.example.simello.controller.varie.User;
 import com.example.simello.utils.utils;
 
 /**
@@ -31,10 +29,10 @@ public class PuntiActivity extends ActionBarActivity
         String userRef = prefs.getString("username","");
 
 
-        Utente user = Utente.getIstance(userRef, this);
+        User user = User.getUser();
         //Stampa a video l'username dell'utente
         TextView username = (TextView) findViewById(R.id.user);
-        username.setText(user.getNome());
+        username.setText(user.getNickname());
 
 
 

@@ -16,7 +16,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.example.simello.controller.punteggi.Utente;
+import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
 
 import java.util.Timer;
@@ -182,13 +182,13 @@ public class GPSManager extends Service implements LocationListener {
             if(!notFirstTime)
             {
                 // Setting Dialog Message
-                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffText2));
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + User.getUser().getNickname() + mContext.getResources().getString(R.string.gpsOffText2));
                 notFirstTime = true;
             }
             else
             {
 
-                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + Utente.getUser().getNome() + mContext.getResources().getString(R.string.gpsOffTextNoHello));
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + User.getUser().getNickname() + mContext.getResources().getString(R.string.gpsOffTextNoHello));
             }
 
             // On pressing Settings button

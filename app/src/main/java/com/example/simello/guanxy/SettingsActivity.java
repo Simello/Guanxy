@@ -17,8 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.simello.controller.punteggi.Utente;
-import com.example.simello.utils.GPSManager;
+import com.example.simello.controller.varie.User;
 import com.example.simello.utils.utils;
 
 /**
@@ -27,7 +26,7 @@ import com.example.simello.utils.utils;
 public class SettingsActivity extends PreferenceActivity
 {
     private String m_Text = "";
-    Utente user = Utente.getUser();
+    User user = User.getUser();
 
 
 
@@ -123,7 +122,7 @@ public class SettingsActivity extends PreferenceActivity
             {
 
                 //Setta il nome dell'user
-                user.setNome(m_Text);
+                user.setNickname(m_Text);
                 //Serve per salvare lo stato del toggle sia di batteria che notifica
                 editor.putString("notifiche",""+notifiche.isChecked());
                 editor.putString("batteria", ""+batteria.isChecked());

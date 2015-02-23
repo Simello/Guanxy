@@ -3,9 +3,7 @@ package com.example.simello.guanxy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -16,12 +14,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.simello.controller.punteggi.Utente;
+import com.example.simello.controller.varie.Position;
+import com.example.simello.controller.varie.User;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 
 public class GuanxyActivity extends ActionBarActivity
@@ -39,11 +41,14 @@ public class GuanxyActivity extends ActionBarActivity
 
         GPSManager gpsManager = new GPSManager(this);
 
-        if(gpsManager.canGetLocation())
-        {
-            Log.i("GPS",""+ gpsManager.getLatitude());
-        }
-        else
+        Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
+        List<Position> positions = new ArrayList<Position>();
+        positions.add(position);
+
+        //CREAZIONE PRIMO UTENTE
+        User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
+
+        if(!gpsManager.canGetLocation())
         {
             gpsManager.showSettingsAlert();
         }
@@ -52,34 +57,18 @@ public class GuanxyActivity extends ActionBarActivity
         {
             //@Todo
             //Registrazione per il primo login o exit
-            String code = prefs.getString("codiceSegreto","codiceSegreto");
-            if (code.compareTo("codiceSegreto") == 0)
+            String code = prefs.getString("PIN","PIN");
+            if (code.compareTo("PIN") == 0)
             {
-                //Creazione HashMap Iniziale
-                HashMap<String, HashMap<String,String>> registrazione = new HashMap<String, HashMap<String,String>>();
-                //Inserisco nella mappa il valore dell'url
-                //Chiave -> url
-                //Valore -> url reale
-                HashMap<String,String> values = new HashMap<String,String>();
-                values.put("url","http://192.168.1.64:8080/guanxy/registration/iscrivi");
+                HashMap<String,Object> invio = new HashMap<String, Object>();
+                invio.put("url","Http://etc.etc");
 
-                //Prendo il numero di telefono
-                TelephonyManager tMgr =(TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);
-                mPhoneNumber = tMgr.getLine1Number();
+                invio.put("User",user);
 
-                //Lo aggiungo alla mappa
-                values.put("phone","3208814625");
                 AsyncConnection cnt = new AsyncConnection(this);
 
-                //Aggiungo anche l'username
-                String userName = Utente.getNome();
-                values.put("username",userName);
+                cnt.execute(invio);
 
-                //Infine lo invio alla classe AsyncConnection
-                //La quale richiede una mappa di String,String (Chiave,Valore)
-
-                registrazione.put("Invio",values);
-                cnt.execute(registrazione);
             }
             /*
             if utente non registrato, registra utente

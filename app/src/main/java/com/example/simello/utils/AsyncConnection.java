@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.simello.controller.varie.User;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +32,7 @@ import java.util.Map;
 /**
  * Created by Simello & Sunfury on 27/01/15.
  */
-public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,String>>, Void, String> {
+public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, String> {
 
     private Context context;
 
@@ -39,37 +42,26 @@ public class AsyncConnection extends AsyncTask<HashMap<String,HashMap<String,Str
     }
 
 
-    protected String doInBackground(HashMap<String,HashMap<String,String>>... params) {
+    protected String doInBackground(HashMap<String,Object>... params) {
         HttpClient httpclient;
         HttpPost request;
         HttpResponse response = null;
         String result = "";
         JSONArray jArray = null;
         // TextView to display result
-        HashMap<String,String> invio = params[0].get("Invio");
-        HashMap<String,String> ritorno = params[0].get("Ritorno");
-
+        HashMap<String,Object> invio = params[0];
         // Try to connect using Apache HttpClient Library
         try {
             httpclient = new DefaultHttpClient();
-            request = new HttpPost(invio.get("url")); //URL
+            request = new HttpPost((String)invio.get("url")); //URL
 
             //Preparo la mappa
-            ObjectMapper objectMapper = new ObjectMapper();
-            ObjectWriter objectWriter = objectMapper.writer();
+            ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
-            for(Map.Entry<String, String> e : invio.entrySet()) {
-                String key = e.getKey();
-                String value = e.getValue();
-                if(key.compareTo("url") != 0)  //Prendi i valori diversi dall'"url"
-                {
-                   // pairs.add(new BasicNameValuePair(key, value));
-                }
-                //Log.e("Key",key);
-                //Log.e("Value",value);
-            }
+            String s = objectWriter.writeValueAsString((Object)invio.get("User"));
 
-            //request.setEntity(new UrlEncodedFormEntity(pairs));
+            Log.i("OBJECT",s);
+
             response = httpclient.execute(request);
             Log.i("Invio","fatto");
 

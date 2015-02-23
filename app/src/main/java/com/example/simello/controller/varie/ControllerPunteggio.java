@@ -1,4 +1,4 @@
-package com.example.simello.controller.punteggi;
+package com.example.simello.controller.varie;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +13,7 @@ public class ControllerPunteggio
     private Date todayDate;
     private Date lastUpdatePoints;
     private Punteggio punteggio;
-    private Utente utente;
+    private User user;
 
     public ControllerPunteggio()
     {
