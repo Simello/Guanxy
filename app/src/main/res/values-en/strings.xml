@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Guanxy</string>
+    <string name="lingua">Set Language</string>
+    <string name="notifiche">Notify</string>
+    <string name="punti">Points</string>
+    <string name="richiesta">Help</string>
+    <string name="title_section1">Guanxy</string>
+    <string name="title_section2">Points</string>
+    <string name="title_section3">Guide</string>
+    <string name="trofei">Trophies</string>
+    <string name="usare_guanxy">Use Guanxy</string>
+    <string name="action_settings">Settings</string>
+    <string name="autori">Authors</string>
+    <string name="batteria">Battery Save</string>
+    <string name="cerca_aiuti">Search for Help</string>
+    <string name="chiedi_aiuto">Ask for Help</string>
+    <string name="gpsOff">Gps offline!</string>
+    <string name="gpsOffText1">Hey</string>
+    <string name="gpsOffText2">, I\'m Guanxy!\nI don\'t work without Gps.\nCan you set it?</string>
+    <string name="gpsOffTextNoHello">, I don\'t work without Gps, Can you set it?"</string>
+    <string name="impostazioni">Settings</string>
+    <string name="premi">Prizes</string>
+    <string name="username">Change Username</string>
+    <string name="utente">User:</string>
+</resources>
