@@ -47,7 +47,6 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
         HttpPost request;
         HttpResponse response = null;
         String result = "";
-        JSONArray jArray = null;
         // TextView to display result
         HashMap<String,Object> invio = params[0];
         // Try to connect using Apache HttpClient Library
@@ -56,12 +55,11 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             request = new HttpPost((String)invio.get("url")); //URL
 
             //Preparo la mappa
-            ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            ObjectMapper objectWriter = new ObjectMapper();
 
             String s = objectWriter.writeValueAsString((Object)invio.get("User"));
-
+            
             Log.i("OBJECT",s);
-
             response = httpclient.execute(request);
             Log.i("Invio","fatto");
 

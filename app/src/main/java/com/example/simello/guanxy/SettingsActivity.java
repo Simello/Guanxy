@@ -31,6 +31,7 @@ public class SettingsActivity extends PreferenceActivity
 
 
 
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -113,6 +114,22 @@ public class SettingsActivity extends PreferenceActivity
 
             }
         });
+
+
+
+
+        final ImageButton language = (ImageButton) findViewById(R.id.lingua);
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("com.android.settings", "com.android.settings.LanguageSettings");
+                startActivity(intent);
+
+            }
+        });
+
 
         //Se l'utente preme Salva, salva le impostazioni e torna alla schermata Guanxy
         final Button salva = (Button) findViewById(R.id.button_setting_salva);

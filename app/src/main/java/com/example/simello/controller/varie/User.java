@@ -136,7 +136,7 @@ public class User
         return user;
     }
 
-    public Position lastPosition()
+    public Position lcmastPosition()
     {
         return positions.get(0);
     }

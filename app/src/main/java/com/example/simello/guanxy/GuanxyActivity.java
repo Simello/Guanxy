@@ -19,11 +19,18 @@ import com.example.simello.controller.varie.User;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+
+
+
+
 
 
 public class GuanxyActivity extends ActionBarActivity
@@ -36,6 +43,9 @@ public class GuanxyActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
 
+
+
+
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
 
@@ -47,6 +57,7 @@ public class GuanxyActivity extends ActionBarActivity
 
         //CREAZIONE PRIMO UTENTE
         User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
+
 
         if(!gpsManager.canGetLocation())
         {
