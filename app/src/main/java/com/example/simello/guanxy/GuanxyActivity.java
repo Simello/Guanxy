@@ -53,6 +53,8 @@ public class GuanxyActivity extends ActionBarActivity
 
         //CREAZIONE PRIMO UTENTE
         User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
+        Log.d("User",user.getNickname());
+
 
 
         if(!gpsManager.canGetLocation())
