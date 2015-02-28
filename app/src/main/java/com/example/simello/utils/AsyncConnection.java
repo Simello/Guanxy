@@ -3,31 +3,20 @@ package com.example.simello.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.simello.controller.varie.User;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Simello & Sunfury on 27/01/15.
@@ -58,7 +47,8 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             ObjectMapper objectWriter = new ObjectMapper();
 
             String s = objectWriter.writeValueAsString((Object)invio.get("User"));
-            
+            StringEntity se = new StringEntity(s);
+            request.setEntity(se);
             Log.i("OBJECT",s);
             response = httpclient.execute(request);
             Log.i("Invio","fatto");
@@ -97,6 +87,7 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
         }
         return result;
     }
+
 
     protected void onPostExecute(String result)
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,13 +18,10 @@ import com.example.simello.controller.varie.User;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
-import com.parse.Parse;
-import com.parse.ParseInstallation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 
 
@@ -43,7 +39,7 @@ public class GuanxyActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
 
-
+        
 
 
         SharedPreferences prefs = this.getSharedPreferences(
