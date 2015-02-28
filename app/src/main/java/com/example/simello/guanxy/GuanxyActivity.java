@@ -52,6 +52,7 @@ public class GuanxyActivity extends ActionBarActivity
         List<Position> positions = new ArrayList<Position>();
         positions.add(position);
         //Numero di telefono dell'utente, da prendere durante la registrazione
+
         TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneNumber = tMgr.getLine1Number();
 
