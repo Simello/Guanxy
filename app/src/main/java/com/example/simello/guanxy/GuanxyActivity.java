@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,10 +51,12 @@ public class GuanxyActivity extends ActionBarActivity
         Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
         List<Position> positions = new ArrayList<Position>();
         positions.add(position);
+        //Numero di telefono dell'utente, da prendere durante la registrazione
+        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
 
         //CREAZIONE PRIMO UTENTE
         User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
-        Log.d("User",user.getNickname());
 
 
 
