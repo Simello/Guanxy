@@ -9,8 +9,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +52,9 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             String s = objectWriter.writeValueAsString((Object)invio.get("User"));
             StringEntity se = new StringEntity(s);
             request.setEntity(se);
+            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+            //request.setEntity(se);
 
             Log.i("OBJECT",s);
             response = httpclient.execute(request);
@@ -75,17 +81,7 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             result = "error";
         }
 
-        try
-        {
-            Log.i("Ritorno",result);
-            JSONObject jObj = new JSONObject(result);
-            Log.e("Ritorno",jObj.toString());
-
-        }
-        catch (JSONException e)
-        {
-            Log.e("JSONException", "Error: " + e.toString());
-        }
+        Log.d("Ritorno",result);
         return result;
     }
 

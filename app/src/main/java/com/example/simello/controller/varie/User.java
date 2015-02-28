@@ -4,12 +4,13 @@ package com.example.simello.controller.varie;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by simello & sunfury on 19/12/14.
  */
-public class User
+public class User implements Serializable
 {
     private String nickname;
     private static User user = null;

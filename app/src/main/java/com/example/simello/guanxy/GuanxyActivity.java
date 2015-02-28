@@ -74,7 +74,7 @@ public class GuanxyActivity extends ActionBarActivity
             if (code.compareTo("PIN") == 0)
             {
                 HashMap<String,Object> invio = new HashMap<String, Object>();
-                invio.put("url","Http://etc.etc");
+                invio.put("url","http://192.168.1.186:8080/guanxy-web/newuser");
 
                 invio.put("User",user);
 
