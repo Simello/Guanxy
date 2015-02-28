@@ -47,7 +47,7 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             ObjectMapper objectWriter = new ObjectMapper();
 
 
-
+            String lello = "lello";
             String s = objectWriter.writeValueAsString((Object)invio.get("User"));
             StringEntity se = new StringEntity(s);
             request.setEntity(se);
