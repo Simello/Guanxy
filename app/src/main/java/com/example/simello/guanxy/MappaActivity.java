@@ -1,6 +1,8 @@
 package com.example.simello.guanxy;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -81,8 +83,8 @@ private GoogleMap mMap;
 
 
         String url = makeURL(pos.getLat(),pos.getLon(), posSecondoMarke.latitude, posSecondoMarke.longitude);
-        JSONParser jParser = new JSONParser();
-        String json = jParser.getJSONFromUrl(url);
+        connectAsyncTask connectAsyncTask = new connectAsyncTask(url);
+        connectAsyncTask.execute();
 
 
 
@@ -206,6 +208,38 @@ private GoogleMap mMap;
         }
 
         return poly;
+    }
+
+
+    private class connectAsyncTask extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+        connectAsyncTask(String urlPass){
+            url = urlPass;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MappaActivity.this);
+            progressDialog.setMessage("Fetching route, Please wait...");
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            JSONParser jParser = new JSONParser();
+            String json = jParser.getJSONFromUrl(url);
+            return json;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.hide();
+            if(result!=null){
+                drawPath(result);
+            }
+        }
     }
 
 
