@@ -42,6 +42,7 @@ import java.util.List;
 public class MappaActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
+private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,7 +51,7 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         SupportMapFragment map = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-
+        mMap = map.getMap();
         map.getMapAsync(this);
 
 
@@ -63,15 +64,23 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         Position pos = user.lcmastPosition();
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
+
         Marker primomark = map.addMarker(new MarkerOptions().position(posPrimoMarke).title(user.getNickname()));
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(primomark.getPosition());
-        LatLngBounds baundese = builder.build();//isi
-        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 16);
-
+        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
         map.moveCamera(cu);
 
-       // String url = makeURL(pos.getLat(),pos.getLon(), //dest.getlat, dest.getlon)
+
+        LatLng posSecondoMarke = new LatLng(pos.getLat() + .003198, pos.getLon() - .003266);
+        Marker secondoMark = map.addMarker(new MarkerOptions().position(posSecondoMarke).title("Simello Pippaccia"));
+        builder.include(secondoMark.getPosition());
+
+        LatLngBounds baundese = builder.build();//isi
+
+
+
+        String url = makeURL(pos.getLat(),pos.getLon(), posSecondoMarke.latitude, posSecondoMarke.longitude);
         JSONParser jParser = new JSONParser();
         String json = jParser.getJSONFromUrl(url);
 
