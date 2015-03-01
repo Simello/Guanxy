@@ -19,7 +19,7 @@
                 android:layout_marginLeft="45dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
-             <ImageButtonButton
+             <ImageButton
                  android:id="@+id/bottone_mappa1"
                  android:layout_marginLeft="55dp"
                  android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"
