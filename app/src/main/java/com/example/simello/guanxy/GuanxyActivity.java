@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
+import com.example.simello.registrazione.RegistrazioneTabActivity;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
@@ -41,41 +42,12 @@ public class GuanxyActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_main);
-
-        
 
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
 
-        GPSManager gpsManager = new GPSManager(this);
 
-        Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-        List<Position> positions = new ArrayList<Position>();
-        positions.add(position);
-        //Numero di telefono dell'utente, da prendere durante la registrazione
-
-        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        mPhoneNumber = tMgr.getLine1Number();
-
-
-        Parse.initialize(this,"f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e","dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-
-
-        PushService.setDefaultPushCallback(this, GuanxyActivity.class);
-
-
-        //CREAZIONE PRIMO UTENTE
-        User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
-
-
-
-        if(!gpsManager.canGetLocation())
-        {
-            gpsManager.showSettingsAlert();
-        }
 
         if (utils.isConnected(this))
         {
@@ -84,6 +56,11 @@ public class GuanxyActivity extends ActionBarActivity
             String code = prefs.getString("PIN","PIN");
             if (code.compareTo("PIN") == 0)
             {
+                /*
+                Intent i = new Intent(this, RegistrazioneTabActivity.class);
+                startActivity(i);
+
+/*
                 HashMap<String,Object> invio = new HashMap<String, Object>();
                 invio.put("url","http://192.168.1.186:8080/guanxy-web/newuser");
 
@@ -92,6 +69,7 @@ public class GuanxyActivity extends ActionBarActivity
                 AsyncConnection cnt = new AsyncConnection(this);
 
                 cnt.execute(invio);
+                */
 
             }
             /*
@@ -125,7 +103,33 @@ public class GuanxyActivity extends ActionBarActivity
 
 
 
+        GPSManager gpsManager = new GPSManager(this);
 
+        Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
+        List<Position> positions = new ArrayList<Position>();
+        positions.add(position);
+        //Numero di telefono dell'utente, da prendere durante la registrazione
+
+        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
+
+
+        Parse.initialize(this,"f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e","dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+
+        PushService.setDefaultPushCallback(this, GuanxyActivity.class);
+
+
+        //CREAZIONE PRIMO UTENTE
+        User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
+
+        setContentView(R.layout.fragment_main);
+
+        if(!gpsManager.canGetLocation())
+        {
+            gpsManager.showSettingsAlert();
+        }
 
 
         ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);
