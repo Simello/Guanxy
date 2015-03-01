@@ -38,17 +38,23 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap map)
     {
-
         User user = User.getUser();
         Position pos = user.lcmastPosition();
-        Marker primomark = map.addMarker(new MarkerOptions().position(new LatLng(pos.getLat(), pos.getLon())).title(user.getNickname()));
+//Posizione primo markè
+        LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
+
+        Marker primomark = map.addMarker(new MarkerOptions().position(posPrimoMarke).title(user.getNickname()));
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(primomark.getPosition());
         LatLngBounds baundese = builder.build();//isi
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(baundese, 100);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 15);
         map.moveCamera(cu);
 
+
+
     }
+
+
 
 
 }
