@@ -19,6 +19,9 @@ import com.example.simello.controller.varie.User;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +58,14 @@ public class GuanxyActivity extends ActionBarActivity
 
         TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneNumber = tMgr.getLine1Number();
+
+
+        Parse.initialize(this,"f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e","dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+
+        PushService.setDefaultPushCallback(this, GuanxyActivity.class);
+
 
         //CREAZIONE PRIMO UTENTE
         User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
