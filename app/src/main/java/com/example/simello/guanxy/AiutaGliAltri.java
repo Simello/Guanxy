@@ -12,11 +12,11 @@ import android.view.View.OnLongClickListener;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.Transformation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
 
 /**
@@ -74,6 +74,22 @@ public class AiutaGliAltri extends ActionBarActivity
                 hideOthers(v);
             }
         });
+
+        ImageButton mappa1 = (ImageButton) findViewById(R.id.bottone_mappa1);
+        mappa1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(AiutaGliAltri.this, MappaActivity.class);
+                AiutaGliAltri.this.startActivity(myIntent);
+                overridePendingTransition(0, 0);
+
+
+            }
+
+            ;
+        });
+
+
         text2.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v)

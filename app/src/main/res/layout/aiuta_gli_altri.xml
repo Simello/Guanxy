@@ -10,90 +10,27 @@
     <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="center" >
         <TextView android:text="Utente 1" android:id="@+id/text1" android:textSize="17dp" android:textColor="@color/white" android:textStyle="bold" android:paddingLeft="25dp" android:paddingTop="3dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"
             android:clickable="false" />
-        <LinearLayout android:id="@+id/panel1" android:visibility="gone"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@+id/guanxy">
+        <LinearLayout android:id="@+id/panel1"   android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@+id/guanxy">
             <TextView android:layout_margin="2dip" android:textStyle="bold" android:text="Sono stato bocciato all' esame di malvestuto, come posso fare?" android:textSize="17dp" android:id="@+id/stringaUtente1" android:paddingLeft="115dp" android:paddingTop="25dp" android:background="@drawable/sfondo_nuvoletta"  android:layout_width="fill_parent" android:textColor="@color/white"  android:layout_height="200dp" />
             <TextView android:layout_margin="2dip" android:textStyle="bold"  android:textColor="@color/white" android:paddingLeft="105dp" android:textSize="17dp" android:paddingTop="2dp" android:text="Distanza da Te: 200m\nTempo: 4 minuti" android:background="@color/blueChiaro"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
+
+
             <RelativeLayout
                 android:layout_marginLeft="45dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
-            <ImageButton
-                android:layout_width="150dp"
-                android:id="@+id/bottone_accetta_aiutaglialtri_bozza"
-                android:layout_height="50dp"
-                android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"/>
-            <ImageButton
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_toRightOf="@+id/bottone_accetta_aiutaglialtri_bozza"
-                android:background="@drawable/bottone_rifiuta_aiutaglialtri_bozza"/>
+             <Button
+                 android:layout_marginLeft="40dp"
+                 android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"
+                 android:layout_width="150dp"
+                 android:layout_height="50dp"/>
             </RelativeLayout>
+
+
+
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="center">
-        <TextView android:text="Utente 1" android:id="@+id/text2" android:textSize="17dp" android:textColor="@color/white" android:textStyle="bold" android:paddingLeft="25dp" android:paddingTop="3dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"
-            android:clickable="false" />
-        <LinearLayout android:id="@+id/panel2" android:visibility="gone"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <TextView android:layout_margin="2dip" android:textStyle="bold" android:text="Sono stato bocciato all' esame di malvestuto, come posso fare?" android:textSize="17dp" android:id="@+id/stringaUtente2" android:paddingLeft="115dp" android:paddingTop="25dp" android:background="@drawable/sfondo_nuvoletta"  android:layout_width="fill_parent" android:textColor="@color/white"  android:layout_height="200dp" />
-            <TextView android:layout_margin="2dip" android:textStyle="bold"  android:textColor="@color/white" android:paddingLeft="105dp" android:textSize="17dp" android:paddingTop="2dp" android:text="Distanza da Te: 200m\nTempo: 4 minuti" android:background="@color/blueChiaro"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <RelativeLayout
-                android:layout_marginLeft="45dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:layout_width="150dp"
-                    android:id="@+id/bottone_accetta_aiutaglialtri_bozza2"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"/>
-                <ImageButton
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_toRightOf="@+id/bottone_accetta_aiutaglialtri_bozza2"
-                    android:background="@drawable/bottone_rifiuta_aiutaglialtri_bozza"/>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="center">
-        <TextView android:text="Utente 3" android:id="@+id/text3" android:textSize="17dp" android:textColor="@color/white" android:textStyle="bold" android:paddingLeft="25dp" android:paddingTop="3dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"
-            android:clickable="false" />
-        <LinearLayout android:id="@+id/panel3" android:visibility="gone"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <TextView android:layout_margin="2dip" android:textStyle="bold" android:text="Sono stato bocciato all' esame di malvestuto, come posso fare?" android:textSize="17dp" android:id="@+id/stringaUtente3" android:paddingLeft="115dp" android:paddingTop="25dp" android:background="@drawable/sfondo_nuvoletta"  android:layout_width="fill_parent" android:textColor="@color/white"  android:layout_height="200dp" />
-            <TextView android:layout_margin="2dip" android:textStyle="bold"  android:textColor="@color/white" android:paddingLeft="105dp" android:textSize="17dp" android:paddingTop="2dp" android:text="Distanza da Te: 200m\nTempo: 4 minuti" android:background="@color/blueChiaro"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <RelativeLayout
-                android:layout_marginLeft="45dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:layout_width="150dp"
-                    android:id="@+id/bottone_accetta_aiutaglialtri_bozza3"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"/>
-                <ImageButton
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_toRightOf="@+id/bottone_accetta_aiutaglialtri_bozza3"
-                    android:background="@drawable/bottone_rifiuta_aiutaglialtri_bozza"/>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:layout_marginTop="2dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="center">
-        <TextView android:text="Utente 4" android:id="@+id/text4" android:paddingLeft="25dp" android:paddingTop="5dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"  />
-        <LinearLayout android:id="@+id/panel4" android:visibility="gone" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <TextView android:layout_margin="2dip" android:text="Item1" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <TextView android:layout_margin="2dip" android:text="Item2" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <TextView android:layout_margin="2dip" android:text="Item3" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:layout_marginTop="2dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="center">
-        <TextView android:text="Utente 5" android:id="@+id/text5" android:paddingLeft="25dp" android:paddingTop="5dp" android:background="@drawable/freccia_chiusa"  android:layout_width="fill_parent" android:layout_height="25dp"  />
-        <LinearLayout android:id="@+id/panel5" android:visibility="gone" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <TextView android:layout_margin="2dip" android:text="Item1" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <TextView android:layout_margin="2dip" android:text="Item2" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-            <TextView android:layout_margin="2dip" android:text="Item3" android:padding="5dip" android:background="#777777"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-    <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:visibility="gone"
-        android:layout_height="340dip"  android:drawSelectorOnTop="false"  android:dividerHeight="0px" />
+
 
 
 </LinearLayout>

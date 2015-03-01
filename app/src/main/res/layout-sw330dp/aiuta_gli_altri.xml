@@ -13,19 +13,15 @@
             <TextView android:layout_margin="2dip" android:textStyle="bold" android:text="Sono stato bocciato all' esame di malvestuto, come posso fare?" android:textSize="17dp" android:id="@+id/stringaUtente1" android:paddingLeft="130dp" android:paddingTop="25dp" android:background="@drawable/sfondo_nuvoletta"  android:layout_width="fill_parent" android:textColor="@color/white"  android:layout_height="200dp" />
             <TextView android:layout_margin="2dip" android:textStyle="bold"  android:textColor="@color/white" android:paddingLeft="105dp" android:textSize="17dp" android:paddingTop="2dp" android:text="Distanza da Te: 200m\nTempo: 4 minuti" android:background="@color/blueChiaro"  android:layout_width="fill_parent" android:layout_height="wrap_content" />
             <RelativeLayout
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="55dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
-            <ImageButton
-                android:layout_width="150dp"
-                android:id="@+id/bottone_accetta_aiutaglialtri_bozza"
-                android:layout_height="50dp"
-                android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"/>
-            <ImageButton
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_toRightOf="@+id/bottone_accetta_aiutaglialtri_bozza"
-                android:background="@drawable/bottone_rifiuta_aiutaglialtri_bozza"/>
+                <ImageButton
+                    android:id="@+id/bottone_mappa1"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/bottone_accetta_aiutaglialtri_bozza"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"/>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

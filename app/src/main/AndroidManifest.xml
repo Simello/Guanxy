@@ -2,19 +2,58 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simello.guanxy" >
 
+    <!-- Permessi -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> <!-- serve per ottimizzare wifi con mappa -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> <!-- permette utilizzo del global positioning system (gps)
+
+    <!- Parse Permission -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- questa feature mi serve per la mappa: opengl es version 2 e' necessario per il rendering della mappa op -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    <!--
+      IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
+      to match your app's package name + ".permission.C2D_MESSAGE".
+    -->
+    <permission
+        android:name="com.example.simello.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.simello.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="true">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".GuanxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,34 +66,34 @@
         <activity
             android:name=".PuntiActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".GuidaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GuidaActivity"
             android:label="Guanxy"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".ChiediAiuto"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MappaActivity"
             android:label="Guanxy"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChiediAiuto"
+            android:label="Guanxy"
             android:parentActivityName=".GuanxyActivity"
-            />
-
-        <activity android:name=".AiutaGliAltri"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AiutaGliAltri"
             android:label="Guanxy"
-            android:screenOrientation="portrait"
             android:parentActivityName=".GuanxyActivity"
-            />
-        <activity android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
             android:label="Guanxy"
-            android:screenOrientation="portrait"
             android:parentActivityName=".GuanxyActivity"
-            />
-
-
-
+            android:screenOrientation="portrait" />
+        <!-- Parse Push Notify -->
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParseBroadcastReceiver">
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -62,6 +101,20 @@
         </receiver>
         <receiver android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false">
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+<!--                   IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
+                <category android:name="com.example.simello.pushnotifications" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
@@ -82,11 +135,9 @@
 
     </application>
 
-    <!-- Permessi -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     <!--Parse Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -98,8 +149,9 @@
     <permission android:name="com.example.simello.guanxy.permission.C2D_MESSAGE" android:protectionLevel="signature" />
     <uses-permission android:name="com.example.simello.guanxy.permission.C2D_MESSAGE" />
 
-
-
-
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBqOVja70mh4RwUMfna0jPO3DrZktc90Yo"/>
+    </application>
 
 </manifest>

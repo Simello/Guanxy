@@ -32,5 +32,6 @@
     <color name="grigioChiaro">#e8e8e8</color>
     <color name="grigioScuro">#bcbcbc</color>
     <color name="rosso">#ff1500</color>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
