@@ -113,12 +113,13 @@ public class GuanxyActivity extends ActionBarActivity
         TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneNumber = tMgr.getLine1Number();
 
-
+/*
         Parse.initialize(this,"f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e","dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
 
         PushService.setDefaultPushCallback(this, GuanxyActivity.class);
+        */
 
 
         //CREAZIONE PRIMO UTENTE
