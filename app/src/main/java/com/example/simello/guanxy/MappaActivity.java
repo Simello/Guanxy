@@ -8,7 +8,9 @@ import com.example.simello.controller.varie.User;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -17,7 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * Created by simello e sunfury on 01/03/15.
  */
-public class MappaActivity extends FragmentActivity
+public class MappaActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
     @Override
@@ -37,6 +39,13 @@ public class MappaActivity extends FragmentActivity
         LatLngBounds baundese = builder.build();//isi
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(baundese,10);
         map.moveCamera(cu);
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map)
+    {
+
     }
 
 
