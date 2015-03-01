@@ -25,7 +25,7 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        MapFragment map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment map = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
 
         map.getMapAsync(this);
 
