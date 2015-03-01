@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> <!-- permette utilizzo del global positioning system (gps)-->
 
 
+
     <!-- questa feature mi serve per la mappa: opengl es version 2 e' necessario per il rendering della mappa op -->
     <uses-feature
         android:glEsVersion="0x00020000"
