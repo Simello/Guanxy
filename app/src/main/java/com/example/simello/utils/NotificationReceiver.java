@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+
 /**
- * Created by Sunfury on 26/02/15.
+ * Created by Sunfury & Simello on 26/02/15.
  */
 public class NotificationReceiver extends BroadcastReceiver
 {
@@ -37,5 +38,7 @@ public class NotificationReceiver extends BroadcastReceiver
 
 
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.simello.guanxy;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -114,7 +115,6 @@ public class GuanxyActivity extends ActionBarActivity
         mPhoneNumber = tMgr.getLine1Number();
 
 
-        Parse.initialize(this,"f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e","dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
 
