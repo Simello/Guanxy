@@ -5,11 +5,14 @@ import android.support.v4.app.FragmentActivity;
 
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
@@ -38,8 +41,12 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
 
         User user = User.getUser();
         Position pos = user.lcmastPosition();
-        map.addMarker(new MarkerOptions().position(new LatLng(pos.getLat(),pos.getLon())).title("SIMELLO OP"));
-
+        Marker primomark = map.addMarker(new MarkerOptions().position(new LatLng(pos.getLat(), pos.getLon())).title("SIMELLO OP"));
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(primomark.getPosition());
+        LatLngBounds baundese = builder.build();//isi
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(baundese, 10);
+        map.moveCamera(cu);
 
     }
 
