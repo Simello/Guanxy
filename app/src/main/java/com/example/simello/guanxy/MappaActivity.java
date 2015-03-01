@@ -41,11 +41,11 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
 
         User user = User.getUser();
         Position pos = user.lcmastPosition();
-        Marker primomark = map.addMarker(new MarkerOptions().position(new LatLng(pos.getLat(), pos.getLon())).title("SIMELLO OP"));
+        Marker primomark = map.addMarker(new MarkerOptions().position(new LatLng(pos.getLat(), pos.getLon())).title(user.getNickname()));
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(primomark.getPosition());
         LatLngBounds baundese = builder.build();//isi
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(baundese, 10);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(baundese, 100);
         map.moveCamera(cu);
 
     }
