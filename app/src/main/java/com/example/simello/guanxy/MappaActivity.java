@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,9 +25,10 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        SupportMapFragment fm = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-        GoogleMap map = fm.getMap();
-        onMapReady(map);
+        MapFragment map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+
+        map.getMapAsync(this);
+
 
     }
 
