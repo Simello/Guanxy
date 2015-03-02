@@ -147,7 +147,7 @@ private GoogleMap mMap;
                 .append(Double.toString( destlat));
         urlString.append(",");
         urlString.append(Double.toString( destlog));
-        urlString.append("&sensor=false&mode=driving&alternatives=true");
+        urlString.append("&sensor=false&mode=walking&alternatives=true");
         return urlString.toString();
     }
     public void drawPath(String  result) {
