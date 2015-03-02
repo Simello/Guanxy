@@ -22,9 +22,9 @@ public class MainClass extends Application
 
 
         // start the initial Activity
-        Intent i = new Intent(this, GuanxyActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
+//        Intent i = new Intent(this, GuanxyActivity.class);
+  //      i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    //    startActivity(i);
     }
 
     public MainClass()

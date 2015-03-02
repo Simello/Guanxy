@@ -166,7 +166,7 @@ private GoogleMap mMap;
                 LatLng dest= list.get(z+1);
                 Polyline line = mMap.addPolyline(new PolylineOptions()
                         .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude,   dest.longitude))
-                        .width(2)
+                        .width(6)
                         .color(Color.BLUE).geodesic(true));
             }
 
