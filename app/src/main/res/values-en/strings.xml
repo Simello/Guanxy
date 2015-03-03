@@ -32,5 +32,6 @@
     <string name="impostazioniDati">Data</string>
     <string name="impostazioniWifi">Wifi</string>
     <string name="title_activity_maps">Map</string>
+    <string name="NewUsername">Username:</string>
 
 </resources>

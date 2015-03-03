@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/NewUsername"
+        android:id="@+id/NewUsernameText"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NewUsername"
+        android:layout_below="@+id/NewUsernameText"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edit_text_bordi_tondi"
+        android:maxLength="10"
+        android:inputType="textPersonName"
+        android:enabled="true"
+        android:gravity="center"
+
+        android:layout_alignStart="@+id/NewUsernameText"
+        android:layout_alignEnd="@+id/NewUsernameText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/buttonInizia"
+        android:layout_below="@+id/NewUsername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/button_annulla_aiuto_tondo"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"/>
+
+
+</RelativeLayout>

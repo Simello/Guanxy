@@ -5,11 +5,22 @@
     android:background="@color/blueScuro" >
 
     <TextView
-        android:id="@+id/tvFragFirst"
+        android:id="@+id/tvFragSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textSize="26dp"
-        android:text="TextView" />
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/inizio"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
+
+
 </RelativeLayout>

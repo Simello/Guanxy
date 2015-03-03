@@ -1,5 +1,6 @@
 package com.example.simello.registrazione;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ public class RegistrazioneFirstFragment extends Fragment
         View v = inflater.inflate(R.layout.registrazione_first_fragment, container, false);
 
         TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
+        tv.setTextColor(getResources().getColor(R.color.white));
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
         tv.setText(getArguments().getString("msg"));
 
         return v;

@@ -63,6 +63,7 @@
         <activity android:name="com.example.simello.registrazione.RegistrazioneTabActivity"
             android:label="Guanxy"
             android:screenOrientation="portrait"
+            android:noHistory="true"
             />
 
         <activity
@@ -92,6 +93,12 @@
             android:label="Guanxy"
             android:parentActivityName=".GuanxyActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name="com.example.simello.registrazione.RegistrazioneUsername"
+            android:label="Guanxy"
+            android:screenOrientation="portrait"
+            android:noHistory="true"
+            />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

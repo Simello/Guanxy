@@ -1,12 +1,15 @@
 package com.example.simello.guanxy;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,10 +42,32 @@ public class GuanxyActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Se è true, allora esce dall'applicazione!
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+            return;
+        }
+        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
+        if(mPhoneNumber == null)
+        {
+        //todo da annullare poiche non ha il numero di telefono!
+
+        }
 
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
+
+        //Serve per evitare di rieseguire la registrazione!!!
+        String pin = getIntent().getStringExtra("PIN");
+        if(pin != null)
+        {
+            SharedPreferences.Editor  editor = prefs.edit();
+            editor.putString("PIN","No");
+            editor.apply();
+        }
+
 
 
 
@@ -53,7 +78,7 @@ public class GuanxyActivity extends ActionBarActivity
             String code = prefs.getString("PIN","PIN");
             if (code.compareTo("PIN") == 0)
             {
-                /*
+
                 Intent i = new Intent(this, RegistrazioneTabActivity.class);
                 startActivity(i);
 
@@ -68,6 +93,17 @@ public class GuanxyActivity extends ActionBarActivity
                 cnt.execute(invio);
                 */
 
+            }
+            else
+            {
+                String username = prefs.getString("nickname","");
+                //todo da aggiungere il getPoints e il getNumeroTelefono
+                GPSManager gpsManager = new GPSManager(this);
+
+                Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
+                List<Position> positions = new ArrayList<Position>();
+                positions.add(position);
+                User.getIstance(username,this,"3208814625",0,positions);
             }
             /*
             if utente non registrato, registra utente
@@ -88,26 +124,8 @@ public class GuanxyActivity extends ActionBarActivity
         }
 
 
-        GPSManager gpsManager = new GPSManager(this);
-
-        Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-        List<Position> positions = new ArrayList<Position>();
-        positions.add(position);
-        //Numero di telefono dell'utente, da prendere durante la registrazione
-
-        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        mPhoneNumber = tMgr.getLine1Number();
-
-
         ParseInstallation.getCurrentInstallation().saveInBackground();
-
-
         PushService.setDefaultPushCallback(this, GuanxyActivity.class);
-
-
-
-        //CREAZIONE PRIMO UTENTE
-        User user = User.getIstance(prefs.getString("nickname",""), this, "3208814625", 0, positions);
 
         setContentView(R.layout.fragment_main);
 
@@ -233,6 +251,14 @@ public class GuanxyActivity extends ActionBarActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        //todo da lasciare per testare la registrazione
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("PIN","PIN");
+        editor.apply();
+
         overridePendingTransition(0, 0);
      //Se sono già a Guanxy, esco
     }

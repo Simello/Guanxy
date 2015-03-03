@@ -32,6 +32,7 @@
     <string name="caricamentoGps">Guanxy sta elaborando...</string>
     <string name="annullaAiuto">Annulla Aiuto</string>
     <string name="segnalaAbuso">Segnala Abuso</string>
+    <string name="NewUsername">Inserisci il nome utente:</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
