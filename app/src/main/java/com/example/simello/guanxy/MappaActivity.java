@@ -226,7 +226,7 @@ private GoogleMap mMap;
             // TODO Auto-generated method stub
             super.onPreExecute();
             progressDialog = new ProgressDialog(MappaActivity.this);
-            progressDialog.setMessage("Fetching route, Please wait...");
+            progressDialog.setMessage(getString(R.string.caricamentoGps));
             progressDialog.setIndeterminate(true);
             progressDialog.show();
         }

@@ -23,4 +23,7 @@
     <string name="premi">Prizes</string>
     <string name="username">Change Username</string>
     <string name="utente">User:</string>
+    <string name="caricamentoGps">Guanxy\'s processing...</string>
+    <string name="annullaAiuto">Deny Help</string>
+    <string name="segnalaAbuso">Report</string>
 </resources>
