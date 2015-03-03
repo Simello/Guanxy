@@ -250,7 +250,6 @@ private GoogleMap mMap;
             }
         }
     }
-
     /**
      * Metodo che controlla la perdita del FOCUS della schermata attuale
      * @param hasFocus
@@ -261,7 +260,8 @@ private GoogleMap mMap;
         // TODO Auto-generated method stub
 
         super.onWindowFocusChanged(hasFocus);
-        utils.GPSConnect(hasFocus, this);
+        utils.connect(hasFocus,this);
+
     }
 
     @Override

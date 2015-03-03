@@ -1,13 +1,22 @@
 package com.example.simello.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.provider.Settings;
+
+import com.example.simello.controller.varie.User;
+import com.example.simello.guanxy.R;
 
 /**
  * Created by Sunfury & Simello on 03/01/15.
  */
 public class utils
 {
+    static boolean notFirstTime = false;
+
 
     /**
      * Metodo per il controllo se il dispositivo è Online
@@ -20,6 +29,67 @@ public class utils
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
 
     }
+
+
+    public static void connect(Context context)
+    {
+        final Context mContext = context;
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog builder = alertDialog.create();
+
+        if(builder.isShowing())
+        {
+            builder.dismiss();
+        }
+        else {
+
+            // Setting Dialog Title
+            alertDialog.setTitle(mContext.getResources().getString(R.string.connessioneOff));
+
+            if(!notFirstTime)
+            {
+                // Setting Dialog Message
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + User.getUser().getNickname() + mContext.getResources().getString(R.string.connectOff1));
+                notFirstTime = true;
+            }
+            else
+            {
+
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " " + User.getUser().getNickname() + mContext.getResources().getString(R.string.connectOffNoHello));
+            }
+
+            // On pressing Settings button
+            alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioniDati), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            alertDialog.setNegativeButton(mContext.getResources().getString(R.string.impostazioniWifi), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            alertDialog.setCancelable(false);
+            // Showing Alert Message
+            alertDialog.show();
+        }
+    }
+
+
+    public static void connect(boolean hasFocus, Context cnt)
+    {
+        if(hasFocus)
+        {
+            if(!isConnected(cnt))
+                connect(cnt);
+        }
+    }
+
+
 
     /**
      * Metodo per il controllo del GPS quando viene perso il focus alla finestra

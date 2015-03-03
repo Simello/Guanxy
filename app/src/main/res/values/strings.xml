@@ -24,6 +24,11 @@
     <string name="gpsOffText1">Ciao</string>
     <string name="gpsOffText2">, Io sono Guanxy!\nNon posso funzionare senza GPS.\nLo attivi per favore?</string>
     <string name="gpsOffTextNoHello">, non posso funzionare senza GPS.\nLo attivi per favore?</string>
+    <string name="connectOff1">Io sono Guanxy!\nNon posso funzionare senza connessione.\nLa attivi per favore?</string>
+    <string name="connectOffNoHello">, non posso funzionare senza connessione.\nLa attivi per favore?</string>
+    <string name="impostazioniDati">Dati</string>
+    <string name="impostazioniWifi">Wifi</string>
+    <string name="connessioneOff">Nessuna connessione</string>
     <string name="caricamentoGps">Guanxy sta elaborando...</string>
     <string name="annullaAiuto">Annulla Aiuto</string>
     <string name="segnalaAbuso">Segnala Abuso</string>

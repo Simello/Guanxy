@@ -92,12 +92,8 @@ public class GuanxyActivity extends ActionBarActivity
         }
         else
         {
-            Log.i("Off","Offline");
-            //@Todo
-            //Farlo connettere
-            //Idea, prendo dal db i dati (quindi punti, user e giorni mancanti) e li inserisco in un Bundle, così
-            //possiamo portarli in giro
-            Toast.makeText(this, "Non connesso",Toast.LENGTH_SHORT).show();
+            //farlo connettere
+           //utils.connect(this);
 
         }
 
@@ -264,7 +260,8 @@ public class GuanxyActivity extends ActionBarActivity
         // TODO Auto-generated method stub
 
         super.onWindowFocusChanged(hasFocus);
-        utils.GPSConnect(hasFocus,this);
+        utils.connect(hasFocus,this);
+
     }
 
 

@@ -202,8 +202,7 @@ public class SettingsActivity extends PreferenceActivity
     }
 
     /**
-     * Metodo per evitare l inutilizzo del GPS durante l'esecuzione di Guanxy.
-     * Controlla il GPS ogni volta che viene perso il focus alla schermata
+     * Metodo che controlla la perdita del FOCUS della schermata attuale
      * @param hasFocus
      */
     //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
@@ -212,7 +211,8 @@ public class SettingsActivity extends PreferenceActivity
         // TODO Auto-generated method stub
 
         super.onWindowFocusChanged(hasFocus);
-        utils.GPSConnect(hasFocus, this);
+        utils.connect(hasFocus,this);
+
     }
 
 }

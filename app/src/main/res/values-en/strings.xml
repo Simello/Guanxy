@@ -26,5 +26,11 @@
     <string name="caricamentoGps">Guanxy\'s processing...</string>
     <string name="annullaAiuto">Deny Help</string>
     <string name="segnalaAbuso">Report</string>
+    <string name="connectOff1">,I\'m Guanxy!\nI can\'t work without connection.\nCan you turn it on?</string>
+    <string name="connessioneOff">No connection</string>
+    <string name="connectOffNoHello">, I can\'t work without connection, can you turn it on?</string>
+    <string name="impostazioniDati">Data</string>
+    <string name="impostazioniWifi">Wifi</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
