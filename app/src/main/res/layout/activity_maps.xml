@@ -20,7 +20,7 @@
         android:layout_gravity="right|top"
         android:text="@string/segnalaAbuso"
         android:textColor="@color/white"
-        android:layout_marginTop="20dp"
+        and
         android:background="@color/rosso"/>
 
     <Button
