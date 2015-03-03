@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
+import com.example.simello.utils.utils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -248,6 +249,19 @@ private GoogleMap mMap;
                 drawPath(result);
             }
         }
+    }
+
+    /**
+     * Metodo che controlla la perdita del FOCUS della schermata attuale
+     * @param hasFocus
+     */
+    //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+
+        super.onWindowFocusChanged(hasFocus);
+        utils.GPSConnect(hasFocus, this);
     }
 
 

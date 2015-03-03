@@ -127,11 +127,6 @@ public class GuanxyActivity extends ActionBarActivity
 
         setContentView(R.layout.fragment_main);
 
-        if(!gpsManager.canGetLocation())
-        {
-            gpsManager.showSettingsAlert();
-        }
-
 
         ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);
         chiediAiuto.setOnClickListener(new View.OnClickListener() {

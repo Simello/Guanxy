@@ -38,6 +38,7 @@ public class utils
         }
     }
 
+
     //Per il metodo dell'uso degli script php/connessioni http, usano tutti l'AsyncTask
     //Con onPreExecute() -> ProgessDialog con messaggio "in Creazione"
     //doInBackground() -> Esecuzione dello script vero e proprio
