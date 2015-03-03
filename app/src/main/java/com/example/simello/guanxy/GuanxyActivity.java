@@ -7,13 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
@@ -21,12 +19,10 @@ import com.example.simello.registrazione.RegistrazioneTabActivity;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.utils;
-import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -90,14 +86,6 @@ public class GuanxyActivity extends ActionBarActivity
 
 
         }
-        else
-        {
-            //farlo connettere
-           //utils.connect(this);
-
-        }
-
-
 
 
         GPSManager gpsManager = new GPSManager(this);
