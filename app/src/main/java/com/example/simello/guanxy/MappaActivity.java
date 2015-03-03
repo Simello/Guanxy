@@ -264,6 +264,12 @@ private GoogleMap mMap;
         utils.GPSConnect(hasFocus, this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
+
 
 
 }
