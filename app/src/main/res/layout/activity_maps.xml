@@ -16,23 +16,27 @@
     <Button
         android:id="@+id/segnalaAbuso"
         android:layout_width="wrap_content"
+        android:textAllCaps="false"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:text="@string/segnalaAbuso"
         android:textColor="@color/white"
-        and
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
         android:background="@color/rosso"/>
 
     <Button
         android:id="@+id/annullaAiuto"
+        android:textAllCaps="false"
         android:layout_width="wrap_content"
+        android:padding="10dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left|top"
         android:text="@string/annullaAiuto"
         android:textColor="@color/white"
-        android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:paddingRight="50dp"
+        android:layout_marginLeft="20dp"
         android:background="@color/blueChiaro"/>
 
     </fragment>
