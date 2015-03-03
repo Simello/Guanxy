@@ -14,9 +14,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -67,7 +67,9 @@ private GoogleMap mMap;
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
 
-        Marker primomark = map.addMarker(new MarkerOptions().position(posPrimoMarke).title(user.getNickname()));
+        MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
+        primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
+        map.addMarker(primomark);
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(primomark.getPosition());
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
@@ -75,7 +77,9 @@ private GoogleMap mMap;
 
 
         LatLng posSecondoMarke = new LatLng(pos.getLat() + .003198, pos.getLon() - .003266);
-        Marker secondoMark = map.addMarker(new MarkerOptions().position(posSecondoMarke).title("Simello Pippaccia"));
+        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title("Simello overpower");
+        secondoMark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
+        map.addMarker(secondoMark);;
         builder.include(secondoMark.getPosition());
 
         LatLngBounds baundese = builder.build();//isi
