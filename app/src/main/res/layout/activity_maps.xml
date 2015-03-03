@@ -24,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:padding="10dp"
-        android:background="@color/rosso"/>
+        android:background="@drawable/button_segnala_abuso_tondo"/>
 
     <Button
         android:id="@+id/annullaAiuto"
@@ -37,7 +37,7 @@
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/blueChiaro"/>
+        android:background="@drawable/button_annulla_aiuto_tondo"/>
 
     </fragment>
 
