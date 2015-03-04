@@ -1,20 +1,23 @@
-package com.example.simello.guanxy;
+package com.example.simello.aiuta.gli.altri;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
-import com.example.simello.utils.utils;
+import com.example.simello.guanxy.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -41,30 +44,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by simello e sunfury on 01/03/15.
+ * Created by Sunfury on 04/03/15.
  */
-public class MappaActivity extends FragmentActivity implements OnMapReadyCallback
+public class MappaFragment extends Fragment
 {
 
+    MapView mMapView;
     private GoogleMap mMap;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+
+    public static MappaFragment newIstance()
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-
-        SupportMapFragment map = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-        mMap = map.getMap();
-        map.getMapAsync(this);
-
-
+        MappaFragment map = new MappaFragment();
+        return map;
     }
 
     @Override
-    public void onMapReady(GoogleMap map)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // inflat and return the layout
+        View v = inflater.inflate(R.layout.fragment_location_info, container,
+                false);
+        mMapView = (MapView) v.findViewById(R.id.mapView);
+        mMapView.onCreate(savedInstanceState);
+
+        mMapView.onResume();// needed to get the map to display immediately
+
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mMap = mMapView.getMap();
+
+
         User user = User.getUser();
         Position pos = user.lcmastPosition();
         //Posizione primo markè
@@ -72,19 +87,19 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
 
         MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
         primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
-        Marker mf = map.addMarker(primomark);
+        Marker mf = mMap.addMarker(primomark);
         mf.showInfoWindow();
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(primomark.getPosition());
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
-        map.moveCamera(cu);
+        mMap.moveCamera(cu);
 
 
         LatLng posSecondoMarke = new LatLng(pos.getLat() + .003198, pos.getLon() - .003266);
         MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title("Simello overpower");
         secondoMark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
-        map.addMarker(secondoMark);
+        mMap.addMarker(secondoMark);
 
         builder.include(secondoMark.getPosition());
 
@@ -96,14 +111,18 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         connectAsyncTask connectAsyncTask = new connectAsyncTask(url);
         connectAsyncTask.execute();
 
-
-
+        return v;
     }
+
+
+
+
+
     public class JSONParser {
 
-         InputStream is = null;
-         JSONObject jObj = null;
-         String json = "";
+        InputStream is = null;
+        JSONObject jObj = null;
+        String json = "";
         // constructor
         public JSONParser() {
         }
@@ -231,7 +250,7 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            progressDialog = new ProgressDialog(MappaActivity.this);
+            progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.caricamentoGps));
             progressDialog.setIndeterminate(true);
             progressDialog.show();
@@ -251,26 +270,4 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         }
     }
-    /**
-     * Metodo che controlla la perdita del FOCUS della schermata attuale
-     * @param hasFocus
-     */
-    //@todo Da sistemare l'onResume, deve chiudere per bene il Dialog
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        // TODO Auto-generated method stub
-
-        super.onWindowFocusChanged(hasFocus);
-        utils.connect(hasFocus,this);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0, 0);
-    }
-
-
-
 }

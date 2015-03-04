@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.utils.utils;
 
 /**
@@ -79,7 +80,9 @@ public class AiutaGliAltri extends ActionBarActivity
         mappa1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(AiutaGliAltri.this, MappaActivity.class);
+
+                //todo RICORDATI DI CAMBIARE QUI
+                Intent myIntent = new Intent(AiutaGliAltri.this, TabAiutaGliAltri.class);
                 AiutaGliAltri.this.startActivity(myIntent);
                 overridePendingTransition(0, 0);
 
