@@ -1,5 +1,6 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.simello.guanxy.R;
@@ -31,23 +34,32 @@ public class TabAiutaGliAltri extends FragmentActivity
         mViewPager = (ViewPager) findViewById(R.id.viewPagerAiutaGliAltri);
         FragmentPagerAdapter mMyFragmentPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
 
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+        mViewPager.setAdapter(mMyFragmentPagerAdapter);
+
+        final TitlePageIndicator mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        mIndicator.setViewPager(mViewPager);
+
+        mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
             @Override
             public void onPageSelected(int position) {
-                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mViewPager.getWindowToken(),0);
+
             }
 
             @Override
-            public void onPageScrolled(int position, float offset, int offsetPixels) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int state)
+            {
                 if (state == ViewPager.SCROLL_STATE_IDLE)
                 {
-                    if (mViewPager.getCurrentItem() == 0)
+                    if (mViewPager.getCurrentItem() == 1 || mViewPager.getCurrentItem() == 0)
                     {
                         // Hide the keyboard.
+
                         ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE))
                                 .hideSoftInputFromWindow(mViewPager.getWindowToken(), 0);
                     }
@@ -55,12 +67,10 @@ public class TabAiutaGliAltri extends FragmentActivity
             }
         });
 
-        mViewPager.setAdapter(mMyFragmentPagerAdapter);
-
-        TitlePageIndicator mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
-        mIndicator.setViewPager(mViewPager);
-
         mViewPager.setCurrentItem(1);
+
+
+
 
     }
 
@@ -105,8 +115,6 @@ public class TabAiutaGliAltri extends FragmentActivity
             return 3;
         }
     }
-
-
 
 
 }

@@ -44,7 +44,7 @@ public class HelloBubblesActivity extends Fragment {
                 // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    //adapter.add(new OneComment(false, editText1.getText().toString()));
+                    adapter.add(new OneComment(false, editText1.getText().toString()));
                     receiveMessage();
                     editText1.setText("");
                     return true;
