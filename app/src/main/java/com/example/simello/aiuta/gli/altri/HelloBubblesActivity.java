@@ -60,6 +60,7 @@ public class HelloBubblesActivity extends Fragment {
                 adapter.add(new OneComment(false, editText1.getText().toString()));
                 receiveMessage();
                 editText1.setText("");
+                lv.setSelection(lv.getAdapter().getCount()-1);
             }
         });
 
@@ -71,6 +72,8 @@ public class HelloBubblesActivity extends Fragment {
 
     private void receiveMessage(){
         String msg = editText1.getText().toString();
+        lv.setSelection(lv.getAdapter().getCount()-1);
+
         //new ChatDAO().receiveMessage("");
     }
 

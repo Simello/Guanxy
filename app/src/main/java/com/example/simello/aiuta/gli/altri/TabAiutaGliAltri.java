@@ -1,11 +1,13 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.simello.guanxy.R;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -16,6 +18,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 public class TabAiutaGliAltri extends FragmentActivity
 {
     public static FragmentManager fragmentManager;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,32 @@ public class TabAiutaGliAltri extends FragmentActivity
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
         fragmentManager = getSupportFragmentManager();
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPagerAiutaGliAltri);
+        mViewPager = (ViewPager) findViewById(R.id.viewPagerAiutaGliAltri);
         FragmentPagerAdapter mMyFragmentPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mViewPager.getWindowToken(),0);
+            }
+
+            @Override
+            public void onPageScrolled(int position, float offset, int offsetPixels) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE)
+                {
+                    if (mViewPager.getCurrentItem() == 0)
+                    {
+                        // Hide the keyboard.
+                        ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE))
+                                .hideSoftInputFromWindow(mViewPager.getWindowToken(), 0);
+                    }
+                }
+            }
+        });
 
         mViewPager.setAdapter(mMyFragmentPagerAdapter);
 
@@ -78,6 +105,9 @@ public class TabAiutaGliAltri extends FragmentActivity
             return 3;
         }
     }
+
+
+
 
 }
 

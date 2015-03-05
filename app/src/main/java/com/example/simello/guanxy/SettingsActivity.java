@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import android.widget.ToggleButton;
 
 import com.example.simello.controller.varie.User;
 import com.example.simello.utils.utils;
+import com.parse.ParsePush;
+import com.parse.PushService;
 
 /**
  * Created by Sunfury & Simello on 22/01/15.
@@ -45,7 +48,7 @@ public class SettingsActivity extends PreferenceActivity
         //@Todo è da sistemare il toggle delle notifiche e della batteria
         final ToggleButton notifiche = (ToggleButton) findViewById(R.id.toggleNotifiche);
         //QUI POSSO SETTARE IL METODO REALE DEL TOGGLE BUTTON DELLE NOTIFICHE
-        String statoNotifiche = prefs.getString("notifiche","");
+        String statoNotifiche = prefs.getString("notifiche", "");
         if(statoNotifiche.compareTo("true") == 0)
             notifiche.setChecked(true);
         else
@@ -141,12 +144,14 @@ public class SettingsActivity extends PreferenceActivity
                 //Setta il nome dell'user
                 user.setNickname(m_Text);
                 //Serve per salvare lo stato del toggle sia di batteria che notifica
-                editor.putString("notifiche",""+notifiche.isChecked());
+                editor.putString("notifiche", ""+notifiche.isChecked());
+                Log.i("PushSetting",""+notifiche.isChecked());
                 editor.putString("batteria", ""+batteria.isChecked());
 
 
                 //Appica le modifiche e le salva
                 editor.apply();
+               
 
                 Toast.makeText(SettingsActivity.this, "Salvato!",Toast.LENGTH_SHORT).show();
 
