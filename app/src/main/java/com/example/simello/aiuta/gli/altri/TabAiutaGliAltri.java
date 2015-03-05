@@ -1,6 +1,5 @@
 package com.example.simello.aiuta.gli.altri;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.simello.guanxy.R;
-import com.viewpagerindicator.PageIndicator;
-import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
@@ -54,7 +51,7 @@ public class TabAiutaGliAltri extends FragmentActivity
 
                 case 0: return AiutoFragment.newIstance();
                 case 1: return MappaFragment.newIstance();
-                case 2: return AiutoFragment.newIstance();
+                case 2: return HelloBubblesActivity.newIstance();
 
 
 
