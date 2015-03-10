@@ -10,14 +10,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.simello.classiServer.InsertUserInput;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.GuanxyActivity;
 import com.example.simello.guanxy.R;
+import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Sunfury on 03/03/15.
@@ -39,6 +43,7 @@ public class RegistrazioneUsername extends Activity
             public void onClick(View v)
             {
                 EditText usernameEditText = (EditText) findViewById(R.id.NewUsername);
+                //Prendo l'username
                 String sUsername = usernameEditText.getText().toString();
                 if (sUsername.matches("")) {
                     Toast.makeText(RegistrazioneUsername.this, "Non hai inserito un nome utente corretto", Toast.LENGTH_SHORT).show();
@@ -46,13 +51,24 @@ public class RegistrazioneUsername extends Activity
                 }
 
                 GPSManager gpsManager = new GPSManager(RegistrazioneUsername.this);
-
+                //Prendo la posizione
                 Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-                List<Position> positions = new ArrayList<Position>();
-                positions.add(position);
-                User.getIstance(sUsername,RegistrazioneUsername.this,"3208814625",0,positions);
+                //Creo l'oggetto
+                InsertUserInput userInput = new InsertUserInput("3208814625",sUsername,(long)gpsManager.getLongitude(),(long)gpsManager.getLatitude());
+
+                HashMap<String,Object> provaConnessione = new HashMap<String, Object>();
+                provaConnessione.put("url","http://5.249.151.38:8080/guanxy/user");
+                provaConnessione.put("User",userInput);
+                AsyncConnection connection = new AsyncConnection(RegistrazioneUsername.this);
+                connection.execute(provaConnessione);
+
+
+
+                User.getIstance(sUsername,RegistrazioneUsername.this,"3208814625",0,position);
                 User u = User.getUser();
                 u.setNickname(sUsername);
+
+
 
                 Intent i = new Intent(RegistrazioneUsername.this, GuanxyActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

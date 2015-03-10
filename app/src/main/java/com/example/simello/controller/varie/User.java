@@ -18,17 +18,25 @@ public class User implements Serializable
     private String idUser = null;
     private int point;
     private String pin = null;
-    private List<Position> positions;
+    private Position position;
 
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
     //@Todo è da completare la parte dell'user
-    private User(String nickname, Context cnt, String idUser,int point, List<Position> positions)
+    private User(String nickname, Context cnt, String idUser,int point, Position positions)
     {
         this.nickname = nickname;
         this.context = cnt;
         this.idUser= idUser;
         this.point = point;
-        this.positions = positions;
+        this.position = positions;
 
     }
 
@@ -40,11 +48,11 @@ public class User implements Serializable
      * @param point Punti dell'utente
      * @return Unica istanza di Utente
      */
-    public static User getIstance(String nickname, Context cnt,String idUser, int point, List<Position> positions)
+    public static User getIstance(String nickname, Context cnt,String idUser, int point, Position position)
     {
         if(user == null)
         {
-            user = new User(nickname, cnt, idUser, point, positions);
+            user = new User(nickname, cnt, idUser, point, position);
         }
         return user;
     }
@@ -124,21 +132,10 @@ public class User implements Serializable
         this.pin = pin;
     }
 
-    public List<Position> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
-    }
 
     public static User getUser()
     {
         return user;
     }
 
-    public Position lcmastPosition()
-    {
-        return positions.get(0);
-    }
 }

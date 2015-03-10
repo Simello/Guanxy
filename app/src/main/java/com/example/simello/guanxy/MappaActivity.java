@@ -66,7 +66,7 @@ public class MappaActivity extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map)
     {
         User user = User.getUser();
-        Position pos = user.lcmastPosition();
+        Position pos = user.getPosition();
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
 

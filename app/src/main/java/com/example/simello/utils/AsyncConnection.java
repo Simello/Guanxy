@@ -54,7 +54,6 @@ public class AsyncConnection extends AsyncTask<HashMap<String,Object>, Void, Str
             request.setEntity(se);
             se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-            //request.setEntity(se);
 
             Log.i("OBJECT",s);
             response = httpclient.execute(request);

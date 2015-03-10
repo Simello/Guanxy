@@ -101,9 +101,8 @@ public class GuanxyActivity extends ActionBarActivity
                 GPSManager gpsManager = new GPSManager(this);
 
                 Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-                List<Position> positions = new ArrayList<Position>();
-                positions.add(position);
-                User.getIstance(username,this,"3208814625",0,positions);
+
+                User.getIstance(username,this,"3208814625",0,position);
             }
             /*
             if utente non registrato, registra utente
