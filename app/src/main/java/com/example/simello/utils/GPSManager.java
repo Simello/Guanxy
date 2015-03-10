@@ -61,6 +61,11 @@ public class GPSManager extends Service implements LocationListener {
         getLocation();
     }
 
+    public static GPSManager newInstance(Context context) {
+
+        GPSManager manager= new GPSManager(context);
+        return manager;
+    }
 
     public Location getLocation() {
         try {

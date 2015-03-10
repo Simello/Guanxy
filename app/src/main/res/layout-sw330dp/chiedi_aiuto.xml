@@ -103,4 +103,19 @@
         android:maxLines="4"
         android:gravity="start"
         />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Invia"
+        android:id="@+id/buttonInviaRichiesta"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_invia_tondo"
+        android:layout_below="@+id/richiesta"
+        android:layout_alignEnd="@+id/richiesta"
+        android:layout_marginTop="38dp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/divider2" />
 </RelativeLayout>
