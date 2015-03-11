@@ -11,6 +11,13 @@ public class SearchHelpRequestInput extends BaseInput {
 
     public SearchHelpRequestInput(){};
 
+    public SearchHelpRequestInput(String idUser, long latitude, long longitude)
+    {
+        this.idUser = idUser;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public String getIdUser() {
         return idUser;
     }
