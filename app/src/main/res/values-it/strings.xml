@@ -33,5 +33,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="connectOff1">Io sono Guanxy!\nNon posso funzionare senza connessione.\nLa attivi per favore?</string>
     <string name="NewUsername">Inserisci il nome utente:</string>
+    <string name="Invia">Invia</string>
+    <string name="punti_points">Punti:</string>
+    <string name="puntiExtra">Ottieni Punti Extra</string>
 
 </resources>

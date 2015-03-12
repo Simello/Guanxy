@@ -15,6 +15,7 @@
     <string name="punti">Punti</string>
     <string name="richiesta">Scrivi la tua richiesta:</string>
     <string name="utente">Utente:</string>
+    <string name="punti_points">Punti:</string>
     <string name="notifiche">Notifiche</string>
     <string name="batteria">Risparmio Batteria</string>
     <string name="lingua">Imposta Lingua</string>
@@ -34,6 +35,7 @@
     <string name="segnalaAbuso">Segnala Abuso</string>
     <string name="NewUsername">Inserisci il nome utente:</string>
     <string name="Invia">Invia</string>
+    <string name="puntiExtra">Ottieni Punti Extra</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>

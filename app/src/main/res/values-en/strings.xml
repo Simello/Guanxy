@@ -34,5 +34,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="NewUsername">Username:</string>
     <string name="Invia">Send</string>
+    <string name="punti_points">Points:</string>
+    <string name="puntiExtra">Get Extra Points</string>
 
 </resources>
