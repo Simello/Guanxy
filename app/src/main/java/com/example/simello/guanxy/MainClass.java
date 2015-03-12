@@ -29,7 +29,6 @@ public class MainClass extends Application
 
         Parse.initialize(this, "f1m2IvzkUOSkch5vnJfZOpbB0Om6qp3iHa5K1o8e", "dik2XD2ZWEGU1MJahH0dtnbnT5KIVnI71NSxpykj");
 
-
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
 

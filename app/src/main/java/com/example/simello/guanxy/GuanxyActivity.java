@@ -74,11 +74,6 @@ public class GuanxyActivity extends ActionBarActivity
             editor.apply();
         }
 
-
-
-//todo controllare connessione -> ma serve? e a cosa?
-
-
         ParseInstallation.getCurrentInstallation().saveInBackground();
         PushService.setDefaultPushCallback(this, GuanxyActivity.class);
 
