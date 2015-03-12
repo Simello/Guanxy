@@ -53,17 +53,10 @@ public class GuanxyActivity extends ActionBarActivity
 
         //Se è true, allora esce dall'applicazione!
         if (getIntent().getBooleanExtra("EXIT", false)) {
-            finish();
-            return;
-        }
-
-        //Prendo il numero di telefono
-        mPhoneNumber = utils.numeroTelefonoCorrente(this);
-        if(mPhoneNumber == null)
-        {
-        //todo da annullare poiche non ha il numero di telefono!
-            mPhoneNumber = "3208814625";
-
+            //Cancella l'activity e chiude l'app -> Quando si riapre, riparte l'application
+            //Cosi controlla che l'utente sia registrato o no
+           finish();
+           System.exit(0);
         }
 
 
@@ -81,25 +74,6 @@ public class GuanxyActivity extends ActionBarActivity
             editor.apply();
         }
 
-
-        //@Todo
-        //Registrazione per il primo login o exit
-        String code = prefs.getString("PIN","PIN");
-        if (code.compareTo("PIN") == 0 || code.compareTo(""+mPhoneNumber) != 0)
-        {
-            Intent i = new Intent(this, RegistrazioneTabActivity.class);
-            startActivity(i);
-        }
-        else
-        {
-            String username = prefs.getString("nickname","");
-            //todo da aggiungere il getPoints e il getNumeroTelefono
-            GPSManager gpsManager = new GPSManager(this);
-
-            Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-            //Qui basta usare utils.numeroTelefonoCorrente(this); al posto del mio numero lel
-            User.getIstance(username,this,"3208814625",0,position);
-        }
 
 
 //todo controllare connessione -> ma serve? e a cosa?
@@ -216,7 +190,7 @@ public class GuanxyActivity extends ActionBarActivity
     private void addAlarm(String batteria)
     {
         Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         if(batteria.compareTo("false") == 0)

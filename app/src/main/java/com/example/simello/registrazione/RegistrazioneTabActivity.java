@@ -69,6 +69,12 @@ public class RegistrazioneTabActivity extends FragmentActivity {
             intent.putExtra("EXIT", true);
             startActivity(intent);
         }
+
         return super.onKeyDown(keyCode, event);
     }
 }
+
+
+/*
+
+ */
