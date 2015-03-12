@@ -41,9 +41,11 @@ import java.util.List;
 public class GuanxyActivity extends ActionBarActivity
 {
 
+    private int interval;
     private String mPhoneNumber;
     private PendingIntent pendingIntent;
     private AlarmManager manager;
+    private String batteria = "false";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,13 @@ public class GuanxyActivity extends ActionBarActivity
             finish();
             return;
         }
-        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        mPhoneNumber = tMgr.getLine1Number();
+
+        //Prendo il numero di telefono
+        mPhoneNumber = utils.numeroTelefonoCorrente(this);
         if(mPhoneNumber == null)
         {
         //todo da annullare poiche non ha il numero di telefono!
+            mPhoneNumber = "3208814625";
 
         }
 
@@ -71,7 +75,9 @@ public class GuanxyActivity extends ActionBarActivity
         if(pin != null)
         {
             SharedPreferences.Editor  editor = prefs.edit();
-            editor.putString("PIN","No");
+            //Ci salvo il numero di telefono, cosi se l utente cambia scheda, deve effettuare una nuova registrazione
+            //Sorry bro!
+            editor.putString("PIN",""+mPhoneNumber);
             editor.apply();
         }
 
@@ -79,23 +85,10 @@ public class GuanxyActivity extends ActionBarActivity
         //@Todo
         //Registrazione per il primo login o exit
         String code = prefs.getString("PIN","PIN");
-        if (code.compareTo("PIN") == 0)
+        if (code.compareTo("PIN") == 0 || code.compareTo(""+mPhoneNumber) != 0)
         {
-
             Intent i = new Intent(this, RegistrazioneTabActivity.class);
             startActivity(i);
-
-/*
-                HashMap<String,Object> invio = new HashMap<String, Object>();
-                invio.put("url","http://192.168.1.186:8080/guanxy-web/newuser");
-
-                invio.put("User",user);
-
-                AsyncConnection cnt = new AsyncConnection(this);
-
-                cnt.execute(invio);
-                */
-
         }
         else
         {
@@ -104,7 +97,7 @@ public class GuanxyActivity extends ActionBarActivity
             GPSManager gpsManager = new GPSManager(this);
 
             Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-
+            //Qui basta usare utils.numeroTelefonoCorrente(this); al posto del mio numero lel
             User.getIstance(username,this,"3208814625",0,position);
         }
 
@@ -117,13 +110,12 @@ public class GuanxyActivity extends ActionBarActivity
 
         setContentView(R.layout.fragment_main);
 
+        //Creazione fase autoaggiornamentoPosizione
 
-        Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        int interval = 100000; //10 secs
+        batteria = prefs.getString("batteria","false");
+        addAlarm(batteria);
 
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        //Fine creazione fase autoaggiornamentoPosizione
 
 
 
@@ -213,6 +205,26 @@ public class GuanxyActivity extends ActionBarActivity
         });
 
 
+
+
+    }
+
+    /**
+     * Setta il timer per autoAggiornare la posizione
+     * @param batteria valore per controllo Settings
+     */
+    private void addAlarm(String batteria)
+    {
+        Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        if(batteria.compareTo("false") == 0)
+            interval =  60000 * 15; //15 minuti
+        else
+            interval = 60000 * 30; //30 minuti
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
 
 
     }

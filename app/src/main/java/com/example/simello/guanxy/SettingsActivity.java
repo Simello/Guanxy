@@ -45,7 +45,6 @@ public class SettingsActivity extends PreferenceActivity
                 "com.example.app", Context.MODE_PRIVATE);
         final SharedPreferences.Editor  editor = prefs.edit();
 
-        //@Todo è da sistemare il toggle delle notifiche e della batteria
         final ToggleButton notifiche = (ToggleButton) findViewById(R.id.toggleNotifiche);
         //QUI POSSO SETTARE IL METODO REALE DEL TOGGLE BUTTON DELLE NOTIFICHE
         String statoNotifiche = prefs.getString("notifiche", "");
@@ -53,15 +52,6 @@ public class SettingsActivity extends PreferenceActivity
             notifiche.setChecked(true);
         else
             notifiche.setChecked(false);
-
-        notifiche.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Toast.makeText(SettingsActivity.this,"Cambiato",Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
 
@@ -73,30 +63,22 @@ public class SettingsActivity extends PreferenceActivity
         else
             batteria.setChecked(false);
 
-        batteria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SettingsActivity.this,"Cambiato la batteria ISI PISI",Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
-//@Todo aggiungere l'aggiornamento al db quando viene cambiato l'username!
         ImageButton username = (ImageButton) findViewById(R.id.username);
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Cambia Username");
+                builder.setTitle(getString(R.string.cambiaUsername));
 
                 final EditText input = new EditText(SettingsActivity.this);
 
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
                 //Setta tasto OK
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                builder.setPositiveButton(getString(R.string.Ok), new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -105,7 +87,7 @@ public class SettingsActivity extends PreferenceActivity
                     }
                 });
                 //crea il tasto cancella
-                builder.setNegativeButton("Cancella", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getString(R.string.Cancella), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -145,7 +127,7 @@ public class SettingsActivity extends PreferenceActivity
                 user.setNickname(m_Text);
                 //Serve per salvare lo stato del toggle sia di batteria che notifica
                 editor.putString("notifiche", ""+notifiche.isChecked());
-                Log.i("PushSetting",""+notifiche.isChecked());
+
                 editor.putString("batteria", ""+batteria.isChecked());
 
 

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Sunfury on 03/03/15.
@@ -81,19 +83,13 @@ public class RegistrazioneUsername extends Activity
                 //Creo un oggettto di tipo connectAsyncTask (con Dialog rotella) e gli passo l url dello script
                 connectAsyncTask connection = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user");
                 //Lo eseguo passandogli come parametro l oggetto creato!
+
                 connection.execute(userInput);
 
-
                 //Questo è da spostare nel doOnPostExecute con i ritorni decenti... cazzo è sto OK? e sto fail? BICC VOGLIAMO I PUNTI
-                User.getIstance(sUsername,RegistrazioneUsername.this,"3208814625",0,position);
+                User.getIstance(sUsername, RegistrazioneUsername.this, "3208814625", 0, position);
                 User u = User.getUser();
                 u.setNickname(sUsername);
-
-
-                Intent i = new Intent(RegistrazioneUsername.this, GuanxyActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.putExtra("PIN","No");
-                startActivity(i);
 
 
             }
@@ -110,7 +106,7 @@ public class RegistrazioneUsername extends Activity
         // TODO Auto-generated method stub
 
         super.onWindowFocusChanged(hasFocus);
-        utils.connectNoUser(hasFocus,this);
+        utils.connectNoUser(hasFocus, this);
 
     }
 
@@ -120,6 +116,7 @@ public class RegistrazioneUsername extends Activity
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Intent intent = new Intent(this, RegistrazioneTabActivity.class);
             startActivity(intent);
+            overridePendingTransition(0,0);
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -144,6 +141,7 @@ public class RegistrazioneUsername extends Activity
         }
         @Override
         protected String doInBackground(InsertUserInput... params) {
+
             InsertUserInput userInput = params[0];
             HttpClient httpclient;
             HttpPost request;
@@ -164,7 +162,9 @@ public class RegistrazioneUsername extends Activity
 
                 Log.i("OBJECT", s);
                 response = httpclient.execute(request);
+
                 Log.i("Invio","fatto");
+
 
             }
 
@@ -195,7 +195,15 @@ public class RegistrazioneUsername extends Activity
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            progressDialog.hide();
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+
+            Intent i = new Intent(RegistrazioneUsername.this, GuanxyActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("PIN", "No");
+            startActivity(i);
+            overridePendingTransition(0, 0);
 
         }
     }

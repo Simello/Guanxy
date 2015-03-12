@@ -69,18 +69,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salva"
+        android:text="@string/salva"
+        android:textColor="@color/white"
+        android:background="@drawable/button_invia_tondo"
+        android:textStyle="bold"
         android:id="@+id/button_setting_salva"
         android:layout_below="@+id/username"
         android:layout_alignEnd="@+id/username"
-        android:layout_marginTop="55dp" />
+        android:layout_marginTop="45dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancella"
+        android:text="@string/Cancella"
         android:id="@+id/button_setting_cancella"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_invia_tondo"
+        android:textSize="15dp"
         android:layout_alignBottom="@+id/button_setting_salva"
         android:layout_alignStart="@+id/username" />
-
 </RelativeLayout>

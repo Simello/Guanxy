@@ -36,6 +36,7 @@
     <string name="NewUsername">Inserisci il nome utente:</string>
     <string name="Invia">Invia</string>
     <string name="puntiExtra">Ottieni Punti Extra</string>
+    <string name="cambiaUsername">Cambia Username</string>
 
     <color name="blueChiaro">#3fa9f5</color>
     <color name="white">#FFFFFF</color>
@@ -45,6 +46,9 @@
     <color name="grigioScuro">#bcbcbc</color>
     <color name="rosso">#ff1500</color>
     <string name="title_activity_maps">Map</string>
+    <string name="Ok">Ok</string>
+    <string name="Cancella">Cancella</string>
+    <string name="salva">Salva</string>
 
 
 </resources>

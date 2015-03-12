@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
@@ -16,6 +17,7 @@ import com.example.simello.guanxy.R;
 public class utils
 {
     static boolean notFirstTime = false;
+    static private String mPhoneNumber;
 
 
     /**
@@ -27,6 +29,19 @@ public class utils
     {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+
+    }
+
+    /**
+     * Ritorna il numero di telefono del dispositivo
+     * @param context context per ottenere il numero
+     * @return
+     */
+    public static String numeroTelefonoCorrente(Context context)
+    {
+        TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
+        return mPhoneNumber;
 
     }
 

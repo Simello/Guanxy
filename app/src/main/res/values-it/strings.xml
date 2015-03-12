@@ -36,5 +36,9 @@
     <string name="Invia">Invia</string>
     <string name="punti_points">Punti:</string>
     <string name="puntiExtra">Ottieni Punti Extra</string>
+    <string name="cambiaUsername">Cambia Username</string>
+    <string name="Ok">Ok</string>
+    <string name="Cancella">Cancella</string>
+    <string name="salva">Salva</string>
 
 </resources>
