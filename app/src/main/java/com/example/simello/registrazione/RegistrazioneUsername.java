@@ -20,6 +20,7 @@ import com.example.simello.guanxy.GuanxyActivity;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
+import com.example.simello.utils.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpResponse;
@@ -56,6 +57,14 @@ public class RegistrazioneUsername extends Activity
             @Override
             public void onClick(View v)
             {
+
+                if(!utils.isConnected(RegistrazioneUsername.this))
+                {
+                    utils.connectNoUsername(RegistrazioneUsername.this);
+                    return;
+                }
+
+
                 EditText usernameEditText = (EditText) findViewById(R.id.NewUsername);
                 //Prendo l'username
                 String sUsername = usernameEditText.getText().toString();

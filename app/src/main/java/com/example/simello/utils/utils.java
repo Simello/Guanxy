@@ -80,6 +80,56 @@ public class utils
     }
 
 
+
+    public static void connectNoUsername(Context context)
+    {
+        final Context mContext = context;
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog builder = alertDialog.create();
+
+        if(builder.isShowing())
+        {
+            builder.dismiss();
+        }
+        else {
+
+            // Setting Dialog Title
+            alertDialog.setTitle(mContext.getResources().getString(R.string.connessioneOff));
+
+            if(!notFirstTime)
+            {
+                // Setting Dialog Message
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Nuovo Utente "  + mContext.getResources().getString(R.string.connectOff1));
+                notFirstTime = true;
+            }
+            else
+            {
+
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Nuovo Utente " + mContext.getResources().getString(R.string.connectOffNoHello));
+            }
+
+            // On pressing Settings button
+            alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioniDati), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            alertDialog.setNegativeButton(mContext.getResources().getString(R.string.impostazioniWifi), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            alertDialog.setCancelable(false);
+            // Showing Alert Message
+            alertDialog.show();
+        }
+    }
+
+
     public static void connect(boolean hasFocus, Context cnt)
     {
         if(hasFocus)

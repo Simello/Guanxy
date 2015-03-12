@@ -1,7 +1,9 @@
 package com.example.simello.guanxy;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +23,7 @@ import com.example.simello.controller.varie.User;
 import com.example.simello.registrazione.RegistrazioneTabActivity;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
+import com.example.simello.utils.UpdatePositionReceiver;
 import com.example.simello.utils.utils;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
@@ -38,10 +41,14 @@ public class GuanxyActivity extends ActionBarActivity
 {
 
     private String mPhoneNumber;
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         //Se è true, allora esce dall'applicazione!
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
@@ -69,18 +76,14 @@ public class GuanxyActivity extends ActionBarActivity
         }
 
 
-
-
-        if (utils.isConnected(this))
+        //@Todo
+        //Registrazione per il primo login o exit
+        String code = prefs.getString("PIN","PIN");
+        if (code.compareTo("PIN") == 0)
         {
-            //@Todo
-            //Registrazione per il primo login o exit
-            String code = prefs.getString("PIN","PIN");
-            if (code.compareTo("PIN") == 0)
-            {
 
-                Intent i = new Intent(this, RegistrazioneTabActivity.class);
-                startActivity(i);
+            Intent i = new Intent(this, RegistrazioneTabActivity.class);
+            startActivity(i);
 
 /*
                 HashMap<String,Object> invio = new HashMap<String, Object>();
@@ -93,40 +96,36 @@ public class GuanxyActivity extends ActionBarActivity
                 cnt.execute(invio);
                 */
 
-            }
-            else
-            {
-                String username = prefs.getString("nickname","");
-                //todo da aggiungere il getPoints e il getNumeroTelefono
-                GPSManager gpsManager = new GPSManager(this);
-
-                Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
-
-                User.getIstance(username,this,"3208814625",0,position);
-            }
-            /*
-            if utente non registrato, registra utente
-            per la prima connessione utilizzare lo shared preferences, dove prima controllo
-            se la variabile è != null, se è diversa è già installata,
-            altrimenti eseguo script di registrazione isi pisi
-            if()
-            {
-
-
-            }
-            else
-                altrimenti mostra schermata principale
-
-             */
-
-
         }
+        else
+        {
+            String username = prefs.getString("nickname","");
+            //todo da aggiungere il getPoints e il getNumeroTelefono
+            GPSManager gpsManager = new GPSManager(this);
+
+            Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
+
+            User.getIstance(username,this,"3208814625",0,position);
+        }
+
+
+//todo controllare connessione -> ma serve? e a cosa?
 
 
         ParseInstallation.getCurrentInstallation().saveInBackground();
         PushService.setDefaultPushCallback(this, GuanxyActivity.class);
 
         setContentView(R.layout.fragment_main);
+
+
+        Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        int interval = 10000; //10 secs
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+
+
 
 
         ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);

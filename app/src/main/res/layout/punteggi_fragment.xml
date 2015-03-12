@@ -131,7 +131,7 @@
         android:textStyle="bold"
         android:id="@+id/puntiSchermataPunti"
         android:layout_alignBottom="@+id/textView"
-        android:layout_toStartOf="@+id/guida" />
+        android:layout_toEndOf="@+id/guanxy" />
 
     <Button
         android:layout_width="wrap_content"

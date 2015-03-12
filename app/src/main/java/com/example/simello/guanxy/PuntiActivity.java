@@ -35,7 +35,7 @@ public class PuntiActivity extends ActionBarActivity
         username.setText(user.getNickname());
         //Stampa a video i punti dell utente
         TextView vistaPunti = (TextView) findViewById(R.id.puntiSchermataPunti);
-        vistaPunti.setText(user.getPoint());
+        vistaPunti.setText(""+user.getPoint());
 
 
 
