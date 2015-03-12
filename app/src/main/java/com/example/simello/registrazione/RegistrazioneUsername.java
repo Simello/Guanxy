@@ -90,7 +90,6 @@ public class RegistrazioneUsername extends Activity
                 u.setNickname(sUsername);
 
 
-
                 Intent i = new Intent(RegistrazioneUsername.this, GuanxyActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.putExtra("PIN","No");
