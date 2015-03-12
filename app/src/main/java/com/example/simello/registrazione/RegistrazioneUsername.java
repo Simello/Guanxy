@@ -48,6 +48,7 @@ public class RegistrazioneUsername extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registrazione_username);
+
         TextView textView = (TextView) findViewById(R.id.NewUsernameText);
         textView.setTextColor(getResources().getColor(R.color.white));
 
@@ -58,11 +59,7 @@ public class RegistrazioneUsername extends Activity
             public void onClick(View v)
             {
 
-                if(!utils.isConnected(RegistrazioneUsername.this))
-                {
-                    utils.connectNoUsername(RegistrazioneUsername.this);
-                    return;
-                }
+
 
 
                 EditText usernameEditText = (EditText) findViewById(R.id.NewUsername);
@@ -72,6 +69,8 @@ public class RegistrazioneUsername extends Activity
                     Toast.makeText(RegistrazioneUsername.this, "Non hai inserito un nome utente corretto", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
 
                 GPSManager gpsManager = new GPSManager(RegistrazioneUsername.this);
                 //Prendo la posizione
@@ -97,7 +96,6 @@ public class RegistrazioneUsername extends Activity
                 i.putExtra("PIN","No");
                 startActivity(i);
 
-                //todo esegui script registrazione
 
             }
         });
@@ -107,12 +105,21 @@ public class RegistrazioneUsername extends Activity
 
     }
 
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+
+        super.onWindowFocusChanged(hasFocus);
+        utils.connectNoUser(hasFocus,this);
+
+    }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent intent = new Intent(this, GuanxyActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("EXIT", true);
+            Intent intent = new Intent(this, RegistrazioneTabActivity.class);
             startActivity(intent);
         }
         return super.onKeyDown(keyCode, event);

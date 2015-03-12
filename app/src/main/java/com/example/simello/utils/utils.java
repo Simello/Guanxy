@@ -69,6 +69,7 @@ public class utils
             alertDialog.setNegativeButton(mContext.getResources().getString(R.string.impostazioniWifi), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+
                     mContext.startActivity(intent);
                 }
             });
@@ -99,19 +100,20 @@ public class utils
             if(!notFirstTime)
             {
                 // Setting Dialog Message
-                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Nuovo Utente "  + mContext.getResources().getString(R.string.connectOff1));
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Utente "  + mContext.getResources().getString(R.string.connectOff1));
                 notFirstTime = true;
             }
             else
             {
 
-                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Nuovo Utente " + mContext.getResources().getString(R.string.connectOffNoHello));
+                alertDialog.setMessage(mContext.getResources().getString(R.string.gpsOffText1) + " Utente " + mContext.getResources().getString(R.string.connectOffNoHello));
             }
 
             // On pressing Settings button
             alertDialog.setPositiveButton(mContext.getResources().getString(R.string.impostazioniDati), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                     mContext.startActivity(intent);
                 }
             });
@@ -119,6 +121,7 @@ public class utils
             alertDialog.setNegativeButton(mContext.getResources().getString(R.string.impostazioniWifi), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                     mContext.startActivity(intent);
                 }
             });
@@ -137,6 +140,17 @@ public class utils
             if(!isConnected(cnt))
                 connect(cnt);
         }
+    }
+
+
+    public static void connectNoUser(boolean hasFocus, Context cnt)
+    {
+        if(hasFocus)
+        {
+            if(!isConnected(cnt))
+                connectNoUsername(cnt);
+        }
+
     }
 
 

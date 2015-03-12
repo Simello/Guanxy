@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.example.simello.registrazione.RegistrazioneTabActivity;
+import com.example.simello.registrazione.RegistrazioneUsername;
 import com.example.simello.utils.AsyncConnection;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.UpdatePositionReceiver;
@@ -47,7 +48,6 @@ public class GuanxyActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         //Se è true, allora esce dall'applicazione!
         if (getIntent().getBooleanExtra("EXIT", false)) {
@@ -121,7 +121,7 @@ public class GuanxyActivity extends ActionBarActivity
         Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
         manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        int interval = 10000; //10 secs
+        int interval = 100000; //10 secs
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
 

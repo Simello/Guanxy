@@ -5,6 +5,7 @@ package com.example.simello.registrazione;
  */
 import com.example.simello.guanxy.GuanxyActivity;
 import com.example.simello.guanxy.R;
+import com.example.simello.utils.utils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 

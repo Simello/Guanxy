@@ -59,20 +59,24 @@
         <activity android:name="com.example.simello.registrazione.RegistrazioneTabActivity"
             android:label="Guanxy"
             android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:noHistory="true"
             />
 
         <activity
             android:name=".PuntiActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".GuidaActivity"
             android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MappaActivity"
             android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ChiediAiuto"
@@ -82,22 +86,25 @@
         <activity
             android:name=".AiutaGliAltri"
             android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".GuanxyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsActivity"
             android:label="Guanxy"
             android:parentActivityName=".GuanxyActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.example.simello.registrazione.RegistrazioneUsername"
             android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:noHistory="true"
             />
 
         <activity android:name="com.example.simello.aiuta.gli.altri.TabAiutaGliAltri"
             android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             />
 
