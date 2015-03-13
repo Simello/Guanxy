@@ -3,6 +3,7 @@ package com.example.simello.guanxy;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -102,6 +103,7 @@ public class HelloAccordion_JAVA extends Activity {
  */
                         for(int j=0; j<parent.getChildCount(); j++)
                         {
+
                             if(v.getId() == parent.getChildAt(j).getId())
                             {
 
@@ -132,6 +134,10 @@ public class HelloAccordion_JAVA extends Activity {
                             //TextView y = (TextView)findViewById(v.getId()+1);
                             //Log.i("TESTO3", ""+y.getText());
 
+              /*              Log.i("CHILD_id", "" + parent.getChildAt(j).getId());
+                            TextView y = (TextView) findViewById(parent.getChildAt(j).getId());
+                            Log.i("CHILD_content", ""+y.getText());*/
+
                             if(v.getId() == parent.getChildAt(j).getId() &&
                                     parent.getChildAt(j+1).getVisibility() == View.VISIBLE){
 
@@ -139,7 +145,7 @@ public class HelloAccordion_JAVA extends Activity {
                                 button.setTextColor(getResources().getColor(R.color.nero));
 
 // Change visibility
-
+                                Log.i("PARENT", ""+ parent.getChildAt(j+1).toString());
                                 parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
 
 // Chnage icon
@@ -149,6 +155,7 @@ public class HelloAccordion_JAVA extends Activity {
                                         0,  //right
                                         0);     //bottom
                             }
+                            break;
                         }
                     }
                 }
