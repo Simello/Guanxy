@@ -56,6 +56,11 @@ public class GuanxyActivity extends ActionBarActivity
             SharedPreferences.Editor  editor = prefs.edit();
             //Ci salvo il numero di telefono, cosi se l utente cambia scheda, deve effettuare una nuova registrazione
             //Sorry bro!
+            mPhoneNumber = utils.numeroTelefonoCorrente(this);
+            if(mPhoneNumber == null)
+            {
+                mPhoneNumber = "3208814625";
+            }
             editor.putString("PIN",""+mPhoneNumber);
             editor.apply();
         }
