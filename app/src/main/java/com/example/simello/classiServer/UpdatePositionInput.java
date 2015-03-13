@@ -11,6 +11,13 @@ public class UpdatePositionInput extends BaseInput{
 
     public UpdatePositionInput(){};
 
+    public UpdatePositionInput(String idUser, long latitude, long longitude)
+    {
+        this.idUser = idUser;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public String getIdUser() {
         return idUser;
     }
