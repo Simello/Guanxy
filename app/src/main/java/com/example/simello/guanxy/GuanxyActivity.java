@@ -1,36 +1,22 @@
 package com.example.simello.guanxy;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.simello.controller.varie.Position;
-import com.example.simello.controller.varie.User;
-import com.example.simello.registrazione.RegistrazioneTabActivity;
-import com.example.simello.registrazione.RegistrazioneUsername;
-import com.example.simello.utils.AsyncConnection;
-import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.UpdatePositionReceiver;
 import com.example.simello.utils.utils;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -107,7 +93,7 @@ public class GuanxyActivity extends ActionBarActivity
         aiutaGliAltri.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v){
-                Intent myIntent = new Intent(GuanxyActivity.this, AiutaGliAltri.class);
+                Intent myIntent = new Intent(GuanxyActivity.this, HelloAccordion_JAVA.class);
                 GuanxyActivity.this.startActivity(myIntent);
                 overridePendingTransition(0,0);
             }
