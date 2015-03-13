@@ -101,7 +101,7 @@ public class UpdatePositionReceiver extends BroadcastReceiver
                 result = "error";
             }
 
-            Log.d("RitornoAGGIORNAMENTOPOSIZIONE",result);
+            Log.d("RitornoAGGIORNAMENTO",result);
 
             return result;
 

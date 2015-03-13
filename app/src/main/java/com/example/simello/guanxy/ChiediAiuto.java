@@ -1,9 +1,13 @@
 package com.example.simello.guanxy;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -29,6 +33,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,7 +45,6 @@ public class ChiediAiuto extends ActionBarActivity
 {
     protected void onCreate(Bundle savedInstanceState)
     {
-        Intent myIntent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chiedi_aiuto);
 
@@ -65,7 +69,7 @@ public class ChiediAiuto extends ActionBarActivity
                 // /newHelpRequest
                 InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), (long) GPSManager.newInstance(ChiediAiuto.this).getLatitude(), (long) GPSManager.newInstance(ChiediAiuto.this).getLongitude(), richiesta);
 
-                connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/newHelpRequest");
+                connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/newHelpRequest", ChiediAiuto.this);
                 connectAsyncTask.execute(helpRequestInput);
 
             }
@@ -180,8 +184,10 @@ public class ChiediAiuto extends ActionBarActivity
     private class connectAsyncTask extends AsyncTask<InsertHelpRequestInput, Void, String> {
         private ProgressDialog progressDialog;
         String url;
-        connectAsyncTask(String urlPass){
+        Context cnt;
+        connectAsyncTask(String urlPass, Context cnt){
             url = urlPass;
+            this.cnt = cnt;
         }
         @Override
         protected void onPreExecute() {
@@ -210,11 +216,7 @@ public class ChiediAiuto extends ActionBarActivity
                 StringEntity se = new StringEntity(s);
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-
-
-                Log.i("OBJECT", s);
                 response = httpclient.execute(request);
-                Log.i("InvioRichiesta","fatto");
 
             }
 
@@ -232,20 +234,37 @@ public class ChiediAiuto extends ActionBarActivity
 
                     result = result + line ;
                 }
+
+                JSONObject json = new JSONObject(result);
+                JSONObject help = json.getJSONObject("help");
+                String id = help.getString("id");
+                result = id;
+                Log.i("RitornoID",""+id);
             } catch (Exception e) {
                 // Code to handle exception
                 result = "error";
             }
-
-            Log.d("Ritorno",result);
-
             return result;
 
         }
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            progressDialog.hide();
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+            if(result.compareTo("error") == 0)
+            {
+
+            }
+            else
+            {
+                Intent i = new Intent(ChiediAiuto.this, RicercaChiediAiuto.class);
+                i.putExtra("idRichiesta",result);
+                //Ci vanno flag??
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
 
         }
     }
