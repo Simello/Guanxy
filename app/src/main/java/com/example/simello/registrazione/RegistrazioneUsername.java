@@ -31,6 +31,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -45,6 +46,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class RegistrazioneUsername extends Activity
 {
+    protected User u;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,9 +64,6 @@ public class RegistrazioneUsername extends Activity
             @Override
             public void onClick(View v)
             {
-
-
-
 
                 EditText usernameEditText = (EditText) findViewById(R.id.NewUsername);
                 //Prendo l'username
@@ -88,10 +89,8 @@ public class RegistrazioneUsername extends Activity
 
                 //Questo è da spostare nel doOnPostExecute con i ritorni decenti... cazzo è sto OK? e sto fail? BICC VOGLIAMO I PUNTI
                 User.getIstance(sUsername, RegistrazioneUsername.this, "3208814625", 0, position);
-                User u = User.getUser();
+                u = User.getUser();
                 u.setNickname(sUsername);
-
-
             }
         });
 
@@ -182,6 +181,14 @@ public class RegistrazioneUsername extends Activity
 
                     result = result + line ;
                 }
+
+                JSONObject json = new JSONObject(result);
+                JSONObject user = json.getJSONObject("user");
+                if(user.getInt("point") != 0)
+                {
+                    u.setPoint(user.getInt("point"));
+                }
+
             } catch (Exception e) {
                 // Code to handle exception
                 result = "error";
@@ -198,6 +205,7 @@ public class RegistrazioneUsername extends Activity
             if(progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
+
 
             Intent i = new Intent(RegistrazioneUsername.this, GuanxyActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

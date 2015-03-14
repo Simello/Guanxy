@@ -1,32 +1,53 @@
 package com.example.simello.guanxy;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.simello.classiServer.FindUserInput;
 import com.example.simello.controller.varie.User;
 import com.example.simello.utils.utils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * Created by Sunfury & Simello on 17/01/15.
  */
 public class PuntiActivity extends ActionBarActivity
 {
+    protected int point;
+    TextView vistaPunti;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.punteggi_fragment);
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
         String userRef = prefs.getString("username","");
+        //TODO cambiare il numero di telefono!
+        FindUserInput findUserInput = new FindUserInput("3208814625");
+        ProgressTask progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/user/getUser");
+        progressTask.execute(findUserInput);
 
 
         User user = User.getUser();
@@ -34,7 +55,7 @@ public class PuntiActivity extends ActionBarActivity
         TextView username = (TextView) findViewById(R.id.user);
         username.setText(user.getNickname());
         //Stampa a video i punti dell utente
-        TextView vistaPunti = (TextView) findViewById(R.id.puntiSchermataPunti);
+        vistaPunti = (TextView) findViewById(R.id.puntiSchermataPunti);
         vistaPunti.setText(""+user.getPoint());
 
 
@@ -132,6 +153,85 @@ public class PuntiActivity extends ActionBarActivity
 
         super.onWindowFocusChanged(hasFocus);
         utils.connect(hasFocus,this);
+
+    }
+
+
+    private class ProgressTask extends AsyncTask<FindUserInput,Void,String> {
+        String url;
+        private ProgressDialog progressDialog;
+
+
+        ProgressTask(String url) {
+            this.url = url;
+        }
+
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(PuntiActivity.this);
+            progressDialog.setMessage("Aggiorno...");
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(FindUserInput... arg0) {
+            FindUserInput findInput = arg0[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(findInput);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+                response = httpclient.execute(request);
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line;
+                }
+                JSONObject json = new JSONObject(result);
+                JSONObject user = json.getJSONObject("user");
+                point = user.getInt("point");
+                User.getUser().setPoint(point);
+                vistaPunti.setText(""+User.getUser().getPoint());
+
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
 
     }
 }

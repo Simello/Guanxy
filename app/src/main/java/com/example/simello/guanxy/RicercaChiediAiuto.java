@@ -46,6 +46,8 @@ public class RicercaChiediAiuto extends Activity
         bar = (ProgressBar) this.findViewById(R.id.progressBar);
         progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/findHelpId");
         progressTask.execute(findHelpRequestInput);
+
+        //TODO da aggiungere funzione bottone annulla ricerca
     }
 
 

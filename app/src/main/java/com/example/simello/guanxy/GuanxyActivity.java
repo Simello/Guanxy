@@ -177,16 +177,22 @@ public class GuanxyActivity extends ActionBarActivity
      */
     private void addAlarm(String batteria)
     {
-        Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        boolean alarmUp = (PendingIntent.getBroadcast(this, 0,
+                new Intent(this, UpdatePositionReceiver.class),
+                PendingIntent.FLAG_NO_CREATE) != null);
 
-        if(batteria.compareTo("false") == 0)
-            interval =  60000 * 15; //15 minuti
-        else
-            interval = 60000 * 30; //30 minuti
+        if(!alarmUp) {
+            Intent alarmIntent = new Intent(this, UpdatePositionReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+            if (batteria.compareTo("false") == 0)
+                interval = 60000 * 15; //15 minuti
+            else
+                interval = 60000 * 30; //30 minuti
+
+            manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        }
 
 
     }
