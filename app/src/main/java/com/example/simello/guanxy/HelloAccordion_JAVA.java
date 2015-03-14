@@ -121,10 +121,11 @@ public class HelloAccordion_JAVA extends Activity {
             b1.setTextSize(15);
 
             b1.setGravity(Gravity.CENTER_VERTICAL);
-            t1.setGravity(Gravity.RIGHT);
+            t1.setGravity(Gravity.RIGHT | Gravity.TOP);
+            t1.setPadding(350,90,80,50);
             t1.setTextColor(getResources().getColor(R.color.white));
 
-            t1.setPadding(20, 10, 10, 10);
+            //commento inutile per fare un altro push perche ho dimenticato delle immagini
 
             //b1.setPadding(10,5,10,10);
             b1.setBackgroundColor(getResources().getColor(R.color.blueChiaro));
