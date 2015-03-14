@@ -35,11 +35,7 @@ public class MainClass extends Application
 
         //Prendo il numero di telefono
         mPhoneNumber = utils.numeroTelefonoCorrente(this);
-        if (mPhoneNumber == null) {
-            //todo da annullare poiche non ha il numero di telefono!
-            mPhoneNumber = "3208814625";
 
-        }
         String code = prefs.getString("PIN", "PIN");
         // code.compareTo("PIN") == 0 || code.compareTo(""+mPhoneNumber) != 0  <---- Questp sarà l'if finale
         if (code.compareTo("PIN") == 0) {
@@ -48,14 +44,10 @@ public class MainClass extends Application
             startActivity(i);
         } else {
             String username = prefs.getString("nickname", "");
-            //todo da aggiungere il getPoints e il getNumeroTelefono
-            FindUserInput findUserInput = new FindUserInput(mPhoneNumber);
             GPSManager gpsManager = new GPSManager(this);
-
             Position position = new Position((float) gpsManager.getLatitude(), (float) gpsManager.getLongitude());
-
             //Qui basta usare utils.numeroTelefonoCorrente(this); al posto del mio numero lel
-            User.getIstance(username, this, "3208814625", 0, position);
+            User.getIstance(username, this, mPhoneNumber, 0, position);
         }
     }
 

@@ -33,10 +33,7 @@ public class UpdatePositionReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         String idUser = utils.numeroTelefonoCorrente(context);
-        if(idUser == null)
-        {
-            idUser = "3208814625";
-        }
+
         GPSManager gpsManager = new GPSManager(context);
         if(gpsManager.canGetLocation())
         {

@@ -41,6 +41,8 @@ public class utils
     {
         TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneNumber = tMgr.getLine1Number();
+        if(mPhoneNumber == null)
+            mPhoneNumber = "3208814625";
         return mPhoneNumber;
 
     }

@@ -79,7 +79,7 @@ public class RegistrazioneUsername extends Activity
                 //Prendo la posizione
                 Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
                 //Creo l'oggetto
-                InsertUserInput userInput = new InsertUserInput("3208814625",sUsername,(long)gpsManager.getLongitude(),(long)gpsManager.getLatitude());
+                InsertUserInput userInput = new InsertUserInput(utils.numeroTelefonoCorrente(RegistrazioneUsername.this),sUsername,(long)gpsManager.getLongitude(),(long)gpsManager.getLatitude());
 
                 //Creo un oggettto di tipo connectAsyncTask (con Dialog rotella) e gli passo l url dello script
                 connectAsyncTask connection = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user");
@@ -88,7 +88,7 @@ public class RegistrazioneUsername extends Activity
                 connection.execute(userInput);
 
                 //Questo è da spostare nel doOnPostExecute con i ritorni decenti... cazzo è sto OK? e sto fail? BICC VOGLIAMO I PUNTI
-                User.getIstance(sUsername, RegistrazioneUsername.this, "3208814625", 0, position);
+                User.getIstance(sUsername, RegistrazioneUsername.this, utils.numeroTelefonoCorrente(RegistrazioneUsername.this), 0, position);
                 u = User.getUser();
                 u.setNickname(sUsername);
             }

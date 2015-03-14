@@ -41,11 +41,9 @@ public class PuntiActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.punteggi_fragment);
 
-        SharedPreferences prefs = this.getSharedPreferences(
-                "com.example.app", Context.MODE_PRIVATE);
-        String userRef = prefs.getString("username","");
+        String idUser = utils.numeroTelefonoCorrente(this);
         //TODO cambiare il numero di telefono!
-        FindUserInput findUserInput = new FindUserInput("3208814625");
+        FindUserInput findUserInput = new FindUserInput(idUser);
         ProgressTask progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/user/getUser");
         progressTask.execute(findUserInput);
 
@@ -59,8 +57,6 @@ public class PuntiActivity extends ActionBarActivity
         vistaPunti.setText(""+user.getPoint());
 
 
-
-      
 
         //REPARTO BOTTONI
         //Prendo il bottone e setto a true x lasciare il colore blue
@@ -122,9 +118,6 @@ public class PuntiActivity extends ActionBarActivity
 
             };
         });
-
-
-
 
 
     }

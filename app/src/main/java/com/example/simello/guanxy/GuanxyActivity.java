@@ -57,10 +57,7 @@ public class GuanxyActivity extends ActionBarActivity
             //Ci salvo il numero di telefono, cosi se l utente cambia scheda, deve effettuare una nuova registrazione
             //Sorry bro!
             mPhoneNumber = utils.numeroTelefonoCorrente(this);
-            if(mPhoneNumber == null)
-            {
-                mPhoneNumber = "3208814625";
-            }
+
             editor.putString("PIN",""+mPhoneNumber);
             editor.apply();
         }
@@ -76,8 +73,6 @@ public class GuanxyActivity extends ActionBarActivity
         addAlarm(batteria);
 
         //Fine creazione fase autoaggiornamentoPosizione
-
-
 
 
         ImageButton chiediAiuto = (ImageButton) findViewById(R.id.chiediAiuto);
@@ -165,9 +160,6 @@ public class GuanxyActivity extends ActionBarActivity
 
             }
         });
-
-
-
 
     }
 
