@@ -100,6 +100,7 @@ public class HelloAccordion_JAVA extends Activity {
         Button b1;
         TextView t1;
 //Converting to dip unit
+        //chissa che cazzo fa sta linea di codice
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
 
@@ -228,6 +229,8 @@ public class HelloAccordion_JAVA extends Activity {
                             TextView y = (TextView) findViewById(parent.getChildAt(j).getId());
                             Log.i("CHILD_content", ""+y.getText());*/
 
+                            //j è ok, j+1 crashava con l'ultimo bottone xke non prendeva view esitenti
+                            //anche se sono visibility gone android ne tiene traccia
                             if(v.getId() == parent.getChildAt(j).getId() &&
                                     parent.getChildAt(j).getVisibility() == View.VISIBLE){
 
@@ -239,6 +242,8 @@ public class HelloAccordion_JAVA extends Activity {
                                 parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
 
 // Chnage icon
+                                //questa si potrebbe riutilizzare in certe circostanze aggiunge l'immagine a sinistra del
+                                //bottone ma non puo' essere sovrascritta da testo o altro
                                /* button.setCompoundDrawablesWithIntrinsicBounds(
                                         R.drawable.marker_icon_map,     //left
                                         0,      //top
