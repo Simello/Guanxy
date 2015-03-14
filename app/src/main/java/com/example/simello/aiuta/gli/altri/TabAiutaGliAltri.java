@@ -1,22 +1,18 @@
 package com.example.simello.aiuta.gli.altri;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.simello.guanxy.R;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
- * Created by Sunfury on 04/03/15.
+ * Created by Sunfury e Simello on 04/03/15.
  */
 public class TabAiutaGliAltri extends FragmentActivity
 {

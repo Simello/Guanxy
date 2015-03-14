@@ -40,7 +40,9 @@
 
 
     <color name="blueChiaro">#3fa9f5</color>
-    <color name="nero">#000000</color>
+    <color name="biancoAperto">#FFFFFD</color>
+    <color name="biancoChiuso">#FFFFFA</color>
+
     <color name="white">#FFFFFF</color>
     <color name="biancoOminoRichiesta">#e6e6e6</color>
     <color name="blueScuro">#277edf</color>

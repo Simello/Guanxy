@@ -98,6 +98,8 @@ public class GuanxyActivity extends ActionBarActivity
         aiutaGliAltri.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v){
+
+                // chiamo l'accordion dinamico
                 Intent myIntent = new Intent(GuanxyActivity.this, HelloAccordion_JAVA.class);
                 GuanxyActivity.this.startActivity(myIntent);
                 overridePendingTransition(0,0);
