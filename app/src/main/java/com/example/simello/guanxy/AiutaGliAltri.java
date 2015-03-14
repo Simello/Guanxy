@@ -43,10 +43,7 @@ public class AiutaGliAltri extends ActionBarActivity
         setContentView(R.layout.aiuta_gli_altri);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         panel1 = (LinearLayout) findViewById(R.id.panel1);
-        panel2 = (LinearLayout) findViewById(R.id.panel2);
-        panel3 = (LinearLayout) findViewById(R.id.panel3);
-        panel4 = (LinearLayout) findViewById(R.id.panel4);
-        panel5 = (LinearLayout) findViewById(R.id.panel5);
+
 
 //panel1.setVisibility(View.VISIBLE); OVERLOLLING
 
@@ -55,10 +52,7 @@ public class AiutaGliAltri extends ActionBarActivity
 //Log.v("CZ","height at first ..." + panel1.getMeasuredHeight()); OVERLOLLING MADLY AROUNd
 
         text1 = (TextView) findViewById(R.id.text1);
-        text2 = (TextView) findViewById(R.id.text2);
-        text3 = (TextView) findViewById(R.id.text3);
-        text4 = (TextView) findViewById(R.id.text4);
-        text5 = (TextView) findViewById(R.id.text5);
+
 
         text1.setOnClickListener(new OnClickListener(){
             @Override
@@ -90,36 +84,6 @@ public class AiutaGliAltri extends ActionBarActivity
             }
 
             ;
-        });
-
-
-        text2.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                hideOthers(v);
-            }
-        });
-        text3.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                hideOthers(v);
-            }
-        });
-        text4.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                hideOthers(v);
-            }
-        });
-        text5.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                hideOthers(v);
-            }
         });
 
 
@@ -187,14 +151,7 @@ public class AiutaGliAltri extends ActionBarActivity
         if(openLayout == null) return;
         if(openLayout == panel1)
             panel1.startAnimation(new ScaleAnimToHide(1.0f, 1.0f, 1.0f, 0.0f, 500, panel1, true));
-        if(openLayout == panel2)
-            panel2.startAnimation(new ScaleAnimToHide(1.0f, 1.0f, 1.0f, 0.0f, 500, panel2, true));
-        if(openLayout == panel3)
-            panel3.startAnimation(new ScaleAnimToHide(1.0f, 1.0f, 1.0f, 0.0f, 500, panel3, true));
-        if(openLayout == panel4)
-            panel4.startAnimation(new ScaleAnimToHide(1.0f, 1.0f, 1.0f, 0.0f, 500, panel4, true));
-        if(openLayout == panel5)
-            panel5.startAnimation(new ScaleAnimToHide(1.0f, 1.0f, 1.0f, 0.0f, 500, panel5, true));
+
     }
     private void hideOthers(View layoutView)
     {
@@ -217,42 +174,7 @@ public class AiutaGliAltri extends ActionBarActivity
                     panel1.startAnimation(new ScaleAnimToShow(1.0f, 1.0f, 1.0f, 0.0f, 500, panel1, true));
                 }
             }
-            else if(layoutView.getId() == R.id.text2)
-            {
-                v = panel2.getVisibility();
-                hideThemAll();
-                if(v != View.VISIBLE)
-                {
-                    panel2.startAnimation(new ScaleAnimToShow(1.0f, 1.0f, 1.0f, 0.0f, 500, panel2, true));
-                }
-            }
-            else if(layoutView.getId() == R.id.text3)
-            {
-                v = panel3.getVisibility();
-                hideThemAll();
-                if(v != View.VISIBLE)
-                {
-                    panel3.startAnimation(new ScaleAnimToShow(1.0f, 1.0f, 1.0f, 0.0f, 500, panel3, true));
-                }
-            }
-            else if(layoutView.getId() == R.id.text4)
-            {
-                v = panel4.getVisibility();
-                hideThemAll();
-                if(v != View.VISIBLE)
-                {
-                    panel4.startAnimation(new ScaleAnimToShow(1.0f, 1.0f, 1.0f, 0.0f, 500, panel4, true));
-                }
-            }
-            else if(layoutView.getId() == R.id.text5)
-            {
-                v = panel5.getVisibility();
-                hideThemAll();
-                if(v != View.VISIBLE)
-                {
-                    panel5.startAnimation(new ScaleAnimToShow(1.0f, 1.0f, 1.0f, 0.0f, 500, panel5, true));
-                }
-            }
+
         }
     }
 

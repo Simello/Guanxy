@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sunfury on 04/03/15.
+ * Created by Sunfury e Simello on 04/03/15.
  */
 public class MappaFragment extends Fragment
 {

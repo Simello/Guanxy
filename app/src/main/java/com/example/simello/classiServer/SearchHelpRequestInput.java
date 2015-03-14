@@ -1,7 +1,7 @@
 package com.example.simello.classiServer;
 
 /**
- * Created by Sunfury on 10/03/15.
+ * Created by Sunfury e Super simello on 10/03/15.
  */
 public class SearchHelpRequestInput extends BaseInput {
 
