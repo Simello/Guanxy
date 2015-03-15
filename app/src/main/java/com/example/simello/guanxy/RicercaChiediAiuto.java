@@ -44,6 +44,7 @@ public class RicercaChiediAiuto extends Activity
         findHelpRequestInput = new FindHelpRequestInput(id);
 
         bar = (ProgressBar) this.findViewById(R.id.progressBar);
+        bar.setVisibility(View.VISIBLE);
         progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/findHelpId");
         progressTask.execute(findHelpRequestInput);
 
@@ -75,7 +76,7 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
     }
     @Override
     protected void onPreExecute(){
-        bar.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -152,10 +153,14 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
     protected void onPostExecute(String result) {
         if(result.compareTo("noUser") == 0)
         {
-            bar.setVisibility(View.GONE);
             progressTask.cancel(true);
             progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/findHelpId");
             progressTask.execute(findHelpRequestInput);
+
+        }
+        else
+        {
+            bar.setVisibility(View.GONE);
 
         }
 
