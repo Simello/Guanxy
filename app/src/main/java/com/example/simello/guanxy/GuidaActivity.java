@@ -20,6 +20,9 @@ public class GuidaActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guida_fragment);
 
+
+
+
         final Button guanxy = (Button) findViewById(R.id.guanxy);
         final Button punti = (Button) findViewById(R.id.punti);
         final Button guida = (Button) findViewById(R.id.guida);

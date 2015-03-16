@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.simello.controller.varie.Position;
+import com.example.simello.controller.varie.User;
+import com.example.simello.registrazione.RegistrazioneTabActivity;
+import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.UpdatePositionReceiver;
 import com.example.simello.utils.utils;
 import com.parse.ParseInstallation;
@@ -61,6 +65,25 @@ public class GuanxyActivity extends ActionBarActivity
             editor.putString("PIN",""+mPhoneNumber);
             editor.apply();
         }
+
+
+        //Prendo il numero di telefono
+        mPhoneNumber = utils.numeroTelefonoCorrente(this);
+
+        String code = prefs.getString("PIN", "PIN");
+        // code.compareTo("PIN") == 0 || code.compareTo(""+mPhoneNumber) != 0  <---- Questp sarà l'if finale
+        if (code.compareTo("PIN") == 0) {
+            Intent i = new Intent(this, RegistrazioneTabActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
+            String username = prefs.getString("nickname", "");
+            GPSManager gpsManager = new GPSManager(this);
+            Position position = new Position((float) gpsManager.getLatitude(), (float) gpsManager.getLongitude());
+            //Qui basta usare utils.numeroTelefonoCorrente(this); al posto del mio numero lel
+            User.getIstance(username, this, mPhoneNumber, 0, position);
+        }
+
 
         ParseInstallation.getCurrentInstallation().saveInBackground();
         PushService.setDefaultPushCallback(this, GuanxyActivity.class);
