@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -26,6 +28,14 @@ public class HelloAccordion_JAVA extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
+
+        //SIMONE DENSITY -> 480
+        //      width -> 1080
+
         fillCountryTable();
 
 
@@ -99,6 +109,7 @@ public class HelloAccordion_JAVA extends Activity {
 
         Button b1;
         TextView t1;
+        RelativeLayout rl;
 //Converting to dip unit
         //chissa che cazzo fa sta linea di codice
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
@@ -108,8 +119,12 @@ public class HelloAccordion_JAVA extends Activity {
 
             b1 = new Button(this);
             t1 = new TextView(this);
+            rl = new RelativeLayout(this);
+
+
 
             b1.setId(current);
+            rl.setId(current);
             t1.setId(current);
 
             b1.setText(DatiProvaAccordion.headerProva[current]);
@@ -163,10 +178,18 @@ public class HelloAccordion_JAVA extends Activity {
            // Drawable d = Drawable.createFromPath(getString(R.layout.login_selector));
           //  b1.setBackgroundColor(getResources().getColor(R.color.blueChiaro));
 
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(20,0,30,30);
+
+            rl.addView(t1, params );
+
+
             buses.addView(b1, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            buses.addView(t1, new TableLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            buses.addView(rl, 0);
+
+
 
             b1.setOnClickListener(new View.OnClickListener() {
 
@@ -174,7 +197,9 @@ public class HelloAccordion_JAVA extends Activity {
 //button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
 
                     Button button = (Button) v;
-                    System.out.println(v.getId());
+                    //System.out.println(v.getParent().getClass());
+
+
                     LinearLayout parent = (LinearLayout) v.getParent();
 
 /**
@@ -197,9 +222,11 @@ public class HelloAccordion_JAVA extends Activity {
 
 // Change color, so that we can distinguish the tab which are selected
                                 button.setTextColor(getResources().getColor(R.color.white));
-
 // Change visibility
-                                parent.getChildAt(j).setVisibility(parent.getChildAt(j).VISIBLE);
+                                RelativeLayout rl = (RelativeLayout) parent.getChildAt(j);
+                                TextView l = (TextView) rl.getChildAt(v.getId());
+                                l.setVisibility(l.VISIBLE);
+
                                 //TODO prendere l'id di questo child aperto xkee dopo si perde e chiude il bottone sotto
 // Chnage icon
                             /*    button.setCompoundDrawablesWithIntrinsicBounds(
@@ -208,7 +235,7 @@ public class HelloAccordion_JAVA extends Activity {
                                         0,  //right
                                         0);     //bottom*/
                                 Drawable simelloDbleAperto = getResources().getDrawable(R.drawable.freccia_aperto_sml);
-                                simelloDbleAperto.setBounds(0,0,80,80);
+                                simelloDbleAperto.setBounds(0,0, 80,80);
                                 button.setCompoundDrawables(simelloDbleAperto,null,null,null);
                             }
                         }
