@@ -41,6 +41,10 @@ public class UpdatePositionReceiver extends BroadcastReceiver
             connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user/updatePosition");
             connectAsyncTask.execute(updatePositionInput);
         }
+        else
+        {
+            Log.i("Aggiornamento","Non disponibile");
+        }
 
 
     }

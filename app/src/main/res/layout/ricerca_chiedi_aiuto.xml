@@ -6,14 +6,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancella Richiesta"
+        android:text="@string/annullaRichiesta"
         android:textAllCaps="false"
-        android:id="@+id/button2"
+        android:id="@+id/annullaRichiesta"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:layout_marginTop="62dp"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:padding="10dp"
         android:background="@drawable/button_segnala_abuso_tondo"
         android:textColor="@color/white"/>
@@ -26,7 +26,7 @@
         android:visibility="gone"
         android:layout_centerInParent="true"
         android:indeterminateDrawable="@drawable/progress"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/annullaRichiesta"
         android:layout_marginTop="20dp">
     </ProgressBar>
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Sto cercando..."
+        android:text="@string/stoCercando"
         android:textSize="15sp"
         android:textStyle="bold"
         android:id="@+id/textView2"

@@ -40,5 +40,7 @@
     <string name="Ok">Ok</string>
     <string name="Cancella">Cancel</string>
     <string name="salva">Save</string>
+    <string name="annullaRichiesta">Delete request</string>
+    <string name="stoCercando">Searching...</string>
 
 </resources>

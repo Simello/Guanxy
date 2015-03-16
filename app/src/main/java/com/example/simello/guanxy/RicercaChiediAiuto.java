@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.simello.classiServer.FindHelpRequestInput;
@@ -47,6 +48,8 @@ public class RicercaChiediAiuto extends Activity
         bar.setVisibility(View.VISIBLE);
         progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/findHelpId");
         progressTask.execute(findHelpRequestInput);
+
+        final Button annullaRichiesta = (Button) findViewById(R.id.annullaRichiesta);
 
         //TODO da aggiungere funzione bottone annulla ricerca
     }

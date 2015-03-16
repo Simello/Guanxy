@@ -179,7 +179,7 @@ public class GuanxyActivity extends ActionBarActivity
             manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
             if (batteria.compareTo("false") == 0)
-                interval = 60000 * 15; //15 minuti
+                interval = 60000 * 15 ; //15 minuti
             else
                 interval = 60000 * 30; //30 minuti
 

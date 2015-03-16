@@ -53,6 +53,8 @@
     <string name="Ok">Ok</string>
     <string name="Cancella">Cancella</string>
     <string name="salva">Salva</string>
+    <string name="annullaRichiesta">Cancella Richiesta</string>
+    <string name="stoCercando">Sto cercando...</string>
 
 
 </resources>
