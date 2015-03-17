@@ -51,7 +51,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),(long)user.getPosition().getLat(),(long)user.getPosition().getLon());
+        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),34.3,34.5);
         connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
         connectAsyncTask.execute(userResearcher);
 

@@ -6,12 +6,12 @@ package com.example.simello.classiServer;
 public class SearchHelpRequestInput extends BaseInput {
 
     private String idUser;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
     public SearchHelpRequestInput(){};
 
-    public SearchHelpRequestInput(String idUser, long latitude, long longitude)
+    public SearchHelpRequestInput(String idUser, double latitude, double longitude)
     {
         this.idUser = idUser;
         this.latitude = latitude;
@@ -24,16 +24,16 @@ public class SearchHelpRequestInput extends BaseInput {
     public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
-    public void setLatitude(long latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
-    public void setLongitude(long longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
