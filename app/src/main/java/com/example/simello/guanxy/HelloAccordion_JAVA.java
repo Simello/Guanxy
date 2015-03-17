@@ -4,9 +4,11 @@ package com.example.simello.guanxy;
  * Created by simello on 13/03/15.
  */
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
@@ -23,7 +25,22 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.simello.classiServer.InsertUserInput;
+import com.example.simello.classiServer.SearchHelpRequestInput;
+import com.example.simello.controller.varie.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
@@ -32,7 +49,11 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        User user = User.getUser();
+        //creo l oggetto per cercare le richieste
+        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),(long)user.getPosition().getLat(),(long)user.getPosition().getLon());
+        connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
+        connectAsyncTask.execute(userResearcher);
 
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
 
@@ -320,4 +341,87 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             });
         }
     }
+
+    //CREO L'ASKYNCTASK PER LA CONNESSIONE
+    private class connectAsyncTask extends AsyncTask<SearchHelpRequestInput, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+        connectAsyncTask(String urlPass){
+            url = urlPass;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(HelloAccordion_JAVA.this);
+            progressDialog.setMessage("Sto Cercando!");
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }
+        @Override
+        protected String doInBackground(SearchHelpRequestInput... params) {
+
+            SearchHelpRequestInput userResearcher = params[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(userResearcher);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+
+                Log.i("OBJECT", s);
+                response = httpclient.execute(request);
+
+                Log.i("Invio","fatto");
+
+
+            }
+
+            catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line ;
+                }
+                Log.d("Ritorno",result);
+
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+
+            return result;
+
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+
+        }
+    }
+
+
 }

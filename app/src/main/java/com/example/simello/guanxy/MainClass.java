@@ -21,8 +21,6 @@ import com.parse.Parse;
  */
 public class MainClass extends Application
 {
-    private String mPhoneNumber;
-
 
     @Override
     public void onCreate() {

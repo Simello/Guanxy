@@ -12,7 +12,12 @@ public class TakingCareHelpReuqestInput extends BaseInput{
     private long latitute;
     private long longitude;
 
-    public TakingCareHelpReuqestInput(){};
+    public TakingCareHelpReuqestInput(String idUser, BigInteger idHelpRequest, long latitute, long longitude){
+        this.idUser = idUser;
+        this.idHelpRequest = idHelpRequest;
+        this.latitute = latitute;
+        this.longitude = longitude;
+    };
 
     public String getIdUser() {
         return idUser;

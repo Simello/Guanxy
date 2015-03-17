@@ -87,7 +87,6 @@ public class RegistrazioneUsername extends Activity
 
                 connection.execute(userInput);
 
-                //Questo è da spostare nel doOnPostExecute con i ritorni decenti... cazzo è sto OK? e sto fail? BICC VOGLIAMO I PUNTI
                 User.getIstance(sUsername, RegistrazioneUsername.this, utils.numeroTelefonoCorrente(RegistrazioneUsername.this), 0, position);
                 u = User.getUser();
                 u.setNickname(sUsername);
