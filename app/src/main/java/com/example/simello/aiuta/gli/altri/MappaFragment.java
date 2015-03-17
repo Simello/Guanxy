@@ -96,12 +96,8 @@ public class MappaFragment extends Fragment
         mMap.moveCamera(cu);
 
         Bundle bundle = getActivity().getIntent().getExtras();
-        String idUser = bundle.getString("idUser");
-        Log.i("VALORI",idUser);
         double posLat = bundle.getDouble("Lat");
         double posLon = bundle.getDouble("Lon");
-        Log.i("VALORI",""+posLat);
-        Log.i("VALORI","" + posLon);
 
 
         LatLng posSecondoMarke = new LatLng(posLat, posLon);

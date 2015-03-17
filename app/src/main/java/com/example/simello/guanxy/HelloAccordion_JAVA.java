@@ -512,18 +512,6 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 }
                 Log.d("Ritorno",result);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("idUser",DatiProvaAccordion.headers.get(corrente));
-                bundle.putInt("idRichiesta",userAccepter.getIdHelpRequest().intValue());
-                Log.i("INSERIMENTO","LAT "+ DatiProvaAccordion.latitudes.get(corrente));
-                Log.i("INSERIMENTO","LON "+ DatiProvaAccordion.longitudes.get(corrente));
-
-
-                bundle.putDouble("Lat",DatiProvaAccordion.latitudes.get(corrente));
-                bundle.putDouble("Lon",DatiProvaAccordion.longitudes.get(corrente));
-                MappaFragment map = MappaFragment.newIstance();
-                map.setArguments(bundle);
-
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 
                 i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));
