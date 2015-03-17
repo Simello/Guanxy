@@ -95,9 +95,17 @@ public class MappaFragment extends Fragment
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
         mMap.moveCamera(cu);
 
+        Bundle bundle = getActivity().getIntent().getExtras();
+        String idUser = bundle.getString("idUser");
+        Log.i("VALORI",idUser);
+        double posLat = bundle.getDouble("Lat");
+        double posLon = bundle.getDouble("Lon");
+        Log.i("VALORI",""+posLat);
+        Log.i("VALORI","" + posLon);
 
-        LatLng posSecondoMarke = new LatLng(pos.getLat() + .003198, pos.getLon() - .003266);
-        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title("Simello overpower");
+
+        LatLng posSecondoMarke = new LatLng(posLat, posLon);
+        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(bundle.getString("idUser"));
         secondoMark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
         mMap.addMarker(secondoMark);
 

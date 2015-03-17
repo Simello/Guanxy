@@ -1,5 +1,6 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +24,13 @@ public class TabAiutaGliAltri extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_aiuta_gli_altri);
+/*
+        Intent intent = getIntent();
+        String idUser = intent.getStringExtra("idUser");
+        int idRichiesta = intent.getIntExtra("idRichiesta",0);
+        double latitudine = intent.getDoubleExtra("Latitudine",0);
+        double longitudine = intent.getDoubleExtra("Longitudine", 0);
+        */
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
         fragmentManager = getSupportFragmentManager();

@@ -12,24 +12,32 @@ public class DatiProvaAccordion
     public static ArrayList<String> headers = new ArrayList<String>();
     public static ArrayList<String> texts = new ArrayList<String>() ;
     public static ArrayList<String> ids = new ArrayList<String>();
-    public static ArrayList<Integer> latitudes = new ArrayList<Integer>();
-    public static ArrayList<Integer> longitudes = new ArrayList<Integer>();
+    public static ArrayList<Double> latitudes = new ArrayList<Double>();
+    public static ArrayList<Double> longitudes = new ArrayList<Double>();
 
     public DatiProvaAccordion(ArrayList<String> dati)
     {
         //7 nome utente / header
-        //0 Numero ID richiesta
+        //6 Numero ID richiesta
         //3 testo della richiesta
         //11 lat
         //12 lon
-        for(String s : dati)
+        for(int i = 0 ; i < dati.size() ; i ++)
         {
-            String [] parts = s.split(",");
-            headers.add(parts[7]);
-            texts.add(parts[3]);
-            ids.add(parts[0]);
-            latitudes.add(Integer.parseInt(parts[11]));
-            longitudes.add(Integer.parseInt(parts[12]));
+
+            String [] parts = dati.get(i).split(",");
+            for(int j = 0; j < parts.length ; j++)
+            {
+                System.out.println(parts[j] + " " + j);
+            }
+            headers.add(parts[7].replaceAll("\"",""));
+            texts.add(parts[3].replaceAll("\"",""));
+            ids.add(parts[6].replaceAll("\"",""));
+            parts[13] = parts[13].replaceAll("\"","");
+            parts[14] = parts[14].replaceAll("\"","");
+
+            latitudes.add(Double.valueOf(parts[13]));
+            longitudes.add(Double.valueOf(parts[14]));
         }
 
 
@@ -38,5 +46,10 @@ public class DatiProvaAccordion
     public static void clean()
     {
         headers.removeAll(headers);
+        texts.removeAll(texts);
+        ids.removeAll(ids);
+        latitudes.removeAll(latitudes);
+        longitudes.removeAll(longitudes);
+
     }
 }
