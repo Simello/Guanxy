@@ -26,10 +26,6 @@ public class DatiProvaAccordion
         {
 
             String [] parts = dati.get(i).split(",");
-            for(int j = 0; j < parts.length ; j++)
-            {
-                System.out.println(parts[j] + " " + j);
-            }
             headers.add(parts[7].replaceAll("\"",""));
             texts.add(parts[3].replaceAll("\"",""));
             ids.add(parts[6].replaceAll("\"",""));

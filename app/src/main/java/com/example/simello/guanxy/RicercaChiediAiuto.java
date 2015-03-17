@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.FindHelpRequestInput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -73,6 +74,7 @@ public class RicercaChiediAiuto extends Activity
 
 private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
     String url;
+    Intent i;
     ProgressTask(String url)
     {
         this.url = url;
@@ -122,9 +124,18 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
                 result = result + line;
             }
             JSONObject json = new JSONObject(result);
+            JSONObject help = json.getJSONObject("help");
+            Log.i("Test",help.toString());
 
-            if(json.has("userReceive")) {
-                JSONObject receive = json.getJSONObject("userReceive");
+
+            if(!help.isNull("userReceive")) {
+                JSONObject receive = help.getJSONObject("userReceive");
+                i = new Intent(RicercaChiediAiuto.this, TabAiutaGliAltri.class);
+
+                i.putExtra("idUser",receive.getString("nickname"));
+                i.putExtra("idRichiesta",receive.getInt("id"));
+                i.putExtra("Lat",receive.getDouble("latitude"));
+                i.putExtra("Lon",receive.getDouble("longitude"));
             }
             else
             {
@@ -164,6 +175,8 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
         else
         {
             bar.setVisibility(View.GONE);
+            startActivity(i);
+            //... Non posso continuare lelling, ho bisogno
 
         }
 

@@ -67,7 +67,7 @@ public class ChiediAiuto extends ActionBarActivity
 
 
                 // /newHelpRequest
-                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), (long) GPSManager.newInstance(ChiediAiuto.this).getLatitude(), (long) GPSManager.newInstance(ChiediAiuto.this).getLongitude(), richiesta);
+                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), GPSManager.newInstance(ChiediAiuto.this).getLatitude(), GPSManager.newInstance(ChiediAiuto.this).getLongitude(), richiesta);
 
                 connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/newHelpRequest", ChiediAiuto.this);
                 connectAsyncTask.execute(helpRequestInput);
