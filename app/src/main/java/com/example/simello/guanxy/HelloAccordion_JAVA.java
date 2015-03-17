@@ -36,9 +36,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
@@ -49,9 +52,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-     //   SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),34.3,34.5);
-       // connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
-       // connectAsyncTask.execute(userResearcher);
+        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),user.getPosition().getLat(),user.getPosition().getLon());
+        connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
+        connectAsyncTask.execute(userResearcher);
 
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
 
@@ -154,7 +157,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
 
-        for (int current = 0; current < DatiProvaAccordion.headerProva.length; current++)
+        for (int current = 0; current < DatiProvaAccordion.headers.size(); current++)
         {
             rl1=new RelativeLayout(this);
             b1 = new Button(this);
@@ -168,8 +171,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             t1.setId(current);
             rl1.setId(current);
 
-            b1.setText(DatiProvaAccordion.headerProva[current]);
-            t1.setText(DatiProvaAccordion.textProva[current]);
+            b1.setText(DatiProvaAccordion.headers.get(current));
+            t1.setText(DatiProvaAccordion.texts.get(current));
 
             b1.setTypeface(null, 1);
             t1.setTypeface(null, 1);
@@ -390,7 +393,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                     result = result + line ;
                 }
                 Log.d("Ritorno",result);
-
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("helpRequest");
+                ArrayList<String> listdata = new ArrayList<String>();
+                if (jsonArray != null) {
+                    for (int i=0;i<jsonArray.length();i++){
+                        listdata.add(jsonArray.get(i).toString());
+                    }
+                }
+                new DatiProvaAccordion(listdata);
 
             } catch (Exception e) {
                 // Code to handle exception

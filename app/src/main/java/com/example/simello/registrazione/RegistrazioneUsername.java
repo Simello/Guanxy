@@ -79,7 +79,7 @@ public class RegistrazioneUsername extends Activity
                 //Prendo la posizione
                 Position position = new Position((float)gpsManager.getLatitude(),(float) gpsManager.getLongitude());
                 //Creo l'oggetto
-                InsertUserInput userInput = new InsertUserInput(utils.numeroTelefonoCorrente(RegistrazioneUsername.this),sUsername,(long)gpsManager.getLongitude(),(long)gpsManager.getLatitude());
+                InsertUserInput userInput = new InsertUserInput(utils.numeroTelefonoCorrente(RegistrazioneUsername.this),sUsername,gpsManager.getLongitude(),gpsManager.getLatitude());
 
                 //Creo un oggettto di tipo connectAsyncTask (con Dialog rotella) e gli passo l url dello script
                 connectAsyncTask connection = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user");
