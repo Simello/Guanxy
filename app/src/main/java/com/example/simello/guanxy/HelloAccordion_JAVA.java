@@ -256,7 +256,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                     if(button.getCurrentTextColor() == getResources().getColor(R.color.biancoChiuso)){
 /**
- * OPEN CHILD OF SELECTED TAB AND CLOSE REMAINING PREVIOUSLY OPENED TABS
+ * OPEN CHILD OF SELECTED TAB AND CLOSE REMAINING PREVIOUSLY OPENED TABS s
  */
                         for(int j=0; j<parent.getChildCount(); j++)
                         {
