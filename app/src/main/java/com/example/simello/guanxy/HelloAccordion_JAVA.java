@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.example.simello.classiServer.InsertUserInput;
 import com.example.simello.classiServer.SearchHelpRequestInput;
 import com.example.simello.controller.varie.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +36,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -51,9 +49,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),34.3,34.5);
-        connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
-        connectAsyncTask.execute(userResearcher);
+     //   SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),34.3,34.5);
+       // connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
+       // connectAsyncTask.execute(userResearcher);
 
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
 
@@ -223,15 +221,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                     0);     //bottom*/
 
             t1.setVisibility(t1.GONE);
+
             rl1.setVisibility(rl1.GONE);
-
-//b1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
-
-            // Drawable d = Drawable.createFromPath(getString(R.layout.login_selector));
-            //  b1.setBackgroundColor(getResources().getColor(R.color.blueChiaro));
-
-
-
 
             buses.addView(b1, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -243,11 +234,33 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             b1.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
-//button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
 
                     Button button = (Button) v;
                     System.out.println(v.getId());
                     LinearLayout parent = (LinearLayout) v.getParent();
+
+
+
+
+                    for(int j=0; j<parent.getChildCount(); j++)
+                    {
+
+                        if (parent.getChildAt(j) instanceof Button) {
+                            Button x = (Button) parent.getChildAt(j);
+                            if (x.getCurrentTextColor() == getResources().getColor(R.color.white)) {
+                                Log.i("CHIUDOBTN", ""+x.getId());
+                                button.setTextColor(getResources().getColor(R.color.biancoChiuso));
+                                parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
+                                parent.getChildAt(j+2).setVisibility(parent.getChildAt(j+2).GONE);
+                                Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
+                                simelloDbleChiuso2.setBounds(0,0,80,80);
+                                x.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
+
+                            }
+                        }
+                    }
+
+
 
 /**
  * It text color is black
@@ -262,34 +275,16 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
  *
  */
 
-                    for( int j = 0; j < parent.getChildCount(); j++ )
+                    if(button.getCurrentTextColor() == getResources().getColor(R.color.biancoChiuso))
                     {
-                        Log.i("Chiudo id:", ""+parent.getChildAt(j).getId());
-                        if( parent.getChildAt(j).getVisibility() == View.VISIBLE ) {
-                            parent.getChildAt(j + 1).setVisibility(parent.getChildAt(j + 1).GONE);
-                            parent.getChildAt(j + 2).setVisibility(parent.getChildAt(j + 2).GONE);
-                            Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
-                            simelloDbleChiuso2.setBounds(0,0,80,80);
-                            button.setTextColor(getResources().getColor(R.color.biancoChiuso));
-                            button.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
-                        }
-                    }
 
-                    if(button.getCurrentTextColor() == getResources().getColor(R.color.biancoChiuso)){
-/**
- * OPEN CHILD OF SELECTED TAB AND CLOSE REMAINING PREVIOUhSLY OPENED TABS s
- */
                         for(int j=0; j<parent.getChildCount(); j++)
                         {
-
                             if(v.getId() == parent.getChildAt(j).getId())
                             {
 
-// Change color, so that we can distinguish the tab which are selected
                                 button.setTextColor(getResources().getColor(R.color.white));
-// Change visibility
                                 parent.getChildAt(j).setVisibility(parent.getChildAt(j).VISIBLE);
-                                parent.getChildAt((j+1)).setVisibility(parent.getChildAt(j+1).VISIBLE);
 
                                 Drawable simelloDbleAperto = getResources().getDrawable(R.drawable.freccia_aperto_sml);
                                 simelloDbleAperto.setBounds(0,0,80,80);
@@ -312,9 +307,10 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                                 button.setTextColor(getResources().getColor(R.color.biancoChiuso));
 
 // Change visibility
-                                Log.i("PARENT", ""+ parent.getChildAt(j).toString());
-                                parent.getChildAt(j+1).setVisibility(parent.getChildAt(j+1).GONE);
+                                Log.i("CHIUDO", ""+parent.getChildAt(j)+"\n");
+                                parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
                                 parent.getChildAt(j+2).setVisibility(parent.getChildAt(j+2).GONE);
+
 
 // Chnage icon
                                 //questa si potrebbe riutilizzare in certe circostanze aggiunge l'immagine a sinistra del
@@ -324,16 +320,12 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                                         0,      //top
                                         0,  //right
                                         0);     //bottom*/
+                                Log.i("Cambioicona", "");
                                 Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
                                 simelloDbleChiuso2.setBounds(0,0,80,80);
                                 button.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
+                                break;
                             }
-
-
-
-
-
-
 
                         }
                     }
