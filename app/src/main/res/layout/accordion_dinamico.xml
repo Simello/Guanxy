@@ -11,7 +11,7 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/blueChiaro">
-    <TextView android:gravity="center_vertical|center_horizontal" android:textSize="16dip"
+   <!-- <TextView android:gravity="center_vertical|center_horizontal" android:textSize="16dip"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="10dp"
@@ -20,7 +20,7 @@
         android:background="@drawable/annulla_aiuta_gli_altri"
         android:text="Annulla"
 
-        android:layout_marginBottom="5dip" android:typeface="sans" />
+        android:layout_marginBottom="5dip" android:typeface="sans" /> -->
 
     <LinearLayout android:id="@+id/ll_country"
     android:layout_height="fill_parent" android:layout_width="fill_parent">

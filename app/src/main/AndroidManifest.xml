@@ -119,6 +119,7 @@
 
         <activity android:name=".HelloAccordion_JAVA"
             android:label="Guanxy"
+            android:parentActivityName=".GuanxyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
 
