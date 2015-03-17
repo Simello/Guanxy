@@ -203,8 +203,6 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             bgnuovo.setTileModeXY(bg.getTileModeX(), bg.getTileModeY());
             t1.setBackground(bgnuovo);
             //</altro pezzo brutto>
-
-
 /**
  * By default colour of button is black
  */
@@ -219,11 +217,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                     0,      //top
                     0,  //right
                     0);     //bottom*/
-
             t1.setVisibility(t1.GONE);
-
             rl1.setVisibility(rl1.GONE);
-
             buses.addView(b1, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             buses.addView(t1, new TableLayout.LayoutParams(
@@ -247,14 +242,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                         if (parent.getChildAt(j) instanceof Button) {
                             Button x = (Button) parent.getChildAt(j);
-                            if (x.getCurrentTextColor() == getResources().getColor(R.color.white)) {
+                            if (x.getCurrentTextColor() == getResources().getColor(R.color.white) && x.getId() != v.getId()) {
                                 Log.i("CHIUDOBTN", ""+x.getId());
-                                button.setTextColor(getResources().getColor(R.color.biancoChiuso));
+                                x.setTextColor(getResources().getColor(R.color.biancoChiuso));
                                 parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
                                 parent.getChildAt(j+2).setVisibility(parent.getChildAt(j+2).GONE);
                                 Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
                                 simelloDbleChiuso2.setBounds(0,0,80,80);
                                 x.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
+
 
                             }
                         }
