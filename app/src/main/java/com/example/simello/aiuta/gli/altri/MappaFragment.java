@@ -84,6 +84,7 @@ public class MappaFragment extends Fragment
         Position pos = user.getPosition();
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
+        Log.i("PosUser1","Lat: " +pos.getLat() + " Lon: " + pos.getLon() );
 
         MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
         primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
@@ -99,6 +100,7 @@ public class MappaFragment extends Fragment
         double posLat = bundle.getDouble("Lat");
         double posLon = bundle.getDouble("Lon");
 
+        Log.i("PosUser2","Lat: " +posLat + " Lon: " + posLon );
 
         LatLng posSecondoMarke = new LatLng(posLat, posLon);
         MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(bundle.getString("idUser"));
@@ -257,6 +259,7 @@ public class MappaFragment extends Fragment
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.caricamentoGps));
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override

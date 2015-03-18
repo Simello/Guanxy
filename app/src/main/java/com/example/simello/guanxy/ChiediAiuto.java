@@ -196,6 +196,7 @@ public class ChiediAiuto extends ActionBarActivity
             progressDialog = new ProgressDialog(ChiediAiuto.this);
             progressDialog.setMessage("Sto Inviando la richiesta!");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override
@@ -217,6 +218,7 @@ public class ChiediAiuto extends ActionBarActivity
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                 response = httpclient.execute(request);
+                Log.i("InvioRichiesta","" + s);
 
             }
 

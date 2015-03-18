@@ -135,6 +135,7 @@ public class RegistrazioneUsername extends Activity
             progressDialog = new ProgressDialog(RegistrazioneUsername.this);
             progressDialog.setMessage("Sto Registrando!");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override

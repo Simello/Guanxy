@@ -369,6 +369,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             progressDialog = new ProgressDialog(HelloAccordion_JAVA.this);
             progressDialog.setMessage("Sto Cercando!");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override
@@ -465,6 +466,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             progressDialog = new ProgressDialog(HelloAccordion_JAVA.this);
             progressDialog.setMessage("Attendi...");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override
