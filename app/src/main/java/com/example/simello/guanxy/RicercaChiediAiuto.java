@@ -75,6 +75,9 @@ public class RicercaChiediAiuto extends Activity
         overridePendingTransition(0, 0);
         if(!progressTask.isCancelled())
             progressTask.cancel(true);
+        CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id);
+        ProgressTaskCancella progressTaskCancella = new ProgressTaskCancella("http://5.249.151.38:8080/guanxy/cancelRequest");
+        progressTaskCancella.execute(cancelHelpRequestInput);
 
 
         Intent myIntent = new Intent(this, GuanxyActivity.class);
@@ -260,6 +263,7 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
         {
           Intent i = new Intent(RicercaChiediAiuto.this, GuanxyActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            overridePendingTransition(0, 0);
             startActivity(i);
 
             }
