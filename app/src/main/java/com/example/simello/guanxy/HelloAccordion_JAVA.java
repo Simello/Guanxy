@@ -22,6 +22,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -51,6 +52,7 @@ import java.util.ArrayList;
 public class HelloAccordion_JAVA extends ActionBarActivity {
     LinearLayout buses;
     int corrente;
+    ScrollView sw;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
@@ -62,6 +64,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         connectAsyncTask.execute(userResearcher);
 
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
+        sw = (ScrollView) findViewById(R.id.ScrollView11);
+        //
 
 
 
@@ -149,6 +153,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+//   yourScrollView.scrollTo(0, button.getY());
 
     void fillCountryTable() {
 
