@@ -54,13 +54,14 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
     LinearLayout buses;
     int corrente;
     ScrollView sw;
+    GPSManager gpsManager;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-        GPSManager gpsManager = new GPSManager(this);
+        gpsManager = new GPSManager(this);
         SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),gpsManager.getLatitude(),gpsManager.getLongitude());
         connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
         connectAsyncTask.execute(userResearcher);
@@ -200,8 +201,6 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     int id = Integer.parseInt(DatiProvaAccordion.ids.get(corrente));
-
-                    GPSManager gpsManager = new GPSManager(HelloAccordion_JAVA.this);
 
                     TakingCareHelpReuqestInput takingCareHelpReuqestInput = new TakingCareHelpReuqestInput(User.getUser().getIdUser(), BigInteger.valueOf(id), gpsManager.getLatitude(), gpsManager.getLongitude() );
                     connectAsyncTaskAccetta accetta = new connectAsyncTaskAccetta("http://5.249.151.38:8080/guanxy/takingCareHelp");
