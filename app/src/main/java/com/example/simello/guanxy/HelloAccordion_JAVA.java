@@ -31,6 +31,7 @@ import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.SearchHelpRequestInput;
 import com.example.simello.classiServer.TakingCareHelpReuqestInput;
 import com.example.simello.controller.varie.User;
+import com.example.simello.utils.GPSManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpResponse;
@@ -59,7 +60,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),user.getPosition().getLat(),user.getPosition().getLon());
+        GPSManager gpsManager = new GPSManager(this);
+        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),gpsManager.getLatitude(),gpsManager.getLongitude());
         connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
         connectAsyncTask.execute(userResearcher);
 
@@ -199,8 +201,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 public void onClick(View v) {
                     int id = Integer.parseInt(DatiProvaAccordion.ids.get(corrente));
 
+                    GPSManager gpsManager = new GPSManager(HelloAccordion_JAVA.this);
 
-                    TakingCareHelpReuqestInput takingCareHelpReuqestInput = new TakingCareHelpReuqestInput(User.getUser().getIdUser(), BigInteger.valueOf(id), DatiProvaAccordion.latitudes.get(corrente), DatiProvaAccordion.longitudes.get(corrente) );
+                    TakingCareHelpReuqestInput takingCareHelpReuqestInput = new TakingCareHelpReuqestInput(User.getUser().getIdUser(), BigInteger.valueOf(id), gpsManager.getLatitude(), gpsManager.getLongitude() );
                     connectAsyncTaskAccetta accetta = new connectAsyncTaskAccetta("http://5.249.151.38:8080/guanxy/takingCareHelp");
                     accetta.execute(takingCareHelpReuqestInput);
 
@@ -495,7 +498,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
 
-                Log.i("OBJECT", s);
+                Log.i("AccettaRichiesta", s);
                 response = httpclient.execute(request);
 
                 Log.i("Invio","fatto");
@@ -522,9 +525,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 
                 i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));
-                i.putExtra("idRichiesta",userAccepter.getIdHelpRequest());
-                i.putExtra("Lat",DatiProvaAccordion.latitudes.get(corrente));
-                i.putExtra("Lon",DatiProvaAccordion.longitudes.get(corrente));
+                i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
+                i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
+                i.putExtra("Lon", DatiProvaAccordion.longitudes.get(corrente));
 
 
             } catch (Exception e) {

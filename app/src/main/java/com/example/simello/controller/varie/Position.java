@@ -5,17 +5,17 @@ package com.example.simello.controller.varie;
  */
 public class Position
 {
-    private float lat;
-    private float lon;
+    private double lat;
+    private double lon;
 
-    public Position(float lat, float lon)
+    public Position(double lat, double lon)
     {
         this.lat = lat;
         this.lon = lon;
     }
 
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
@@ -23,7 +23,7 @@ public class Position
         this.lat = lat;
     }
 
-    public float getLon() {
+    public double getLon() {
         return lon;
     }
 

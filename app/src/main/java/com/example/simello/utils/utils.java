@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
@@ -41,8 +42,9 @@ public class utils
     {
         TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         mPhoneNumber = tMgr.getLine1Number();
+        Log.i("NumeroTelefono", "" + mPhoneNumber);
         if(mPhoneNumber == null)
-            mPhoneNumber = "3208814625";
+            mPhoneNumber = "320881462";
         return mPhoneNumber;
 
     }

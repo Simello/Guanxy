@@ -65,9 +65,10 @@ public class ChiediAiuto extends ActionBarActivity
                     return;
                 }
 
+                GPSManager gpsManager = new GPSManager(ChiediAiuto.this);
 
                 // /newHelpRequest
-                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), GPSManager.newInstance(ChiediAiuto.this).getLatitude(), GPSManager.newInstance(ChiediAiuto.this).getLongitude(), richiesta);
+                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), gpsManager.getLatitude(), gpsManager.getLongitude(), richiesta);
 
                 connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/newHelpRequest", ChiediAiuto.this);
                 connectAsyncTask.execute(helpRequestInput);
@@ -263,6 +264,7 @@ public class ChiediAiuto extends ActionBarActivity
             {
                 Intent i = new Intent(ChiediAiuto.this, RicercaChiediAiuto.class);
                 i.putExtra("idRichiesta",result);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //Ci vanno flag??
                 startActivity(i);
                 overridePendingTransition(0, 0);

@@ -29,11 +29,12 @@ public class DatiProvaAccordion
             headers.add(parts[7].replaceAll("\"",""));
             texts.add(parts[3].replaceAll("\"",""));
             ids.add(parts[6].replaceAll("\"",""));
-            parts[13] = parts[13].replaceAll("\"","");
-            parts[14] = parts[14].replaceAll("\"","");
+            parts[13] = parts[13].replaceAll("\"","").trim();
+            parts[14] = parts[14].replaceAll("\"","").trim();
 
             latitudes.add(Double.valueOf(parts[13]));
             longitudes.add(Double.valueOf(parts[14]));
+
         }
 
 
