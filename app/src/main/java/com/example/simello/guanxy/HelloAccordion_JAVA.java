@@ -27,11 +27,16 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.simello.aiuta.gli.altri.MappaFragment;
+import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.SearchHelpRequestInput;
+import com.example.simello.classiServer.TakingCareHelpReuqestInput;
 import com.example.simello.controller.varie.User;
+import com.example.simello.utils.GPSManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpResponse;
@@ -41,25 +46,35 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.ArrayList;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
     LinearLayout buses;
     boolean schermoPiccolo;//true = piccolo;
+    int corrente;
+    ScrollView sw;
+    GPSManager gpsManager;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
-     //   SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),34.3,34.5);
-       // connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
-       // connectAsyncTask.execute(userResearcher);
+        gpsManager = new GPSManager(this);
+        SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),gpsManager.getLatitude(),gpsManager.getLongitude());
+        connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
+        connectAsyncTask.execute(userResearcher);
 
         buses=(LinearLayout)findViewById(R.id.linearLayoutBuses);
+        sw = (ScrollView) findViewById(R.id.ScrollView11);
+        //
 
 
 
@@ -174,8 +189,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
 
-        for (int current = 0; current < DatiProvaAccordion.headerProva.length; current++)
+        for (int current = 0; current < DatiProvaAccordion.headers.size(); current++)
         {
+            corrente = current;
             rl1=new RelativeLayout(this);
             b1 = new Button(this);
             t1 = new TextView(this);
@@ -188,8 +204,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             t1.setId(current);
             rl1.setId(current);
 
-            b1.setText(DatiProvaAccordion.headerProva[current]);
-            t1.setText(DatiProvaAccordion.textProva[current]);
+            b1.setText(DatiProvaAccordion.headers.get(current));
+            t1.setText(DatiProvaAccordion.texts.get(current));
 
             b1.setTypeface(null, 1);
             t1.setTypeface(null, 1);
@@ -202,6 +218,22 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             }
 
             b1.setTextSize(15);
+
+
+
+
+            //Imposto onClick bottone accetta
+            b2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int id = Integer.parseInt(DatiProvaAccordion.ids.get(corrente));
+
+                    TakingCareHelpReuqestInput takingCareHelpReuqestInput = new TakingCareHelpReuqestInput(User.getUser().getIdUser(), BigInteger.valueOf(id), gpsManager.getLatitude(), gpsManager.getLongitude() );
+                    connectAsyncTaskAccetta accetta = new connectAsyncTaskAccetta("http://5.249.151.38:8080/guanxy/takingCareHelp");
+                    accetta.execute(takingCareHelpReuqestInput);
+
+                }
+            });
 
 
             b1.setGravity(Gravity.CENTER_VERTICAL);
@@ -440,10 +472,12 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             progressDialog = new ProgressDialog(HelloAccordion_JAVA.this);
             progressDialog.setMessage("Sto Cercando!");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override
         protected String doInBackground(SearchHelpRequestInput... params) {
+            DatiProvaAccordion.clean();
 
             SearchHelpRequestInput userResearcher = params[0];
             HttpClient httpclient;
@@ -486,6 +520,109 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                     result = result + line ;
                 }
                 Log.d("Ritorno",result);
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("helpRequest");
+                ArrayList<String> listdata = new ArrayList<String>();
+                if (jsonArray != null) {
+                    for (int i=0;i<jsonArray.length();i++){
+                        listdata.add(jsonArray.get(i).toString());
+                    }
+                }
+                new DatiProvaAccordion(listdata);
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+
+            return result;
+
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+            fillCountryTable();
+
+
+        }
+    }
+
+
+
+
+    //CREO L'ASKYNCTASK PER LA CONNESSIONE
+    private class connectAsyncTaskAccetta extends AsyncTask<TakingCareHelpReuqestInput, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+        Intent i;
+        connectAsyncTaskAccetta(String urlPass){
+            url = urlPass;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(HelloAccordion_JAVA.this);
+            progressDialog.setMessage("Attendi...");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+        @Override
+        protected String doInBackground(TakingCareHelpReuqestInput... params) {
+
+            TakingCareHelpReuqestInput userAccepter = params[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(userAccepter);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+
+                Log.i("AccettaRichiesta", s);
+                response = httpclient.execute(request);
+
+                Log.i("Invio","fatto");
+
+
+            }
+
+            catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line ;
+                }
+                Log.d("Ritorno",result);
+
+                i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
+
+                i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));
+                i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
+                i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
+                i.putExtra("Lon", DatiProvaAccordion.longitudes.get(corrente));
 
 
             } catch (Exception e) {
@@ -503,6 +640,9 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             if(progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
+            startActivity(i);
+
+
 
         }
     }

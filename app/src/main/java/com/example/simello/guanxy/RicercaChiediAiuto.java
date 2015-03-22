@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
+import com.example.simello.classiServer.CancelHelpRequestInput;
 import com.example.simello.classiServer.FindHelpRequestInput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,6 +52,17 @@ public class RicercaChiediAiuto extends Activity
         progressTask.execute(findHelpRequestInput);
 
         final Button annullaRichiesta = (Button) findViewById(R.id.annullaRichiesta);
+        annullaRichiesta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!progressTask.isCancelled())
+                    progressTask.cancel(true);
+                CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id);
+                ProgressTaskCancella progressTaskCancella = new ProgressTaskCancella("http://5.249.151.38:8080/guanxy/cancelRequest");
+                progressTaskCancella.execute(cancelHelpRequestInput);
+
+            }
+        });
 
         //TODO da aggiungere funzione bottone annulla ricerca
     }
@@ -62,6 +75,9 @@ public class RicercaChiediAiuto extends Activity
         overridePendingTransition(0, 0);
         if(!progressTask.isCancelled())
             progressTask.cancel(true);
+        CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id);
+        ProgressTaskCancella progressTaskCancella = new ProgressTaskCancella("http://5.249.151.38:8080/guanxy/cancelRequest");
+        progressTaskCancella.execute(cancelHelpRequestInput);
 
 
         Intent myIntent = new Intent(this, GuanxyActivity.class);
@@ -73,6 +89,7 @@ public class RicercaChiediAiuto extends Activity
 
 private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
     String url;
+    Intent i;
     ProgressTask(String url)
     {
         this.url = url;
@@ -122,9 +139,18 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
                 result = result + line;
             }
             JSONObject json = new JSONObject(result);
+            JSONObject help = json.getJSONObject("help");
+            Log.i("Test",help.toString());
 
-            if(json.has("userReceive")) {
-                JSONObject receive = json.getJSONObject("userReceive");
+
+            if(!help.isNull("userReceive")) {
+                JSONObject receive = help.getJSONObject("userReceive");
+                i = new Intent(RicercaChiediAiuto.this, TabAiutaGliAltri.class);
+
+                i.putExtra("idUser",receive.getString("nickname"));
+                i.putExtra("idRichiesta",receive.getInt("id"));
+                i.putExtra("Lat",receive.getDouble("latitude"));
+                i.putExtra("Lon",receive.getDouble("longitude"));
             }
             else
             {
@@ -164,9 +190,84 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
         else
         {
             bar.setVisibility(View.GONE);
+            startActivity(i);
+            //... Non posso continuare lelling, ho bisogno
 
         }
 
     }
 }
+
+
+    private class ProgressTaskCancella extends AsyncTask<CancelHelpRequestInput,Void,String> {
+        String url;
+
+        ProgressTaskCancella(String url) {
+            this.url = url;
+        }
+
+        @Override
+        protected String doInBackground(CancelHelpRequestInput... arg0) {
+            CancelHelpRequestInput cancelHelpRequestInput = arg0[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(cancelHelpRequestInput);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+
+                Log.i("OggIdCancella", s);
+                response = httpclient.execute(request);
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line;
+                }
+
+
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            Log.d("Ritorno", result);
+
+
+
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+          Intent i = new Intent(RicercaChiediAiuto.this, GuanxyActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            overridePendingTransition(0, 0);
+            startActivity(i);
+
+            }
+
+
+    }
 }

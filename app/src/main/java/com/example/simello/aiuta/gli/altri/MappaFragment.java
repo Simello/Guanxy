@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
+import com.example.simello.utils.GPSManager;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -81,9 +82,11 @@ public class MappaFragment extends Fragment
 
 
         User user = User.getUser();
-        Position pos = user.getPosition();
+        GPSManager gpsManager = new GPSManager(getActivity());
+
         //Posizione primo markè
-        LatLng posPrimoMarke = new LatLng(pos.getLat(), pos.getLon());
+        LatLng posPrimoMarke = new LatLng( gpsManager.getLatitude(), gpsManager.getLongitude());
+        Log.i("PosUser1","Lat: " + gpsManager.getLatitude() + " Lon: " + gpsManager.getLongitude() );
 
         MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
         primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
@@ -95,11 +98,17 @@ public class MappaFragment extends Fragment
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
         mMap.moveCamera(cu);
 
+        Bundle bundle = getActivity().getIntent().getExtras();
+        double posLat = bundle.getDouble("Lat");
+        double posLon = bundle.getDouble("Lon");
 
-        LatLng posSecondoMarke = new LatLng(pos.getLat() + .003198, pos.getLon() - .003266);
-        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title("Simello overpower");
+        Log.i("PosUser2","Lat: " +posLat + " Lon: " + posLon );
+
+        LatLng posSecondoMarke = new LatLng(posLat, posLon);
+        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(bundle.getString("idUser"));
         secondoMark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
         mMap.addMarker(secondoMark);
+
 
         builder.include(secondoMark.getPosition());
 
@@ -107,7 +116,7 @@ public class MappaFragment extends Fragment
 
 
 
-        String url = makeURL(pos.getLat(),pos.getLon(), posSecondoMarke.latitude, posSecondoMarke.longitude);
+        String url = makeURL(gpsManager.getLatitude(),gpsManager.getLongitude(), posSecondoMarke.latitude, posSecondoMarke.longitude);
         connectAsyncTask connectAsyncTask = new connectAsyncTask(url);
         connectAsyncTask.execute();
 
@@ -253,6 +262,7 @@ public class MappaFragment extends Fragment
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.caricamentoGps));
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override

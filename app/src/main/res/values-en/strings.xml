@@ -42,5 +42,6 @@
     <string name="salva">Save</string>
     <string name="annullaRichiesta">Delete request</string>
     <string name="stoCercando">Searching...</string>
+    <string name="registraNumero">Insert phone number:</string>
 
 </resources>

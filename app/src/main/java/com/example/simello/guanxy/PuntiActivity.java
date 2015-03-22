@@ -165,6 +165,7 @@ public class PuntiActivity extends ActionBarActivity
             progressDialog = new ProgressDialog(PuntiActivity.this);
             progressDialog.setMessage("Aggiorno...");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
 

@@ -65,9 +65,10 @@ public class ChiediAiuto extends ActionBarActivity
                     return;
                 }
 
+                GPSManager gpsManager = new GPSManager(ChiediAiuto.this);
 
                 // /newHelpRequest
-                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), (long) GPSManager.newInstance(ChiediAiuto.this).getLatitude(), (long) GPSManager.newInstance(ChiediAiuto.this).getLongitude(), richiesta);
+                InsertHelpRequestInput helpRequestInput = new InsertHelpRequestInput(User.getUser().getIdUser(), gpsManager.getLatitude(), gpsManager.getLongitude(), richiesta);
 
                 connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/newHelpRequest", ChiediAiuto.this);
                 connectAsyncTask.execute(helpRequestInput);
@@ -196,6 +197,7 @@ public class ChiediAiuto extends ActionBarActivity
             progressDialog = new ProgressDialog(ChiediAiuto.this);
             progressDialog.setMessage("Sto Inviando la richiesta!");
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
         @Override
@@ -217,6 +219,7 @@ public class ChiediAiuto extends ActionBarActivity
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                 response = httpclient.execute(request);
+                Log.i("InvioRichiesta","" + s);
 
             }
 
@@ -261,6 +264,7 @@ public class ChiediAiuto extends ActionBarActivity
             {
                 Intent i = new Intent(ChiediAiuto.this, RicercaChiediAiuto.class);
                 i.putExtra("idRichiesta",result);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //Ci vanno flag??
                 startActivity(i);
                 overridePendingTransition(0, 0);

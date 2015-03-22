@@ -9,12 +9,12 @@ public class InsertUserInput extends BaseInput {
 
     private String userId;
     private String nickname;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
     public InsertUserInput() {}
 
-    public InsertUserInput(String userId, String nickname, long latitude, long longitude) {
+    public InsertUserInput(String userId, String nickname, double latitude, double longitude) {
         this.userId = userId;
         this.nickname = nickname;
         this.latitude = latitude;
@@ -37,19 +37,19 @@ public class InsertUserInput extends BaseInput {
         this.nickname = nickname;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }

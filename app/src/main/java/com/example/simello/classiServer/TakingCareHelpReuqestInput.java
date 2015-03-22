@@ -9,10 +9,10 @@ public class TakingCareHelpReuqestInput extends BaseInput{
 
     private String idUser;
     private BigInteger idHelpRequest;
-    private long latitute;
-    private long longitude;
+    private double latitute;
+    private double longitude;
 
-    public TakingCareHelpReuqestInput(String idUser, BigInteger idHelpRequest, long latitute, long longitude){
+    public TakingCareHelpReuqestInput(String idUser, BigInteger idHelpRequest, double latitute, double longitude){
         this.idUser = idUser;
         this.idHelpRequest = idHelpRequest;
         this.latitute = latitute;
@@ -32,16 +32,16 @@ public class TakingCareHelpReuqestInput extends BaseInput{
         this.idHelpRequest = idHelpRequest;
     }
 
-    public long getLatitute() {
+    public double getLatitute() {
         return latitute;
     }
-    public void setLatitute(long latitute) {
+    public void setLatitute(double latitute) {
         this.latitute = latitute;
     }
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
