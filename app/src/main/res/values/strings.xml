@@ -56,6 +56,8 @@
     <string name="annullaRichiesta">Cancella Richiesta</string>
     <string name="stoCercando">Sto cercando...</string>
     <string name="cosaFare">Che devo fare?</string>
+    <string name="registraNumero">Inserisci il numero di telefono:</string>
+    <string name="registrazionePin">A momenti ti arriverà per SMS il PIN, aggiungilo nella casella qui sotto:</string>
 
 
 </resources>

@@ -2,30 +2,43 @@ package com.example.simello.guanxy;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.simello.classiServer.AuthenticateUserInput;
+import com.example.simello.classiServer.FindUserInput;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.example.simello.registrazione.RegistrazioneTabActivity;
 import com.example.simello.utils.GPSManager;
 import com.example.simello.utils.UpdatePositionReceiver;
 import com.example.simello.utils.utils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 
-
-
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 
 public class GuanxyActivity extends ActionBarActivity
@@ -36,6 +49,8 @@ public class GuanxyActivity extends ActionBarActivity
     private PendingIntent pendingIntent;
     private AlarmManager manager;
     private String batteria = "false";
+    private GPSManager gpsManager;
+    private static User u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,8 @@ public class GuanxyActivity extends ActionBarActivity
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
+        gpsManager = new GPSManager(this);
+
 
         //Serve per evitare di rieseguire la registrazione!!!
         String pin = getIntent().getStringExtra("PIN");
@@ -60,28 +77,32 @@ public class GuanxyActivity extends ActionBarActivity
             SharedPreferences.Editor  editor = prefs.edit();
             //Ci salvo il numero di telefono, cosi se l utente cambia scheda, deve effettuare una nuova registrazione
             //Sorry bro!
-            mPhoneNumber = utils.numeroTelefonoCorrente(this);
-
-            editor.putString("PIN",""+mPhoneNumber);
+            editor.putString("numeroTelefono",getIntent().getStringExtra("numeroTelefono"));
+            editor.putString("PIN",pin);
             editor.apply();
         }
 
 
         //Prendo il numero di telefono
         mPhoneNumber = utils.numeroTelefonoCorrente(this);
-
         String code = prefs.getString("PIN", "PIN");
+
+
         // code.compareTo("PIN") == 0 || code.compareTo(""+mPhoneNumber) != 0  <---- Questp sarà l'if finale
-        if (code.compareTo("PIN") == 0) {
+        if (code.compareTo("PIN") == 0 || mPhoneNumber.compareTo("") == 0) {
             Intent i = new Intent(this, RegistrazioneTabActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
-        } else {
-            String username = prefs.getString("nickname", "");
-            GPSManager gpsManager = new GPSManager(this);
-            Position position = new Position((float) gpsManager.getLatitude(), (float) gpsManager.getLongitude());
-            //Qui basta usare utils.numeroTelefonoCorrente(this); al posto del mio numero lel
-            User.getIstance(username, this, mPhoneNumber, 0, position);
+        }
+        else
+        {
+            if(u == null) {
+                FindUserInput findUserInput = new FindUserInput(utils.numeroTelefonoCorrente(this));
+                connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user/getUser");
+                connectAsyncTask.execute(findUserInput);
+            }
+            else
+                Log.i("User","Non nullo");
         }
 
 
@@ -269,6 +290,106 @@ public class GuanxyActivity extends ActionBarActivity
         super.onWindowFocusChanged(hasFocus);
         utils.connect(hasFocus,this);
 
+    }
+
+    private class connectAsyncTask extends AsyncTask<FindUserInput, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+        connectAsyncTask(String urlPass){
+            url = urlPass;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(GuanxyActivity.this);
+            progressDialog.setMessage("Sto cercando l'utente!");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+        @Override
+        protected String doInBackground(FindUserInput... params) {
+
+            FindUserInput userInput = params[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(userInput);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+                Log.i("OBJECT", s);
+                response = httpclient.execute(request);
+
+                Log.i("Invio","fatto");
+
+
+            }
+
+            catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line ;
+                }
+
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            Log.d("RitornoGuanxy",result);
+
+            return result;
+
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+
+            if( result.compareTo("error") == 0)
+            {
+                //todo qui c'è da gestire il caso in cui non vada a buon fine la connessione x la registrazion
+
+            }
+            else {
+                try {
+                    JSONObject json = new JSONObject(result);
+                    JSONObject user = json.getJSONObject("user");
+                    Position position = new Position(gpsManager.getLatitude(),gpsManager.getLongitude());
+                    u = User.getIstance(user.getString("nickname"), GuanxyActivity.this, mPhoneNumber, user.getInt("point"), position);
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
     }
 
 

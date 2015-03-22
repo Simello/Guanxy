@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -33,6 +34,9 @@ public class utils
 
     }
 
+
+
+
     /**
      * Ritorna il numero di telefono del dispositivo
      * @param context context per ottenere il numero
@@ -40,12 +44,17 @@ public class utils
      */
     public static String numeroTelefonoCorrente(Context context)
     {
-        TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-        mPhoneNumber = tMgr.getLine1Number();
-        Log.i("NumeroTelefono", "" + mPhoneNumber);
-        if(mPhoneNumber == null)
-            mPhoneNumber = "320881462";
-        return mPhoneNumber;
+        SharedPreferences prefs = context.getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+               return prefs.getString("numeroTelefono","");
+
+    }
+
+    public static String pin(Context context)
+    {
+        SharedPreferences prefs = context.getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+        return prefs.getString("PIN","");
 
     }
 
