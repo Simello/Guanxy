@@ -6,6 +6,10 @@ package com.example.simello.guanxy;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -15,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +48,7 @@ import java.io.InputStreamReader;
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
     LinearLayout buses;
+    boolean schermoPiccolo;//true = piccolo;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
@@ -62,6 +68,20 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         Log.i("SW", ""+ metrics.densityDpi);
         Log.i("SW", ""+ metrics.widthPixels);
 
+        //sezione dimensione schermo device in uso
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        Log.i("SCREEN_SIZE", "W:"+width+" H:"+height);
+
+        //flag schermo piccolo (w:480 h:800) o grande
+        if( width == 480 && height == 800 )
+        {
+            //schermo piccolo
+            schermoPiccolo = true;
+        }
 
         fillCountryTable();
 
@@ -175,22 +195,49 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             t1.setTypeface(null, 1);
             b2.setBackground(getResources().getDrawable(R.drawable.bottone_accetta_aiutaglialtri_bozza));
             t1.setTextSize(15);
+            if ( schermoPiccolo == true )
+            {
+                t1.setHeight(280);
+                t1.setTextSize(14);
+            }
+
             b1.setTextSize(15);
 
 
             b1.setGravity(Gravity.CENTER_VERTICAL);
             t1.setGravity(Gravity.LEFT | Gravity.TOP);
+            RelativeLayout.LayoutParams params;
+            if( schermoPiccolo == true )
+            {
+                params = new RelativeLayout.LayoutParams(
+                        160,
+                        50
+                );
+            }
+            else
+            {
+                params = new RelativeLayout.LayoutParams(
+                        350,
+                        120
+                );
+            }
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    350,
-                    120
-            );
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             b2.setLayoutParams(params);
 
 
             // IMPORTANTE PER CENTRARE IL TESTO MODIFICARE IL PRIMO VALORE ( 400 ) IN QUESTO CASO
-            t1.setPadding(410, 90, 80, 50);
+            if( schermoPiccolo == true )
+            {
+                t1.setBackgroundColor(getResources().getColor(R.color.blueScuro));
+                t1.setPadding(205,30,40,25);
+            }
+            else
+            {
+                t1.setPadding(410, 90, 80, 50);
+            }
+
+
             t1.setTextColor(getResources().getColor(R.color.white));
             //b1.setPadding(10,5,10,10);
             b1.setBackgroundColor(getResources().getColor(R.color.blueChiaro));
@@ -198,10 +245,28 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
             //<altro pezzo brutto>
             //forzo la dimensione dello sfondo alla dimensione dell' immagine
-            BitmapDrawable bg = (BitmapDrawable)getResources().getDrawable(R.drawable.sfondo_nuvoletta);
-            BitmapDrawable bgnuovo = new BitmapDrawable( bg.getBitmap());
-            bgnuovo.setTileModeXY(bg.getTileModeX(), bg.getTileModeY());
-            t1.setBackground(bgnuovo);
+            if( schermoPiccolo == true)
+            {
+                BitmapDrawable bg = (BitmapDrawable)getResources().getDrawable(R.drawable.sfondo_nuvoletta);
+
+
+                Bitmap b = (bg).getBitmap();
+                //Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 50, 50, false);
+
+                Matrix m = new Matrix();
+                m.setRectToRect(new RectF(0, 0, b.getWidth(), b.getHeight()), new RectF(0, 0, 200, 200), Matrix.ScaleToFit.CENTER);
+                Bitmap bit2 =  Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
+                BitmapDrawable bd2 = new BitmapDrawable(bit2);
+                t1.setBackground(bd2);
+            }
+            else
+            {
+                BitmapDrawable bg = (BitmapDrawable)getResources().getDrawable(R.drawable.sfondo_nuvoletta);
+                BitmapDrawable bgnuovo = new BitmapDrawable( bg.getBitmap());
+                bgnuovo.setTileModeXY(bg.getTileModeX(), bg.getTileModeY());
+                t1.setBackground(bgnuovo);
+            }
+
             //</altro pezzo brutto>
 /**
  * By default colour of button is black
@@ -209,7 +274,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
             // <quanto so forte>
             b1.setTextColor(getResources().getColor(R.color.biancoChiuso));
             Drawable simelloDble = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
-            simelloDble.setBounds(0,0,80,80);
+            if( schermoPiccolo == false )
+            {
+                simelloDble.setBounds(0,0,80,80);
+            }
+            else
+            {
+                simelloDble.setBounds(0,0,40,40);
+            }
+
             b1.setCompoundDrawables(simelloDble,null,null,null);
             // </quanto so forte>
           /*  b1.setCompoundDrawablesWithIntrinsicBounds(
@@ -248,7 +321,14 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                                 parent.getChildAt(j+1).setVisibility(parent.getChildAt(j + 1).GONE);
                                 parent.getChildAt(j+2).setVisibility(parent.getChildAt(j+2).GONE);
                                 Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
-                                simelloDbleChiuso2.setBounds(0,0,80,80);
+                                if( schermoPiccolo == false )
+                                {
+                                    simelloDbleChiuso2.setBounds(0,0,80,80);
+                                }
+                                else
+                                {
+                                    simelloDbleChiuso2.setBounds(0,0,40,40);
+                                }
                                 x.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
 
 
@@ -283,7 +363,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                                 parent.getChildAt(j).setVisibility(parent.getChildAt(j).VISIBLE);
 
                                 Drawable simelloDbleAperto = getResources().getDrawable(R.drawable.freccia_aperto_sml);
-                                simelloDbleAperto.setBounds(0,0,80,80);
+                                if( schermoPiccolo == false )
+                                {
+                                    simelloDbleAperto.setBounds(0,0,80,80);
+                                }
+                                else
+                                {
+                                    simelloDbleAperto.setBounds(0,0,40,40);
+                                }
+
                                 button.setCompoundDrawables(simelloDbleAperto,null,null,null);
 
                             }
@@ -318,7 +406,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                                         0);     //bottom*/
                                 Log.i("Cambioicona", "");
                                 Drawable simelloDbleChiuso2 = getResources().getDrawable(R.drawable.freccia_chiuso_sml);
-                                simelloDbleChiuso2.setBounds(0,0,80,80);
+                                if( schermoPiccolo == false )
+                                {
+                                    simelloDbleChiuso2.setBounds(0,0,80,80);
+                                }
+                                else
+                                {
+                                    simelloDbleChiuso2.setBounds(0,0,40,40);
+                                }
+
                                 button.setCompoundDrawables(simelloDbleChiuso2,null,null,null);
                                 break;
                             }
