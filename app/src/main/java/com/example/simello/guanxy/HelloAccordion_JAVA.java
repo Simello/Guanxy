@@ -53,6 +53,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
@@ -522,12 +524,15 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 Log.d("Ritorno",result);
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("helpRequest");
+
                 ArrayList<String> listdata = new ArrayList<String>();
+
                 if (jsonArray != null) {
                     for (int i=0;i<jsonArray.length();i++){
                         listdata.add(jsonArray.get(i).toString());
                     }
                 }
+
                 new DatiProvaAccordion(listdata);
 
             } catch (Exception e) {
@@ -615,7 +620,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                     result = result + line ;
                 }
-                Log.d("Ritorno",result);
+                Log.d("RitornoAccetta",result);
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 

@@ -150,7 +150,9 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
                 i.putExtra("idUser",receive.getString("nickname"));
                 i.putExtra("idRichiesta",receive.getInt("id"));
                 i.putExtra("Lat",receive.getDouble("latitude"));
+                Log.i("Lat RCA" ,"" + receive.getDouble("latitude") );
                 i.putExtra("Lon",receive.getDouble("longitude"));
+                Log.i("Lon RCA" , "" +receive.getDouble("longitude"));
             }
             else
             {
