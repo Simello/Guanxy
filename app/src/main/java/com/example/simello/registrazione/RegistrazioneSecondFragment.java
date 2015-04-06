@@ -49,6 +49,8 @@ public class RegistrazioneSecondFragment extends Fragment
         if ( nFint == 5 ){v = inflater.inflate(R.layout.registrazione_second_fragment, container, false);};
 
 
+
+        //asdadsad
         Log.i("PROVALEL", nF);
         return v;
     }
