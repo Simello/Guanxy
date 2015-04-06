@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:text="Gentilezza"
+        android:text="Gratuita"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="60dp"
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Con Guanxy puoi chiedere aiuto ed aiutare le persone attorno a te."
+        android:text="Guanxy è gratuita. E lo sarà sempre."
         android:textColor="@color/white"
         android:gravity="center"
         android:textStyle="bold"

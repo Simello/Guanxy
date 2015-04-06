@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.GPSManager;
@@ -86,7 +85,7 @@ public class MappaFragment extends Fragment
 
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng( gpsManager.getLatitude(), gpsManager.getLongitude());
-        Log.i("PosUser1","Lat: " + gpsManager.getLatitude() + " Lon: " + gpsManager.getLongitude() );
+        Log.i("LatMP","Lat: " + gpsManager.getLatitude() + " Lon: " + gpsManager.getLongitude() );
 
         MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
         primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
@@ -102,7 +101,7 @@ public class MappaFragment extends Fragment
         double posLat = bundle.getDouble("Lat");
         double posLon = bundle.getDouble("Lon");
 
-        Log.i("PosUser2","Lat: " +posLat + " Lon: " + posLon );
+        Log.i("LatMP2","Lat: " +posLat + " Lon: " + posLon );
 
         LatLng posSecondoMarke = new LatLng(posLat, posLon);
         MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(bundle.getString("idUser"));

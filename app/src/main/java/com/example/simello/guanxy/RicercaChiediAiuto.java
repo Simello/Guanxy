@@ -145,12 +145,16 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
 
             if(!help.isNull("userReceive")) {
                 JSONObject receive = help.getJSONObject("userReceive");
+                Log.i("LatRECEI", ""+receive.toString());
                 i = new Intent(RicercaChiediAiuto.this, TabAiutaGliAltri.class);
 
                 i.putExtra("idUser",receive.getString("nickname"));
                 i.putExtra("idRichiesta",receive.getInt("id"));
                 i.putExtra("Lat",receive.getDouble("latitude"));
+                Log.i("LatRCA", ""+receive.getDouble("latitude"));
                 i.putExtra("Lon",receive.getDouble("longitude"));
+
+
             }
             else
             {
