@@ -31,6 +31,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.simello.aiuta.gli.altri.MappaFragment;
 import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.SearchHelpRequestInput;
 import com.example.simello.classiServer.TakingCareHelpReuqestInput;
@@ -52,6 +53,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
@@ -59,7 +62,6 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
     boolean schermoPiccolo;//true = piccolo;
     int corrente;
     ScrollView sw;
-    DatiProvaAccordion x;
     GPSManager gpsManager;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -522,14 +524,16 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 Log.d("Ritorno",result);
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("helpRequest");
+
                 ArrayList<String> listdata = new ArrayList<String>();
+
                 if (jsonArray != null) {
                     for (int i=0;i<jsonArray.length();i++){
                         listdata.add(jsonArray.get(i).toString());
                     }
                 }
-                x = new DatiProvaAccordion(listdata);
-                Log.d("DPA", ""+x.latitudes.get(corrente));
+
+                new DatiProvaAccordion(listdata);
 
             } catch (Exception e) {
                 // Code to handle exception
@@ -593,7 +597,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-              //  Log.i("Lathaj", ""+DatiProvaAccordion.latitudes.get(corrente));
+
                 Log.i("AccettaRichiesta", s);
                 response = httpclient.execute(request);
 
@@ -616,17 +620,14 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                     result = result + line ;
                 }
-
-                Log.d("Ritorno",result);
+                Log.d("RitornoAccetta",result);
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 
                 i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));
                 i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
                 i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
-                Log.i("Lathaj", "valore = "+DatiProvaAccordion.latitudes.get(corrente));
                 i.putExtra("Lon", DatiProvaAccordion.longitudes.get(corrente));
-
 
 
             } catch (Exception e) {

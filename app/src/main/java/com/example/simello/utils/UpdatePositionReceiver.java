@@ -1,12 +1,16 @@
 package com.example.simello.utils;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.simello.classiServer.InsertUserInput;
 import com.example.simello.classiServer.UpdatePositionInput;
+import com.example.simello.guanxy.GuanxyActivity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpResponse;
@@ -33,7 +37,7 @@ public class UpdatePositionReceiver extends BroadcastReceiver
         GPSManager gpsManager = new GPSManager(context);
         if(gpsManager.canGetLocation())
         {
-            UpdatePositionInput updatePositionInput = new UpdatePositionInput(idUser,  gpsManager.getLatitude(),  gpsManager.getLongitude());
+            UpdatePositionInput updatePositionInput = new UpdatePositionInput(idUser, gpsManager.getLatitude(),  gpsManager.getLongitude());
             connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user/updatePosition");
             connectAsyncTask.execute(updatePositionInput);
         }

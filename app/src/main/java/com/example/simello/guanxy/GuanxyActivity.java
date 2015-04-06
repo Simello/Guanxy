@@ -265,13 +265,14 @@ public class GuanxyActivity extends ActionBarActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+/*
         //todo da lasciare per testare la registrazione
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("PIN","PIN");
         editor.apply();
+        */
 
         overridePendingTransition(0, 0);
      //Se sono già a Guanxy, esco
