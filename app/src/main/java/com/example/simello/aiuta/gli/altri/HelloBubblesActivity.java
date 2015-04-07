@@ -41,9 +41,7 @@ public class HelloBubblesActivity extends Fragment {
 
         Richiesta richiesta = Richiesta.getRichiesta();
 
-        Log.i("Bundle", "idRichiesta" + richiesta.getIdRichiesta());
         Gc = new GestoreChat( richiesta.getIdRichiesta());
-
 
 
         adapter = new DiscussArrayAdapter(getActivity(), R.layout.listitem_discuss);

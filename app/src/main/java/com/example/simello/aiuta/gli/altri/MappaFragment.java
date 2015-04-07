@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.GPSManager;
@@ -97,10 +98,10 @@ public class MappaFragment extends Fragment
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
         mMap.moveCamera(cu);
 
-
+        Richiesta richiesta = Richiesta.getRichiesta();
         Bundle bundle = getActivity().getIntent().getExtras();
-        double posLat = bundle.getDouble("Lat");
-        double posLon = bundle.getDouble("Lon");
+        double posLat = richiesta.getLat();
+        double posLon = richiesta.getLon();
 
         Log.i("LatMP2","Lat: " +posLat + " Lon: " + posLon );
 
