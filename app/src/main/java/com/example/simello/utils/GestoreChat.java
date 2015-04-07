@@ -17,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 
 /**
  * Created by simello on 07/04/15.
@@ -24,16 +25,16 @@ import java.io.InputStreamReader;
 public class GestoreChat
 {
     String id_usr1;
-    String id_richiesta;
-    public GestoreChat(String id_richiesta)
+    BigInteger idRichiesta;
+    public GestoreChat(BigInteger id_richiesta)
     {
         this.id_usr1 = User.getUser().getIdUser(); //prende l'user dell'utente del cellulare
-        this.id_richiesta=id_richiesta;
+        this.idRichiesta=id_richiesta;
     }
 
     public void nuovoMessaggio(String testoMessaggio)
     {
-        NewMessageInput nmi = new NewMessageInput(id_richiesta, id_usr1, testoMessaggio);
+        NewMessageInput nmi = new NewMessageInput(idRichiesta.toString() , id_usr1, testoMessaggio);
         connectAsyncTaskNewMessage connectAsyncTaskNewMessage = new connectAsyncTaskNewMessage("http://5.249.151.38:8080/guanxy/newChat");
         connectAsyncTaskNewMessage.execute(nmi);
 

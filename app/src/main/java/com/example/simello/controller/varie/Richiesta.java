@@ -33,5 +33,26 @@ public class Richiesta
         return richiesta;
     }
 
+    public String getIdUser()
+    {
+        return idUser;
+    }
+
+    public BigInteger getIdRichiesta()
+    {
+        return idRichiesta;
+    }
+
+    public double getLat()
+    {
+        return lat;
+    }
+
+    public double getLon()
+    {
+        return lon;
+    }
+
+
 
 }

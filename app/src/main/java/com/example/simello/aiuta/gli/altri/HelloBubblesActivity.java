@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.GestoreChat;
 
@@ -38,10 +39,10 @@ public class HelloBubblesActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_discuss, container, false);
         lv = (ListView)view.findViewById(R.id.listView1);
 
+        Richiesta richiesta = Richiesta.getRichiesta();
 
-        Bundle bndl = getActivity().getIntent().getExtras();
-        Log.i("Bundle", "idRichiesta" + bndl.getString("idRichiesta"));
-        Gc = new GestoreChat( bndl.getString("idRichiesta"));
+        Log.i("Bundle", "idRichiesta" + richiesta.getIdRichiesta());
+        Gc = new GestoreChat( richiesta.getIdRichiesta());
 
 
 
