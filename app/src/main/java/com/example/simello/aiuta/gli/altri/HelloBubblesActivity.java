@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.simello.guanxy.R;
+import com.example.simello.utils.GestoreChat;
 
 /**
  * Created by Sunfury e simello on 04/03/15.
@@ -22,6 +23,7 @@ public class HelloBubblesActivity extends Fragment {
     private String ipsum;
     private EditText editText1;
     private Button btnSend;
+    private GestoreChat Gc;
 
 
     public static HelloBubblesActivity newIstance()
@@ -35,6 +37,12 @@ public class HelloBubblesActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_discuss, container, false);
         lv = (ListView)view.findViewById(R.id.listView1);
 
+
+        Bundle bndl = getActivity().getIntent().getExtras();
+        Gc = new GestoreChat( bndl.getString("idRichiesta"));
+
+
+
         adapter = new DiscussArrayAdapter(getActivity(), R.layout.listitem_discuss);
         lv.setAdapter(adapter);
 
@@ -45,6 +53,7 @@ public class HelloBubblesActivity extends Fragment {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
                     adapter.add(new OneComment(false, editText1.getText().toString()));
+
                     receiveMessage();
                     editText1.setText("");
                     return true;
@@ -58,6 +67,7 @@ public class HelloBubblesActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.add(new OneComment(false, editText1.getText().toString()));
+                Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
                 receiveMessage();
                 editText1.setText("");
                 lv.setSelection(lv.getAdapter().getCount()-1);
@@ -66,7 +76,6 @@ public class HelloBubblesActivity extends Fragment {
 
         return  view;
     }
-
 
 
 

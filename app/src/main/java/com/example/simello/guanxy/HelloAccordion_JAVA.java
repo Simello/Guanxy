@@ -31,7 +31,6 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.example.simello.aiuta.gli.altri.MappaFragment;
 import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.SearchHelpRequestInput;
 import com.example.simello.classiServer.TakingCareHelpReuqestInput;
@@ -53,8 +52,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class HelloAccordion_JAVA extends ActionBarActivity {
@@ -624,7 +621,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 
-                i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));
+                i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));//id user e' il nickname isi
                 i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
                 i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
                 i.putExtra("Lon", DatiProvaAccordion.longitudes.get(corrente));
