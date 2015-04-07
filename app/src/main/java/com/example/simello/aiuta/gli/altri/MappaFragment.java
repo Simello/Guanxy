@@ -97,6 +97,7 @@ public class MappaFragment extends Fragment
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(posPrimoMarke, 17);
         mMap.moveCamera(cu);
 
+
         Bundle bundle = getActivity().getIntent().getExtras();
         double posLat = bundle.getDouble("Lat");
         double posLon = bundle.getDouble("Lon");
