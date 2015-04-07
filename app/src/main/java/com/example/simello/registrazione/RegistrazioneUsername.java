@@ -41,6 +41,7 @@ public class RegistrazioneUsername extends Activity
     private String sUsername = "";
     private String numeroTelefono = "";
     private String punti = "";
+    private String prefix = "";
 
 
     @Override
@@ -72,11 +73,19 @@ public class RegistrazioneUsername extends Activity
                     return;
                 }
 
+                EditText prefixEdit = (EditText) findViewById(R.id.prefix);
+
+                prefix = prefixEdit.getText().toString();
+                if (prefix.matches("")) {
+                    Toast.makeText(RegistrazioneUsername.this, "Non hai inserito un preefisso corretto", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
 
                 GPSManager gpsManager = new GPSManager(RegistrazioneUsername.this);
                 //Creo l'oggetto
-                InsertUserInput userInput = new InsertUserInput(numeroTelefono, "39" ,sUsername,gpsManager.getLatitude(),gpsManager.getLongitude());
+                InsertUserInput userInput = new InsertUserInput(numeroTelefono, prefix ,sUsername,gpsManager.getLatitude(),gpsManager.getLongitude());
 
                 //Creo un oggettto di tipo connectAsyncTask (con Dialog rotella) e gli passo l url dello script
                 connectAsyncTask connection = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user");

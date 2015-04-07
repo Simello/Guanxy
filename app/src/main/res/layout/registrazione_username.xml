@@ -43,8 +43,9 @@
         android:padding="10dp"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/numeroTelefono"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
         android:layout_marginTop="28dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
@@ -70,7 +71,21 @@
         android:background="@drawable/edit_text_bordi_tondi"
 
         android:layout_below="@+id/textNumeroTelefono"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/NewUsername"
+        android:gravity="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="3"
+        android:id="@+id/prefix"
+        android:background="@drawable/edit_text_bordi_tondi"
+
+        android:layout_above="@+id/buttonInizia"
+        android:layout_toStartOf="@+id/buttonInizia"
+        android:hint="+39"
+        android:gravity="center" />
 
 
 </RelativeLayout>
