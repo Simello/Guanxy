@@ -76,7 +76,7 @@ public class RegistrazioneUsername extends Activity
 
                 GPSManager gpsManager = new GPSManager(RegistrazioneUsername.this);
                 //Creo l'oggetto
-                InsertUserInput userInput = new InsertUserInput(numeroTelefono ,sUsername,gpsManager.getLatitude(),gpsManager.getLongitude());
+                InsertUserInput userInput = new InsertUserInput(numeroTelefono, "39" ,sUsername,gpsManager.getLatitude(),gpsManager.getLongitude());
 
                 //Creo un oggettto di tipo connectAsyncTask (con Dialog rotella) e gli passo l url dello script
                 connectAsyncTask connection = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user");

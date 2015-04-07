@@ -7,7 +7,7 @@ public final class InsertHelpRequestInput extends BaseInput {
 
     private static final long serialVersionUID = -2794341848919295083L;
 
-    private String userId;
+    private String idUser;
     private double latitude;
     private double longitude;
     private String message;
@@ -15,14 +15,14 @@ public final class InsertHelpRequestInput extends BaseInput {
     public InsertHelpRequestInput(){};
 
     public InsertHelpRequestInput(String userId, double latitude, double longitude, String message) {
-        this.userId = userId;
+        this.idUser = userId;
         this.latitude = latitude;
         this.longitude = longitude;
         this.message = message;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getIdUser() {
+        return idUser;
     }
 
     public double getLatitude() {
@@ -35,5 +35,10 @@ public final class InsertHelpRequestInput extends BaseInput {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public String toString() {
+        return "InsertHelpRequestInput [idUser=" + idUser + ", latitude=" + latitude + ", longitude=" + longitude + ", message=" + message + "]";
     }
 }

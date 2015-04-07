@@ -10,19 +10,24 @@ public class FindUserInput extends BaseInput {
      */
     private static final long serialVersionUID = -8886008247570971800L;
 
-    private String id;
+    private String idUser;
 
-    public FindUserInput(String id)
+    public FindUserInput(String idUser)
     {
-        this.id = id;
+        this.idUser = idUser;
     }
 
-    public String getId() {
-        return id;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setId( String id ) {
-        this.id = id;
+    public void setIdUser( String idUser ) {
+        this.idUser = idUser;
+    }
+
+    @Override
+    public String toString() {
+        return "FindUserInput [idUser=" + idUser + "]";
     }
 
 }

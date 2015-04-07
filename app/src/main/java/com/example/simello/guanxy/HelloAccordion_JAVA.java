@@ -67,6 +67,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
         gpsManager = new GPSManager(this);
+        Log.i("Lat", "Lat: " + gpsManager.getLatitude());
         SearchHelpRequestInput userResearcher = new SearchHelpRequestInput(user.getIdUser(),gpsManager.getLatitude(),gpsManager.getLongitude());
         connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/searchRequest");
         connectAsyncTask.execute(userResearcher);

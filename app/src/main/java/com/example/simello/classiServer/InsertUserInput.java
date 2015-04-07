@@ -7,26 +7,28 @@ public class InsertUserInput extends BaseInput {
 
     private static final long serialVersionUID = 1996672327971317596L;
 
-    private String userId;
+    private String idUser;
     private String nickname;
     private double latitude;
     private double longitude;
+    private String prefix;
 
     public InsertUserInput() {}
 
-    public InsertUserInput(String userId, String nickname, double latitude, double longitude) {
-        this.userId = userId;
+    public InsertUserInput(String idUser, String prefix , String nickname, double latitude, double longitude) {
+        this.idUser = idUser;
+        this.prefix = prefix;
         this.nickname = nickname;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setIdUser( String idUser ) {
+        this.idUser = idUser;
     }
 
     public String getNickname() {
@@ -37,19 +39,32 @@ public class InsertUserInput extends BaseInput {
         this.nickname = nickname;
     }
 
-    public double getLatitude() {
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix( String prefix ) {
+        this.prefix = prefix;
+    }
+
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude( Double latitude ) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude( Double longitude ) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "InsertUserInput [idUser=" + idUser + ", nickname=" + nickname + ", prefix=" + prefix + ", latitude=" + latitude + ", longitude=" + longitude + "]";
     }
 }
