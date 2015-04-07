@@ -25,6 +25,7 @@ public class Richiesta
     public static void newRichiesta(String idUser, String idRichiesta , double lat, double lon)
     {
         richiesta = new Richiesta(idUser, idRichiesta, lat, lon);
+
     }
 
 
