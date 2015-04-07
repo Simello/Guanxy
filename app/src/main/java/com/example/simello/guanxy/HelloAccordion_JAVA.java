@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.SearchHelpRequestInput;
 import com.example.simello.classiServer.TakingCareHelpReuqestInput;
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.controller.varie.User;
 import com.example.simello.utils.GPSManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -620,8 +621,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 Log.d("RitornoAccetta",result);
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
-
-
+                //Creo l'oggetto richiesta
+                Richiesta.newRichiesta(DatiProvaAccordion.headers.get(corrente), userAccepter.getIdHelpRequest() , DatiProvaAccordion.latitudes.get(corrente), DatiProvaAccordion.longitudes.get(corrente));
 
                 i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));//id user e' il nickname isi
                 i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());

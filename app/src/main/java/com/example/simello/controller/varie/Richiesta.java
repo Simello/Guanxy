@@ -13,16 +13,16 @@ public class Richiesta
     private double lon;
     static Richiesta richiesta;
 
-    public Richiesta(String idUser, String idRichiesta , double lat, double lon)
+    public Richiesta(String idUser, BigInteger idRichiesta , double lat, double lon)
     {
         this.idUser = idUser;
-        this.idRichiesta = new BigInteger(idRichiesta);
+        this.idRichiesta = idRichiesta;
         this.lat = lat;
         this.lon = lon;
 
     }
 
-    public static void newRichiesta(String idUser, String idRichiesta , double lat, double lon)
+    public static void newRichiesta(String idUser, BigInteger idRichiesta , double lat, double lon)
     {
         richiesta = new Richiesta(idUser, idRichiesta, lat, lon);
 
