@@ -11,6 +11,7 @@ public class Richiesta
     private BigInteger idRichiesta;
     private double lat;
     private double lon;
+    static Richiesta richiesta;
 
     public Richiesta(String idUser, String idRichiesta , double lat, double lon)
     {
@@ -19,6 +20,11 @@ public class Richiesta
         this.lat = lat;
         this.lon = lon;
 
+    }
+
+    public static void newRichiesta(String idUser, String idRichiesta , double lat, double lon)
+    {
+        richiesta = new Richiesta(idUser, idRichiesta, lat, lon);
     }
 
 

@@ -621,6 +621,8 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
 
+
+
                 i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));//id user e' il nickname isi
                 i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
                 i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
