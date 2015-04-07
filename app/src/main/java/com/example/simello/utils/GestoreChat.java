@@ -32,6 +32,13 @@ public class GestoreChat
         this.idRichiesta=id_richiesta;
     }
 
+    public void controlla()
+    {
+        //
+    }
+
+
+
     public void nuovoMessaggio(String testoMessaggio)
     {
         NewMessageInput nmi = new NewMessageInput(idRichiesta.toString() , id_usr1, testoMessaggio);
