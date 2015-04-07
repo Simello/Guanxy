@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.CancelHelpRequestInput;
 import com.example.simello.classiServer.FindHelpRequestInput;
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.controller.varie.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -148,12 +149,15 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
                 JSONObject receive = help.getJSONObject("userReceive");
                 i = new Intent(RicercaChiediAiuto.this, TabAiutaGliAltri.class);
 
+                Richiesta.newRichiesta(receive.getString("nickname"), BigInteger.valueOf(receive.getInt("id")),receive.getDouble("latitude"),receive.getDouble("longitude"));
+/*
                 i.putExtra("idUser",receive.getString("nickname"));
                 i.putExtra("idRichiesta",receive.getInt("id"));
                 i.putExtra("Lat",receive.getDouble("latitude"));
                 Log.i("Lat RCA" ,"" + receive.getDouble("latitude") );
                 i.putExtra("Lon",receive.getDouble("longitude"));
                 Log.i("Lon RCA" , "" +receive.getDouble("longitude"));
+                */
             }
             else
             {

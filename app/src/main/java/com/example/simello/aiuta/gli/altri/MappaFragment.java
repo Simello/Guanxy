@@ -106,7 +106,8 @@ public class MappaFragment extends Fragment
         Log.i("LatMP2","Lat: " +posLat + " Lon: " + posLon );
 
         LatLng posSecondoMarke = new LatLng(posLat, posLon);
-        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(bundle.getString("idUser"));
+        //getIdUser è il nickname in questo caso ------>
+        MarkerOptions secondoMark = new MarkerOptions().position(posSecondoMarke).title(richiesta.getIdUser());
         secondoMark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
         mMap.addMarker(secondoMark);
 
