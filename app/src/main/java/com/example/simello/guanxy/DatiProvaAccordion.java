@@ -26,6 +26,10 @@ public class DatiProvaAccordion
         {
 
             String [] parts = dati.get(i).split(",");
+            for(int j = 0; j < parts.length ; j++)
+            {
+                System.out.println("j = " + j + " parts " + parts[j]);
+            }
 
             headers.add(parts[7].replaceAll("\"",""));
             texts.add(parts[3].replaceAll("\"",""));
@@ -33,8 +37,8 @@ public class DatiProvaAccordion
             parts[16] = parts[16].replaceAll("\"","").trim();
             parts[17] = parts[17].replaceAll("\"","").trim();
 
-            latitudes.add(Double.valueOf(parts[16]));
-            longitudes.add(Double.valueOf(parts[17]));
+            latitudes.add(Double.valueOf(parts[11]));
+            longitudes.add(Double.valueOf(parts[12]));
         }
 
 

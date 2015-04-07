@@ -99,7 +99,6 @@ public class MappaFragment extends Fragment
         mMap.moveCamera(cu);
 
         Richiesta richiesta = Richiesta.getRichiesta();
-        Bundle bundle = getActivity().getIntent().getExtras();
         double posLat = richiesta.getLat();
         double posLon = richiesta.getLon();
 
