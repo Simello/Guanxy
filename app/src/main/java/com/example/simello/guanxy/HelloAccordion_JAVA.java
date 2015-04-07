@@ -621,6 +621,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                 Log.d("RitornoAccetta",result);
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
+
                 //Creo l'oggetto richiesta
                 Richiesta.newRichiesta(DatiProvaAccordion.headers.get(corrente), userAccepter.getIdHelpRequest() , DatiProvaAccordion.latitudes.get(corrente), DatiProvaAccordion.longitudes.get(corrente));
 
