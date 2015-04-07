@@ -28,5 +28,10 @@ public class Richiesta
 
     }
 
+    public static Richiesta getRichiesta()
+    {
+        return richiesta;
+    }
+
 
 }
