@@ -1,8 +1,8 @@
 package com.example.simello.aiuta.gli.altri;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +33,7 @@ public class HelloBubblesActivity extends Fragment {
         HelloBubblesActivity hba = new HelloBubblesActivity();
         return hba;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -75,10 +76,23 @@ public class HelloBubblesActivity extends Fragment {
             }
         });
 
+        controllaMessaggi();
         return  view;
     }
 
 
+    private void controllaMessaggi()
+    {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Gc.controlla();
+            }
+        };
+        Handler hdl = new Handler();
+        hdl.postDelayed(runnable,100);
+
+    }
 
     private void receiveMessage(){
         String msg = editText1.getText().toString();
