@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.classiServer.CancelHelpRequestInput;
 import com.example.simello.classiServer.FindHelpRequestInput;
+import com.example.simello.controller.varie.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpResponse;
@@ -44,7 +45,7 @@ public class RicercaChiediAiuto extends Activity
 
         String idString = getIntent().getStringExtra("idRichiesta");
         id = new BigInteger(idString);
-        findHelpRequestInput = new FindHelpRequestInput(id);
+        findHelpRequestInput = new FindHelpRequestInput(id, User.getUser().getIdUser());
 
         bar = (ProgressBar) this.findViewById(R.id.progressBar);
         bar.setVisibility(View.VISIBLE);
@@ -57,7 +58,7 @@ public class RicercaChiediAiuto extends Activity
             public void onClick(View v) {
                 if(!progressTask.isCancelled())
                     progressTask.cancel(true);
-                CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id);
+                CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id, User.getUser().getIdUser());
                 ProgressTaskCancella progressTaskCancella = new ProgressTaskCancella("http://5.249.151.38:8080/guanxy/cancelRequest");
                 progressTaskCancella.execute(cancelHelpRequestInput);
 
@@ -75,7 +76,7 @@ public class RicercaChiediAiuto extends Activity
         overridePendingTransition(0, 0);
         if(!progressTask.isCancelled())
             progressTask.cancel(true);
-        CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id);
+        CancelHelpRequestInput cancelHelpRequestInput = new CancelHelpRequestInput(id, User.getUser().getIdUser());
         ProgressTaskCancella progressTaskCancella = new ProgressTaskCancella("http://5.249.151.38:8080/guanxy/cancelRequest");
         progressTaskCancella.execute(cancelHelpRequestInput);
 

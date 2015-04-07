@@ -8,19 +8,34 @@ public class FindHelpRequestInput extends BaseInput {
      *
      */
     private static final long serialVersionUID = 4971280391495882185L;
-    private BigInteger id;
+    private BigInteger idHelp;
+    private String idUser;
 
-    public FindHelpRequestInput(BigInteger id)
+    public FindHelpRequestInput(BigInteger idHelp, String idUser)
     {
-        this.id = id;
+        this.idHelp = idHelp;
+        this.idUser = idUser;
     }
 
-    public BigInteger getId() {
-        return id;
+    public BigInteger getIdHelp() {
+        return idHelp;
     }
 
-    public void setId( BigInteger id ) {
-        this.id = id;
+    public void setIdHelp( BigInteger idHelp ) {
+        this.idHelp = idHelp;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser( String idUser ) {
+        this.idUser = idUser;
+    }
+
+    @Override
+    public String toString() {
+        return "FindHelpRequestInput [idHelp=" + idHelp + ", idUser=" + idUser + "]";
     }
 
 }
