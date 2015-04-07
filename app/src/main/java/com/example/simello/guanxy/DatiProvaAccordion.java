@@ -26,14 +26,15 @@ public class DatiProvaAccordion
         {
 
             String [] parts = dati.get(i).split(",");
+
             headers.add(parts[7].replaceAll("\"",""));
             texts.add(parts[3].replaceAll("\"",""));
             ids.add(parts[6].replaceAll("\"",""));
-            parts[14] = parts[14].replaceAll("\"","").trim();
-            parts[15] = parts[15].replaceAll("\"","").trim();
+            parts[16] = parts[16].replaceAll("\"","").trim();
+            parts[17] = parts[17].replaceAll("\"","").trim();
 
-            latitudes.add(Double.valueOf(parts[14]));
-            longitudes.add(Double.valueOf(parts[15]));
+            latitudes.add(Double.valueOf(parts[16]));
+            longitudes.add(Double.valueOf(parts[17]));
         }
 
 

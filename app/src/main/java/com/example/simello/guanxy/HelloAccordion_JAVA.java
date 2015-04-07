@@ -619,7 +619,6 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
                     result = result + line ;
                 }
                 Log.d("RitornoAccetta",result);
-                Log.i("AccettoRic", DatiProvaAccordion.headers.get(corrente) +" " + userAccepter.getIdHelpRequest()+ " " + DatiProvaAccordion.latitudes.get(corrente) + " " + DatiProvaAccordion.longitudes.get(corrente));
 
 
                 i = new Intent(HelloAccordion_JAVA.this, TabAiutaGliAltri.class);
