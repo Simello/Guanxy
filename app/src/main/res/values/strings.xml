@@ -58,6 +58,15 @@
     <string name="cosaFare">Che devo fare?</string>
     <string name="registraNumero">Inserisci il numero di telefono:</string>
     <string name="registrazionePin">A momenti ti arriverà per SMS il PIN, aggiungilo nella casella qui sotto:</string>
+    <string name="registrazione_first">L\'app della gentilezza, gratuita e sicura.</string>
+    <string name="Gentilezza">Gentilezza</string>
+    <string name="Second_fragment">Con Guanxy puoi chiedere aiuto ed aiutare le persone attorno a te.</string>
+    <string name="premiRegistrazione">Premi</string>
+    <string name="TerzoFragment">Quando aiuti un utente, vinci dei punti. Ogni anno, i 100 utenti che hanno raccolto più punti vincono un premio.</string>
+    <string name="Gratuita">Gratuita</string>
+    <string name="Quarto_fragment">Guanxy è gratuita.\nE lo sarà sempre.</string>
+    <string name="Sicura">Sicura</string>
+    <string name="Quinto_fragment">Ad ogni utente corrisponde un numero di cellulare e quindi una persona rintracciabile. Questo espediente, assieme al pulsante antipanico presente nell\'app, garantisce a massima sicurezza.</string>
 
 
 </resources>

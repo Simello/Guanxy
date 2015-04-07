@@ -12,10 +12,11 @@
         android:text="Guanxy"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="70dp"
+        android:textSize="60sp"
         android:textStyle="bold"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
 
     <ImageView
         android:layout_width="fill_parent"
@@ -27,11 +28,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="L'app della gentilezza, gratuita e sicura."
+        android:text="@string/registrazione_first"
         android:textColor="@color/white"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="300dp"/>
