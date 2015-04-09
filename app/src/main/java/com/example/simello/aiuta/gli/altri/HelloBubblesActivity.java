@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
@@ -69,11 +70,15 @@ public class HelloBubblesActivity extends Fragment {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.add(new OneComment(false, editText1.getText().toString()));
-                Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
-                receiveMessage();
-                editText1.setText("");
-                lv.setSelection(lv.getAdapter().getCount()-1);
+                //Se il campo testo è vuoto, non invia isi
+                if(editText1.getText().toString().trim().length() > 0) {
+                    adapter.add(new OneComment(false, editText1.getText().toString()));
+                    Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
+                    receiveMessage();
+                    editText1.setText("");
+                    lv.setSelection(lv.getAdapter().getCount() - 1);
+
+                }
             }
         });
 
