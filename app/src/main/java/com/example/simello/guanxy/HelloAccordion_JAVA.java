@@ -65,6 +65,7 @@ public class HelloAccordion_JAVA extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accordion_dinamico);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        DatiProvaAccordion.clean();
         User user = User.getUser();
         //creo l oggetto per cercare le richieste
         gpsManager = new GPSManager(this);
