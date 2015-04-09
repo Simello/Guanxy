@@ -3,6 +3,7 @@ package com.example.simello.utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.simello.classiServer.MessageByTimeInput;
 import com.example.simello.classiServer.NewMessageInput;
 import com.example.simello.controller.varie.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import org.apache.http.protocol.HTTP;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.Date;
 
 /**
  * Created by simello on 07/04/15.
@@ -34,7 +36,12 @@ public class GestoreChat
 
     public void controlla()
     {
+        Date time = new Date();
+        Log.i("Date", time.toString());
         //
+        MessageByTimeInput messageByTimeInput = new MessageByTimeInput(idRichiesta, id_usr1, time);
+        connectAsyncTaskCheck connectAsyncTaskCheck = new connectAsyncTaskCheck("http://5.249.151.38:8080/guanxy/messageFromTime");
+        connectAsyncTaskCheck.execute(messageByTimeInput);
     }
 
 
@@ -71,28 +78,17 @@ public class GestoreChat
             try {
                 httpclient = new DefaultHttpClient();
                 request = new HttpPost(url);
-
                 ObjectMapper objectWriter = new ObjectMapper();
-
                 String s = objectWriter.writeValueAsString(userAccepter);
                 StringEntity se = new StringEntity(s);
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-
-
-                Log.i("AccettaRichiesta", s);
                 response = httpclient.execute(request);
-
-                Log.i("Invio","fatto");
-
-
             }
-
             catch (Exception e) {
                 // Code to handle exception
                 result = "error";
             }
-
             // response code
             try {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(
@@ -102,25 +98,75 @@ public class GestoreChat
 
                     result = result + line ;
                 }
-                Log.d("RitornoAccetta", result);
-
-
+                Log.d("RitornoNewMex", result);
             } catch (Exception e) {
                 // Code to handle exception
                 result = "error";
             }
-
-
             return result;
-
         }
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+        }
+    }
 
 
+    private class connectAsyncTaskCheck extends AsyncTask<MessageByTimeInput, Void, String> {
 
+        String url;
+        connectAsyncTaskCheck(String urlPass){
+            url = urlPass;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(MessageByTimeInput... params) {
 
+            MessageByTimeInput userAccepter = params[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+                ObjectMapper objectWriter = new ObjectMapper();
+                String s = objectWriter.writeValueAsString(userAccepter);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                Log.i("AccettaRichiesta", s);
+                response = httpclient.execute(request);
+                Log.i("Invio","fatto");
+            }
+            catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line ;
+                }
+                Log.d("RitornoAccettaCheck", result);
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+            return result;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
         }
     }
 

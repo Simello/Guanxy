@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.simello.guanxy.R;
+import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
@@ -41,7 +42,7 @@ public class TabAiutaGliAltri extends FragmentActivity
 
         mViewPager.setAdapter(mMyFragmentPagerAdapter);
 
-        final TitlePageIndicator mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        final TabPageIndicator mIndicator = (TabPageIndicator)findViewById(R.id.indicator);
         mIndicator.setViewPager(mViewPager);
 
         mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

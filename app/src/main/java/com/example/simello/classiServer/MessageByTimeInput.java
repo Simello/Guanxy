@@ -19,6 +19,13 @@ public class MessageByTimeInput extends BaseInput {
     private String idUser1;
     private Date time;
 
+    public MessageByTimeInput(BigInteger idHelp, String idUser1, Date time)
+    {
+        this.idHelp = idHelp;
+        this.idUser1 = idUser1;
+        this.time = time;
+    }
+
     public BigInteger getIdHelp() {
         return idHelp;
     }

@@ -3,6 +3,7 @@ package com.example.simello.aiuta.gli.altri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,19 +81,38 @@ public class HelloBubblesActivity extends Fragment {
         return  view;
     }
 
-
+    private boolean stop = false;
+    private Thread thread;
     private void controllaMessaggi()
     {
-        Runnable runnable = new Runnable() {
-            @Override
+     thread = new Thread(new Runnable(){
             public void run() {
-                Gc.controlla();
-            }
-        };
-        Handler hdl = new Handler();
-        hdl.postDelayed(runnable,100);
+                // TODO Auto-generated method stub
+                while(!stop)
+                {
+                    try {
+                        Gc.controlla();
+                        Thread.sleep(5000);
 
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        });
+        thread.start();
+         //Ok fatto!
     }
+    @Override
+    public void onDetach()
+    {
+        stop = true;
+        super.onDetach();
+    }
+
 
     private void receiveMessage(){
         String msg = editText1.getText().toString();

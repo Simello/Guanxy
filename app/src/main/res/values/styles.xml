@@ -8,6 +8,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
 
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
 
     </style>
     <!-- Base application theme. -->
@@ -29,6 +30,29 @@
         <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
         <item name="android:textOn"></item>
         <item name="android:textOff"></item>
+    </style>
+
+
+
+    <style name="CustomTabPageIndicator">
+        <item name="footerColor">@color/blueChiaro</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="footerLineHeight">2dp</item>
+        <item name="footerIndicatorHeight">3dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:dividerPadding">0dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/divider</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+        <item name="selectedColor">@color/blueScuro</item>
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="selectedBold">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:typeface">normal</item>
+
     </style>
 
 </resources>
