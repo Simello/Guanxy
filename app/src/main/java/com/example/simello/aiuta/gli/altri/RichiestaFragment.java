@@ -26,7 +26,7 @@ public class RichiestaFragment extends Fragment{
         Richiesta richiesta = Richiesta.getRichiesta();
 
         TextView finisciRichiesta = (TextView) v.findViewById(R.id.textCompletaRichiesta);
-        finisciRichiesta.setText("Conferma che \n" + richiesta.getIdUser() + "\nti ha aiutato!");
+        finisciRichiesta.setText(getResources().getString(R.string.RichiestaPartOne) + richiesta.getIdUser() + "\n" + getResources().getString(R.string.RichiestaPartTwo));
         return v;
 
     }
