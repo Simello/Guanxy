@@ -18,11 +18,11 @@
     <ImageButton
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:id="@+id/buttonCosaFare"
-        android:layout_marginStart="20dp"
+        android:id="@+id/buttonCompletaRichiesta"
+        android:layout_marginStart="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:background="@drawable/button_cosa_fare"
+        android:background="@drawable/button_completa_richiesta"
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true" />
 
@@ -31,9 +31,9 @@
         android:layout_height="120dp"
         android:id="@+id/buttonSegnalaAbuso"
         android:background="@drawable/button_segnala_abuso"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="56dp"
-        android:layout_below="@+id/buttonCosaFare"
+        android:layout_below="@+id/buttonCompletaRichiesta"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -62,7 +62,7 @@
         android:textSize="25sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_toEndOf="@+id/buttonCosaFare"
-        android:layout_alignBottom="@+id/buttonCosaFare"
-        android:layout_alignTop="@+id/buttonCosaFare" />
+        android:layout_toEndOf="@+id/buttonCompletaRichiesta"
+        android:layout_alignBottom="@+id/buttonCompletaRichiesta"
+        android:layout_alignTop="@+id/buttonCompletaRichiesta" />
 </RelativeLayout>
