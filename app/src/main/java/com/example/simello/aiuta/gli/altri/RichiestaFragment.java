@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
 
 /**
@@ -21,6 +23,10 @@ public class RichiestaFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.fragment_richiesta, container, false);
+        Richiesta richiesta = Richiesta.getRichiesta();
+
+        TextView finisciRichiesta = (TextView) v.findViewById(R.id.textCompletaRichiesta);
+        finisciRichiesta.setText("Conferma che \n" + richiesta.getIdUser() + "\nti ha aiutato!");
         return v;
 
     }
