@@ -3,7 +3,9 @@ package com.example.simello.utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.simello.classiServer.Message;
 import com.example.simello.classiServer.MessageByTimeInput;
+import com.example.simello.classiServer.MessageByTimeOutput;
 import com.example.simello.classiServer.NewMessageInput;
 import com.example.simello.controller.varie.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,11 +17,16 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by simello on 07/04/15.
@@ -28,22 +35,34 @@ public class GestoreChat
 {
     String id_usr1;
     BigInteger idRichiesta;
+    HashMap<Double, String> messages;
+
     public GestoreChat(BigInteger id_richiesta)
     {
         this.id_usr1 = User.getUser().getIdUser(); //prende l'user dell'utente del cellulare
         this.idRichiesta=id_richiesta;
+        this.messages = new HashMap<Double, String>();
     }
 
-    public void controlla()
+    public boolean controlla()
     {
         Date time = new Date();
-        Log.i("Date", time.toString());
-        //
         MessageByTimeInput messageByTimeInput = new MessageByTimeInput(idRichiesta, id_usr1, time);
         connectAsyncTaskCheck connectAsyncTaskCheck = new connectAsyncTaskCheck("http://5.249.151.38:8080/guanxy/messageFromTime");
         connectAsyncTaskCheck.execute(messageByTimeInput);
+
+        if(messages.size() > 0)
+        {
+            return true;
+        }
+        return false;
+
     }
 
+    public HashMap<Double,String> getMessages()
+    {
+        return messages;
+    }
 
 
     public void nuovoMessaggio(String testoMessaggio)
@@ -51,6 +70,7 @@ public class GestoreChat
         NewMessageInput nmi = new NewMessageInput(idRichiesta.toString() , id_usr1, testoMessaggio);
         connectAsyncTaskNewMessage connectAsyncTaskNewMessage = new connectAsyncTaskNewMessage("http://5.249.151.38:8080/guanxy/newChat");
         connectAsyncTaskNewMessage.execute(nmi);
+
 
     }
 
@@ -69,7 +89,7 @@ public class GestoreChat
         @Override
         protected String doInBackground(NewMessageInput... params) {
 
-            NewMessageInput userAccepter = params[0];
+            NewMessageInput messaggio = params[0];
             HttpClient httpclient;
             HttpPost request;
             HttpResponse response = null;
@@ -79,7 +99,7 @@ public class GestoreChat
                 httpclient = new DefaultHttpClient();
                 request = new HttpPost(url);
                 ObjectMapper objectWriter = new ObjectMapper();
-                String s = objectWriter.writeValueAsString(userAccepter);
+                String s = objectWriter.writeValueAsString(messaggio);
                 StringEntity se = new StringEntity(s);
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -98,7 +118,6 @@ public class GestoreChat
 
                     result = result + line ;
                 }
-                Log.d("RitornoNewMex", result);
             } catch (Exception e) {
                 // Code to handle exception
                 result = "error";
@@ -126,7 +145,7 @@ public class GestoreChat
         @Override
         protected String doInBackground(MessageByTimeInput... params) {
 
-            MessageByTimeInput userAccepter = params[0];
+            MessageByTimeInput check = params[0];
             HttpClient httpclient;
             HttpPost request;
             HttpResponse response = null;
@@ -136,13 +155,11 @@ public class GestoreChat
                 httpclient = new DefaultHttpClient();
                 request = new HttpPost(url);
                 ObjectMapper objectWriter = new ObjectMapper();
-                String s = objectWriter.writeValueAsString(userAccepter);
+                String s = objectWriter.writeValueAsString(check);
                 StringEntity se = new StringEntity(s);
                 request.setEntity(se);
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                Log.i("AccettaRichiesta", s);
                 response = httpclient.execute(request);
-                Log.i("Invio","fatto");
             }
             catch (Exception e) {
                 // Code to handle exception
@@ -157,11 +174,25 @@ public class GestoreChat
 
                     result = result + line ;
                 }
-                Log.d("RitornoAccettaCheck", result);
+
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray array = jsonObject.getJSONArray("messages");
+                if(array.length() > 0)
+                {
+                    for (int i = 0; i < array.length(); i++) {
+                        String textMsg = array.getJSONObject(i).getString("messageTxt");
+                        Double id =  array.getJSONObject(i).getDouble("id");
+                        messages.put(id, textMsg);
+
+                    }
+                }
+
+
             } catch (Exception e) {
                 // Code to handle exception
                 result = "error";
             }
+
             return result;
         }
         @Override

@@ -58,7 +58,7 @@ public class RegistrazionePin extends Activity
             public void onClick(View v)
             {
                 EditText editPin = (EditText) findViewById(R.id.pin);
-                pin = editPin.getText().toString();
+                pin = editPin.getText().toString().trim();
 
                 if (pin.matches("")) {
                     Toast.makeText(RegistrazionePin.this, "Errore", Toast.LENGTH_SHORT).show();

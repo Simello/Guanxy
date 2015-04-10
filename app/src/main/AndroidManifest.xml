@@ -73,11 +73,7 @@
             android:label="Guanxy"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".MappaActivity"
-            android:label="Guanxy"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ChiediAiuto"
             android:label="Guanxy"
@@ -103,6 +99,11 @@
             />
 
         <activity android:name="com.example.simello.aiuta.gli.altri.TabAiutaGliAltri"
+            android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.example.simello.aiuta.gli.altri.TabChiediAiuto"
             android:label="Guanxy"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"

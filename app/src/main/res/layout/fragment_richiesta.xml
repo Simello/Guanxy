@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blueChiaro">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp" />
+
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/buttonCosaFare"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_cosa_fare"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/buttonSegnalaAbuso"
+        android:background="@drawable/button_segnala_abuso"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/buttonCosaFare"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/segnalaAbuso"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:id="@+id/textSegnalaAbuso"
+        android:layout_toEndOf="@+id/buttonSegnalaAbuso"
+        android:layout_alignBottom="@+id/buttonSegnalaAbuso"
+        android:layout_alignTop="@+id/buttonSegnalaAbuso" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/cosaFare"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:id="@+id/textCosaFare"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/buttonCosaFare"
+        android:layout_alignBottom="@+id/buttonCosaFare"
+        android:layout_alignTop="@+id/buttonCosaFare" />
+</RelativeLayout>

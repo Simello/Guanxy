@@ -17,6 +17,9 @@ import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.GestoreChat;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by Sunfury e simello on 04/03/15.
  */
@@ -28,6 +31,8 @@ public class HelloBubblesActivity extends Fragment {
     private EditText editText1;
     private Button btnSend;
     private GestoreChat Gc;
+    private ArrayList<Double> messagesReceived;
+
 
 
     public static HelloBubblesActivity newIstance()
@@ -45,6 +50,8 @@ public class HelloBubblesActivity extends Fragment {
         Richiesta richiesta = Richiesta.getRichiesta();
 
         Gc = new GestoreChat( richiesta.getIdRichiesta());
+
+        messagesReceived = new ArrayList<Double>();
 
 
         adapter = new DiscussArrayAdapter(getActivity(), R.layout.listitem_discuss);
@@ -87,16 +94,21 @@ public class HelloBubblesActivity extends Fragment {
     }
 
     private boolean stop = false;
-    private Thread thread;
+    private HashMap<Double,String> messages;
+
     private void controllaMessaggi()
     {
-     thread = new Thread(new Runnable(){
+        Thread thread;
+
+
+        thread = new Thread(new Runnable(){
             public void run() {
+                boolean newMessages = false;
                 // TODO Auto-generated method stub
                 while(!stop)
                 {
                     try {
-                        Gc.controlla();
+                        newMessages = Gc.controlla();
                         Thread.sleep(5000);
 
                     } catch (InterruptedException e) {
@@ -104,13 +116,34 @@ public class HelloBubblesActivity extends Fragment {
                         e.printStackTrace();
                     }
 
+                    if(newMessages)
+                    {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                messages = Gc.getMessages();
+                                for(Double key : messages.keySet())
+                                {
+                                    if(!messagesReceived.contains(key))
+                                    {
+                                        messagesReceived.add(key);
+                                        adapter.add(new OneComment(true, messages.get(key)));
+                                        lv.setSelection(lv.getAdapter().getCount() - 1);
+                                    }
+                                }
+
+                            }
+                        });
+                        newMessages = false;
+                    }
+
                 }
 
             }
         });
         thread.start();
-         //Ok fatto!
     }
+
     @Override
     public void onDetach()
     {
