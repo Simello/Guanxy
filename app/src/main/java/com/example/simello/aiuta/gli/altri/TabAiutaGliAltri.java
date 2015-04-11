@@ -36,6 +36,7 @@ public class TabAiutaGliAltri extends FragmentActivity
 
         mViewPager.setAdapter(mMyFragmentPagerAdapter);
 
+
         final TabPageIndicator mIndicator = (TabPageIndicator)findViewById(R.id.indicator);
         mIndicator.setViewPager(mViewPager);
 
@@ -47,6 +48,10 @@ public class TabAiutaGliAltri extends FragmentActivity
 
             @Override
             public void onPageSelected(int position) {
+                if(position != 2)
+                    HelloBubblesActivity.isVisibile = false;
+                else
+                    HelloBubblesActivity.isVisibile = true;
 
             }
 

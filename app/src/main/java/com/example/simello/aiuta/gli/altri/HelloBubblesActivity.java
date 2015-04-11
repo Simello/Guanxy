@@ -1,5 +1,6 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
 import com.example.simello.utils.GestoreChat;
+import com.readystatesoftware.viewbadger.BadgeView;
+import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,9 @@ public class HelloBubblesActivity extends Fragment {
     private Button btnSend;
     private GestoreChat Gc;
     private ArrayList<Double> messagesReceived;
+    public BadgeView badgeView;
+    public TabPageIndicator indicator;
+    public static boolean isVisibile;
 
 
 
@@ -50,6 +56,10 @@ public class HelloBubblesActivity extends Fragment {
         Richiesta richiesta = Richiesta.getRichiesta();
 
         Gc = new GestoreChat( richiesta.getIdRichiesta());
+
+        indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
+        badgeView = new BadgeView(getActivity() , indicator);
+
 
         messagesReceived = new ArrayList<Double>();
 
@@ -89,6 +99,7 @@ public class HelloBubblesActivity extends Fragment {
             }
         });
 
+
         controllaMessaggi();
         return  view;
     }
@@ -118,6 +129,7 @@ public class HelloBubblesActivity extends Fragment {
 
                     if(newMessages)
                     {
+
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -126,6 +138,11 @@ public class HelloBubblesActivity extends Fragment {
                                 {
                                     if(!messagesReceived.contains(key))
                                     {
+                                        if(!isVisibile)
+                                        {
+                                            badgeView.setText("1");
+                                            badgeView.show();
+                                        }
                                         messagesReceived.add(key);
                                         adapter.add(new OneComment(true, messages.get(key)));
                                         lv.setSelection(lv.getAdapter().getCount() - 1);
@@ -143,6 +160,8 @@ public class HelloBubblesActivity extends Fragment {
         });
         thread.start();
     }
+
+
 
     @Override
     public void onDetach()
