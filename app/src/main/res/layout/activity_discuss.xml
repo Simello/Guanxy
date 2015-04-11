@@ -41,7 +41,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:id="@+id/buttonSend"
-            android:background="@drawable/button_segnala_abuso_tondo"
+            android:background="@drawable/button_invia_tondo"
             android:layout_alignBottom="@+id/chatText"
             android:layout_alignParentRight="true"
              />
