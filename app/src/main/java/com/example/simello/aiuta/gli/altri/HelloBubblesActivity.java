@@ -140,8 +140,16 @@ public class HelloBubblesActivity extends Fragment {
                                     {
                                         if(!isVisibile)
                                         {
-                                            badgeView.setText("1");
-                                            badgeView.show();
+                                            if(badgeView.isShown()) {
+                                                int val = Integer.parseInt(badgeView.getText().toString());
+                                                val += 1;
+                                                badgeView.setText(""+ val);
+                                            }
+                                            else {
+                                                badgeView.setText("1");
+                                                badgeView.show();
+                                            }
+
                                         }
                                         messagesReceived.add(key);
                                         adapter.add(new OneComment(true, messages.get(key)));
