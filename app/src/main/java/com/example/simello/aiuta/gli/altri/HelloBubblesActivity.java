@@ -141,7 +141,11 @@ public class HelloBubblesActivity extends Fragment {
                                         if(!isVisibile)
                                         {
                                             if(badgeView.isShown()) {
-                                                int val = Integer.parseInt(badgeView.getText().toString());
+                                                int val;
+                                                if(badgeView.getText().toString().compareTo("") == 0)
+                                                    val = 0;
+                                                else
+                                                    val = Integer.parseInt(badgeView.getText().toString());
                                                 val += 1;
                                                 badgeView.setText(""+ val);
                                             }
