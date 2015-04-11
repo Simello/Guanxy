@@ -34,6 +34,7 @@ public class HelloBubblesActivity extends Fragment {
     public BadgeView badgeView;
     public TabPageIndicator indicator;
     public static boolean isVisibile;
+    public static boolean aiutato = false;
 
 
 
@@ -52,8 +53,14 @@ public class HelloBubblesActivity extends Fragment {
         Richiesta richiesta = Richiesta.getRichiesta();
 
         Gc = new GestoreChat( richiesta.getIdRichiesta());
+        if(aiutato) {
+            indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
+        }
+        else
+        {
+            indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
 
-        indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
+        }
         badgeView = new BadgeView(getActivity() , indicator);
 
 
@@ -130,23 +137,19 @@ public class HelloBubblesActivity extends Fragment {
                             @Override
                             public void run() {
                                 messages = Gc.getMessages();
-                                for(Double key : messages.keySet()) // usiamo un id incrementale univoco per dare un ordine ai messaggi
+                                for(Double key : messages.keySet())
                                 {
                                     if(!messagesReceived.contains(key))
                                     {
-                                        if(!isVisibile)
-                                        {
-                                            if(badgeView.isShown()) {// badge view per far apparire 1-2-3 sul pulsante chat
-                                                int val = Integer.parseInt(badgeView.getText().toString());
-                                                val += 1;
-                                                badgeView.setText(""+ val);
-                                            }
-                                            else {
+                                        if(!isVisibile) {
+                                            if (badgeView.isShown()) {
+                                                badgeView.increment(1);
+                                            } else {
                                                 badgeView.setText("1");
                                                 badgeView.show();
                                             }
-
                                         }
+
                                         messagesReceived.add(key);
                                         adapter.add(new OneComment(true, messages.get(key)));
                                         lv.setSelection(lv.getAdapter().getCount() - 1);
@@ -168,7 +171,7 @@ public class HelloBubblesActivity extends Fragment {
 
 
     @Override
-    public void onDetach()//serve per eseguire codice alla chiusura del frammento e viene chiamato da solo dal frammento
+    public void onDetach()
     {
         stop = true;
         super.onDetach();
