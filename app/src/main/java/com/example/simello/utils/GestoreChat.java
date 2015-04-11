@@ -47,6 +47,7 @@ public class GestoreChat
     public boolean controlla()
     {
         Date time = new Date();
+        time.setTime(time.getTime() - 10000);
         MessageByTimeInput messageByTimeInput = new MessageByTimeInput(idRichiesta, id_usr1, time);
         connectAsyncTaskCheck connectAsyncTaskCheck = new connectAsyncTaskCheck("http://5.249.151.38:8080/guanxy/messageFromTime");
         connectAsyncTaskCheck.execute(messageByTimeInput);
