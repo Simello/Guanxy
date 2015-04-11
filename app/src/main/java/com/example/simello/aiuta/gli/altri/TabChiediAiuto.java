@@ -44,6 +44,10 @@ public class TabChiediAiuto extends FragmentActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if(position != 2)
+                    HelloBubblesActivity.isVisibile = false;
+                else
+                    HelloBubblesActivity.isVisibile = true;
 
             }
 

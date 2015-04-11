@@ -67,6 +67,9 @@ public class GestoreChat
 
     public void nuovoMessaggio(String testoMessaggio)
     {
+        Log.i("IdRichiesta", ""+idRichiesta.toString());
+        Log.i("IdUser", ""+id_usr1);
+        Log.i("Text", ""+testoMessaggio);
         NewMessageInput nmi = new NewMessageInput(idRichiesta.toString() , id_usr1, testoMessaggio);
         connectAsyncTaskNewMessage connectAsyncTaskNewMessage = new connectAsyncTaskNewMessage("http://5.249.151.38:8080/guanxy/newChat");
         connectAsyncTaskNewMessage.execute(nmi);
@@ -122,6 +125,7 @@ public class GestoreChat
                 // Code to handle exception
                 result = "error";
             }
+            Log.i("MessaggioInvia", result);
             return result;
         }
         @Override
