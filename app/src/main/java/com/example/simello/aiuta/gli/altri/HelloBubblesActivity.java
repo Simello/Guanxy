@@ -1,10 +1,7 @@
 package com.example.simello.aiuta.gli.altri;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
@@ -38,6 +34,7 @@ public class HelloBubblesActivity extends Fragment {
     public BadgeView badgeView;
     public TabPageIndicator indicator;
     public static boolean isVisibile;
+    public static boolean aiutato = false;
 
 
 
@@ -56,8 +53,14 @@ public class HelloBubblesActivity extends Fragment {
         Richiesta richiesta = Richiesta.getRichiesta();
 
         Gc = new GestoreChat( richiesta.getIdRichiesta());
+        if(aiutato) {
+            indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
+        }
+        else
+        {
+            indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
 
-        indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
+        }
         badgeView = new BadgeView(getActivity() , indicator);
 
 
@@ -138,23 +141,15 @@ public class HelloBubblesActivity extends Fragment {
                                 {
                                     if(!messagesReceived.contains(key))
                                     {
-                                        if(!isVisibile)
-                                        {
-                                            if(badgeView.isShown()) {
-                                                int val;
-                                                if(badgeView.getText().toString().compareTo("") == 0)
-                                                    val = 0;
-                                                else
-                                                    val = Integer.parseInt(badgeView.getText().toString());
-                                                val += 1;
-                                                badgeView.setText(""+ val);
-                                            }
-                                            else {
+                                        if(!isVisibile) {
+                                            if (badgeView.isShown()) {
+                                                badgeView.increment(1);
+                                            } else {
                                                 badgeView.setText("1");
                                                 badgeView.show();
                                             }
-
                                         }
+
                                         messagesReceived.add(key);
                                         adapter.add(new OneComment(true, messages.get(key)));
                                         lv.setSelection(lv.getAdapter().getCount() - 1);

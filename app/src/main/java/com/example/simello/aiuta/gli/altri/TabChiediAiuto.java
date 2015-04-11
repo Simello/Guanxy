@@ -33,6 +33,8 @@ public class TabChiediAiuto extends FragmentActivity {
 
         mViewPager.setAdapter(mMyFragmentPagerAdapter);
 
+        HelloBubblesActivity.aiutato = true;
+
         final TabPageIndicator mIndicator = (TabPageIndicator)findViewById(R.id.indicatorChiediAiuto);
         mIndicator.setViewPager(mViewPager);
 
