@@ -141,7 +141,6 @@ public class HelloBubblesActivity extends Fragment {
                                 messages = Gc.getMessages();
                                 for(Double key : messages.keySet())
                                 {
-                                    Log.i("Key","Key :" + key);
                                     if(!messagesReceived.contains(key))
                                     {
                                         if(!isVisibile) {
