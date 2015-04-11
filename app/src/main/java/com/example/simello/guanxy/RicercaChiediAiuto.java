@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.example.simello.aiuta.gli.altri.TabAiutaGliAltri;
 import com.example.simello.aiuta.gli.altri.TabChiediAiuto;
 import com.example.simello.classiServer.CancelHelpRequestInput;
 import com.example.simello.classiServer.FindHelpRequestInput;
@@ -170,7 +169,7 @@ private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
 
         try {
             Thread.currentThread();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

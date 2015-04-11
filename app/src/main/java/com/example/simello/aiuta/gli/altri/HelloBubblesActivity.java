@@ -1,10 +1,7 @@
 package com.example.simello.aiuta.gli.altri;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
@@ -134,13 +130,13 @@ public class HelloBubblesActivity extends Fragment {
                             @Override
                             public void run() {
                                 messages = Gc.getMessages();
-                                for(Double key : messages.keySet())
+                                for(Double key : messages.keySet()) // usiamo un id incrementale univoco per dare un ordine ai messaggi
                                 {
                                     if(!messagesReceived.contains(key))
                                     {
                                         if(!isVisibile)
                                         {
-                                            if(badgeView.isShown()) {
+                                            if(badgeView.isShown()) {// badge view per far apparire 1-2-3 sul pulsante chat
                                                 int val = Integer.parseInt(badgeView.getText().toString());
                                                 val += 1;
                                                 badgeView.setText(""+ val);
@@ -172,7 +168,7 @@ public class HelloBubblesActivity extends Fragment {
 
 
     @Override
-    public void onDetach()
+    public void onDetach()//serve per eseguire codice alla chiusura del frammento e viene chiamato da solo dal frammento
     {
         stop = true;
         super.onDetach();
