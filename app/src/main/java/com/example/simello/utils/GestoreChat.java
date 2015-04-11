@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by simello on 07/04/15.
@@ -35,13 +36,13 @@ public class GestoreChat
 {
     String id_usr1;
     BigInteger idRichiesta;
-    HashMap<Double, String> messages;
+    TreeMap<Double, String> messages;
 
     public GestoreChat(BigInteger id_richiesta)
     {
         this.id_usr1 = User.getUser().getIdUser(); //prende l'user dell'utente del cellulare
         this.idRichiesta=id_richiesta;
-        this.messages = new HashMap<Double, String>();
+        this.messages = new TreeMap<Double, String>();
     }
 
     public boolean controlla()
@@ -60,7 +61,7 @@ public class GestoreChat
 
     }
 
-    public HashMap<Double,String> getMessages()
+    public TreeMap<Double,String> getMessages()
     {
         return messages;
     }

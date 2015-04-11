@@ -2,6 +2,7 @@ package com.example.simello.aiuta.gli.altri;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by Sunfury e simello on 04/03/15.
@@ -108,7 +110,7 @@ public class HelloBubblesActivity extends Fragment {
     }
 
     private boolean stop = false;
-    private HashMap<Double,String> messages;
+    private TreeMap<Double,String> messages;
 
     private void controllaMessaggi()
     {
@@ -123,7 +125,7 @@ public class HelloBubblesActivity extends Fragment {
                 {
                     try {
                         newMessages = Gc.controlla();
-                        Thread.sleep(5000);
+                        Thread.sleep(3000);
 
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
