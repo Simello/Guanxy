@@ -36,6 +36,7 @@ public class RichiestaFragment extends Fragment{
         completaRichiesta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getActivity(), CompletaRichiesta.class);
                 startActivity(i);
                 getActivity().overridePendingTransition(0,0);

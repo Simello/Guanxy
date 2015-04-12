@@ -128,7 +128,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".HelloAccordion_JAVA"
+        <activity android:name=".AiutaGliAltri"
             android:label="Guanxy"
             android:parentActivityName=".GuanxyActivity"
             android:configChanges="orientation|keyboardHidden"
