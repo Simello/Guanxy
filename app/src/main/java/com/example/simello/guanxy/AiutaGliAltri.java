@@ -628,13 +628,6 @@ public class AiutaGliAltri extends ActionBarActivity {
                 Richiesta.newRichiesta(DatiProvaAccordion.headers.get(corrente), userAccepter.getIdHelpRequest() , DatiProvaAccordion.latitudes.get(corrente), DatiProvaAccordion.longitudes.get(corrente));
 
                 Log.i("DatiAccetta", DatiProvaAccordion.headers.get(corrente) + " " + userAccepter.getIdHelpRequest() + " " + DatiProvaAccordion.longitudes.get(corrente) + " " + DatiProvaAccordion.latitudes.get(corrente));
-                /*
-                i.putExtra("idUser",DatiProvaAccordion.headers.get(corrente));//id user e' il nickname isi
-                i.putExtra("idRichiesta", userAccepter.getIdHelpRequest());
-                i.putExtra("Lat", DatiProvaAccordion.latitudes.get(corrente));
-                i.putExtra("Lon", DatiProvaAccordion.longitudes.get(corrente));
-                */
-
 
             } catch (Exception e) {
                 // Code to handle exception
