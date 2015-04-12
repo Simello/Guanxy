@@ -56,5 +56,6 @@
     <string name="Quinto_fragment">Ad ogni utente corrisponde un numero di cellulare e quindi una persona rintracciabile. Questo espediente, assieme al pulsante antipanico presente nell\'app, garantisce a massima sicurezza.</string>
     <string name="RichiestaPartOne">Conferma che\n</string>
     <string name="RichiestaPartTwo">ti ha aiutato!</string>
+    <string name="TempoMancante">Tempo mancante al 30 Aprile:</string>
 
 </resources>

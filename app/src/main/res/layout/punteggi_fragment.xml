@@ -18,7 +18,7 @@
         android:textSize="30sp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -180,4 +180,66 @@
         android:layout_alignStart="@+id/buttonPuntiExtra"
         android:layout_alignLeft="@+id/buttonPuntiExtra"
         android:layout_alignBottom="@+id/buttonPuntiExtra" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/TempoMancante"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:id="@+id/stringTempoMancante"
+        android:layout_below="@+id/buttonPuntiExtra"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textGiorni"
+        android:layout_below="@+id/stringTempoMancante"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textOre"
+        android:layout_below="@+id/textGiorni"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textMinuti"
+        android:layout_below="@+id/textOre"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textSecondi"
+        android:layout_below="@+id/textMinuti"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
