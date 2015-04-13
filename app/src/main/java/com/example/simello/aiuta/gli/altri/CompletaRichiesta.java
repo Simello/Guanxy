@@ -50,6 +50,8 @@ public class CompletaRichiesta extends Activity {
             public void onClick(View v) {
                 Richiesta richiesta = Richiesta.getRichiesta();
                 int point = Math.round(ratingBar.getRating() * 2);
+                Log.i("Richiesta", "Richiesta id" + richiesta.getIdRichiesta());
+                Log.i("IdUser", "IdUser: "+ richiesta.getIdUser());
                 Log.i("Punti","Punti inviati " + point);
                 completeHelpRequestInput = new CompleteHelpRequestInput(richiesta.getIdRichiesta(), richiesta.getIdUser(), point);
                 connectAsyncTaskFine = new connectAsyncTaskFine("http://5.249.151.38:8080/guanxy/completeRequest");
