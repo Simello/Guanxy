@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import com.example.simello.classiServer.CompleteHelpRequestInput;
 import com.example.simello.classiServer.TakingCareHelpReuqestInput;
 import com.example.simello.controller.varie.Richiesta;
+import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.DatiProvaAccordion;
 import com.example.simello.guanxy.GuanxyActivity;
 import com.example.simello.guanxy.R;
@@ -53,7 +54,7 @@ public class CompletaRichiesta extends Activity {
                 Log.i("Richiesta", "Richiesta id" + richiesta.getIdRichiesta());
                 Log.i("IdUser", "IdUser: "+ richiesta.getIdUser());
                 Log.i("Punti","Punti inviati " + point);
-                completeHelpRequestInput = new CompleteHelpRequestInput(richiesta.getIdRichiesta(), richiesta.getIdUser(), point);
+                completeHelpRequestInput = new CompleteHelpRequestInput(richiesta.getIdRichiesta(), User.getUser().getIdUser(), point);
                 connectAsyncTaskFine = new connectAsyncTaskFine("http://5.249.151.38:8080/guanxy/completeRequest");
                 connectAsyncTaskFine.execute(completeHelpRequestInput);
 
