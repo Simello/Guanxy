@@ -28,6 +28,7 @@
         android:background="@drawable/button_selector"
         android:id="@+id/guanxy"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:textAllCaps="false"/>
 
@@ -38,6 +39,7 @@
         android:background="@drawable/divider"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/guanxy"
+        android:layout_toRightOf="@+id/guanxy"
         android:layout_alignTop="@+id/guanxy" />
 
     <Button
@@ -55,7 +57,8 @@
         android:id="@+id/punti"
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/divider1" />
+        android:layout_toEndOf="@+id/divider1"
+        android:layout_toRightOf="@+id/divider1"/>
 
     <Button
         android:text="@string/title_section3"
@@ -74,7 +77,9 @@
         android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/divider2"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/divider2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -83,6 +88,7 @@
         android:background="@drawable/divider"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/punti"
+        android:layout_toRightOf="@id/punti"
         android:layout_alignTop="@+id/punti" />
 
     <EditText
@@ -96,7 +102,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="@color/white"
         android:lines="4"
         android:maxLength="150"
@@ -115,7 +123,9 @@
         android:background="@drawable/button_invia_tondo"
         android:layout_below="@+id/richiesta"
         android:layout_alignEnd="@+id/richiesta"
+        android:layout_alignRight="@+id/richiesta"
         android:layout_marginTop="38dp"
         android:textStyle="bold"
-        android:layout_toEndOf="@+id/divider2" />
+        android:layout_toEndOf="@+id/divider2"
+        android:layout_toRightOf="@+id/divider2"/>
 </RelativeLayout>
