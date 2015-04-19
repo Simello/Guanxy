@@ -239,6 +239,7 @@ private boolean stop = false;
         protected void onPostExecute(String result) {
             if(status.compareTo("COMPLETED") == 0)
             {
+                stop = true;
                 Log.i("FINE","Ok fine richiesta");
                 i = new Intent(TabAiutaGliAltri.this,RichiestaCompletata.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
