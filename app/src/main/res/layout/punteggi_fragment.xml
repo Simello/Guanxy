@@ -17,7 +17,8 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,8 +29,10 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_alignTop="@+id/utenteView"
         android:layout_toEndOf="@+id/utenteView"
+        android:layout_toRightOf="@+id/utenteView"
         android:layout_alignBottom="@+id/utenteView"
         android:gravity="bottom" />
 
@@ -41,6 +44,7 @@
         android:layout_alignBottom="@+id/guanxy"
         android:layout_alignTop="@+id/guanxy"
         android:layout_alignEnd="@+id/guanxy"
+        android:layout_alignRight="@+id/guanxy"
         android:background="@drawable/divider"/>
 
 
@@ -54,6 +58,7 @@
         android:background="@drawable/button_selector"
         android:id="@+id/guanxy"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true" />
 
     <ImageButton
@@ -63,6 +68,7 @@
         android:layout_alignBottom="@+id/guanxy"
         android:layout_alignTop="@+id/guanxy"
         android:layout_alignEnd="@+id/guanxy"
+        android:layout_alignRight="@+id/guanxy"
         android:background="@drawable/divider"/>
 
     <Button
@@ -79,7 +85,8 @@
         android:shadowRadius="5"
         android:id="@+id/punti"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/divider1" />
+        android:layout_toEndOf="@+id/divider1"
+        android:layout_toRightOf="@+id/divider1"/>
 
     <Button
         android:text="@string/title_section3"
@@ -97,7 +104,9 @@
         android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/divider2"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/divider2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -106,6 +115,7 @@
         android:background="@drawable/divider"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/punti"
+        android:layout_toRightOf="@+id/punti"
         android:layout_alignTop="@+id/punti" />
 
     <TextView
@@ -116,6 +126,7 @@
         android:id="@+id/textView"
         android:layout_below="@+id/utenteView"
         android:layout_alignStart="@+id/utenteView"
+        android:layout_alignLeft="@+id/utenteView"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -132,7 +143,9 @@
         android:id="@+id/puntiSchermataPunti"
         android:layout_alignBottom="@+id/textView"
         android:layout_toEndOf="@+id/guanxy"
-        android:layout_marginStart="10dp"/>
+        android:layout_toRightOf="@+id/guanxy"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <ImageButton
         android:layout_width="fill_parent"
@@ -145,6 +158,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:textColor="@color/white"/>
 
     <TextView
@@ -157,10 +171,75 @@
         android:gravity="start|center"
         android:textSize="25sp"
         android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/textView3"
         android:clickable="false"
         android:layout_alignEnd="@+id/buttonPuntiExtra"
+        android:layout_alignRight="@+id/buttonPuntiExtra"
         android:layout_alignTop="@+id/buttonPuntiExtra"
         android:layout_alignStart="@+id/buttonPuntiExtra"
+        android:layout_alignLeft="@+id/buttonPuntiExtra"
         android:layout_alignBottom="@+id/buttonPuntiExtra" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/TempoMancante"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:id="@+id/stringTempoMancante"
+        android:layout_below="@+id/buttonPuntiExtra"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textGiorni"
+        android:layout_below="@+id/stringTempoMancante"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textOre"
+        android:layout_below="@+id/textGiorni"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textMinuti"
+        android:layout_below="@+id/textOre"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/textSecondi"
+        android:layout_below="@+id/textMinuti"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

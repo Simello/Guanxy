@@ -1,17 +1,37 @@
 package com.example.simello.aiuta.gli.altri;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.example.simello.classiServer.FindHelpRequestInput;
+import com.example.simello.controller.varie.Richiesta;
+import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
 
 /**
  * Created by Sunfury e Simello on 04/03/15.
@@ -73,9 +93,45 @@ public class TabAiutaGliAltri extends FragmentActivity
 
         mViewPager.setCurrentItem(1);
 
+    }
+//Variabili per la fine ...
+private ProgressTask progressTask;
+private String status = "";
+private FindHelpRequestInput findHelpRequestInput;
+private boolean stop = false;
 
+    @Override
+    protected void onStart()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+             while(!stop)
+             {
+                 findHelpRequestInput = new FindHelpRequestInput(Richiesta.getRichiesta().getIdRichiesta(), User.getUser().getIdUser());
+                 progressTask = new ProgressTask("http://5.249.151.38:8080/guanxy/findHelpId");
+                 progressTask.execute(findHelpRequestInput);
+                 try {
+                     Thread.currentThread();
+                     Thread.sleep(1000);
+                 } catch (InterruptedException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+                 }
 
+             }
 
+            }
+        }).start();
+        super.onStart();
+    }
+
+    @Override
+    protected  void onPause()
+    {
+        stop = true;
+        super.onPause();
     }
 
 
@@ -93,8 +149,6 @@ public class TabAiutaGliAltri extends FragmentActivity
                 case 0: return AiutoFragment.newIstance();
                 case 1: return MappaFragment.newIstance();
                 case 2: return HelloBubblesActivity.newIstance();
-
-
 
                 default:
                     return null;
@@ -120,6 +174,84 @@ public class TabAiutaGliAltri extends FragmentActivity
         }
     }
 
+
+
+    private class ProgressTask extends AsyncTask<FindHelpRequestInput,Void,String> {
+        String url;
+        Intent i;
+
+        ProgressTask(String url) {
+            this.url = url;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(FindHelpRequestInput... arg0) {
+            FindHelpRequestInput findHelpRequestInput = arg0[0];
+            HttpClient httpclient;
+            HttpPost request;
+            HttpResponse response = null;
+            String result = "";
+
+            try {
+                httpclient = new DefaultHttpClient();
+                request = new HttpPost(url);
+
+                ObjectMapper objectWriter = new ObjectMapper();
+
+                String s = objectWriter.writeValueAsString(findHelpRequestInput);
+                StringEntity se = new StringEntity(s);
+                request.setEntity(se);
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                response = httpclient.execute(request);
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+
+            // response code
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+
+                    result = result + line;
+                }
+                JSONObject json = new JSONObject(result);
+                JSONObject help = json.getJSONObject("help");
+                status = help.getString("status");
+                //Log.i("TestTabAGA", status);
+
+            } catch (Exception e) {
+                // Code to handle exception
+                result = "error";
+            }
+            Log.d("Ritorno", result);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if(status.compareTo("COMPLETED") == 0)
+            {
+                Log.i("FINE","Ok fine richiesta");
+                i = new Intent(TabAiutaGliAltri.this,RichiestaCompletata.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                overridePendingTransition(0,0);
+            }
+            else if(status.compareTo("CANCELLED") == 0)
+            {
+                Log.i("CANCELLATO", "RICHIESTA cancellata");
+            }
+
+        }
+    }
 
 }
 

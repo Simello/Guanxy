@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Sunfury & Simello on 17/01/15.
@@ -121,7 +125,36 @@ public class PuntiActivity extends ActionBarActivity
 
 
     }
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = dformat.parse("30-04-2015"); // change this to your date
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        //      .getTime() does the conversion: Date --> long
+        CountDownTimer cdt = new CountDownTimer(date.getTime(), 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                // TODO Auto-generated method stub
+                TextView textGiorni = (TextView) findViewById(R.id.textGiorni);
+                textGiorni.setText(String.valueOf(millisUntilFinished/86400000) + " Giorni");
+
+            }
+
+            public void onFinish() {
+                // TODO Auto-generated method stub
+
+            }
+        }.start();
+
+
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

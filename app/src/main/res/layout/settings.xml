@@ -18,7 +18,8 @@
       android:background="@drawable/button_username"
       android:id="@+id/username"
       android:layout_below="@+id/lingua"
-      android:layout_alignEnd="@+id/toggleNotifiche" />
+      android:layout_alignEnd="@+id/toggleNotifiche"
+      android:layout_alignRight="@+id/toggleNotifiche"/>
 
 
     <ToggleButton
@@ -30,7 +31,8 @@
         android:background="@drawable/ic_toggle_bg"
         android:layout_marginTop="71dp"
         android:layout_below="@android:id/list"
-        android:layout_alignStart="@+id/toggleBatteria" />
+        android:layout_alignStart="@+id/toggleBatteria"
+        android:layout_alignLeft="@+id/toggleBatteria"/>
 
     <ToggleButton
         android:id="@+id/toggleBatteria"
@@ -40,7 +42,8 @@
         style="@style/toggleButton"
         android:background="@drawable/ic_toggle_bg"
         android:layout_below="@+id/toggleNotifiche"
-        android:layout_alignEnd="@+id/lingua" />
+        android:layout_alignEnd="@+id/lingua"
+        android:layout_alignRight="@+id/lingua"/>
 
 
     <ListView
@@ -56,7 +59,8 @@
         android:id="@+id/button_notifiche"
         android:background="@drawable/button_notifiche"
         android:layout_alignTop="@+id/toggleNotifiche"
-        android:layout_toStartOf="@+id/toggleNotifiche" />
+        android:layout_toStartOf="@+id/toggleNotifiche"
+        android:layout_toLeftOf="@+id/toggleNotifiche"/>
 
     <ImageButton
         android:layout_width="225dp"
@@ -64,6 +68,7 @@
         android:id="@+id/button_batteria"
         android:layout_below="@+id/toggleNotifiche"
         android:layout_toStartOf="@+id/toggleNotifiche"
+        android:layout_toLeftOf="@+id/toggleNotifiche"
         android:background="@drawable/button_batteria"/>
 
     <Button
@@ -76,6 +81,7 @@
         android:id="@+id/button_setting_salva"
         android:layout_below="@+id/username"
         android:layout_alignEnd="@+id/username"
+        android:layout_alignRight="@+id/username"
         android:layout_marginTop="45dp"
         android:padding="10dp"/>
 
@@ -90,6 +96,7 @@
         android:textSize="15dp"
         android:layout_alignBottom="@+id/button_setting_salva"
         android:layout_alignStart="@+id/username"
+        android:layout_alignLeft="@+id/username"
         android:padding="10dp"/>
 
 </RelativeLayout>

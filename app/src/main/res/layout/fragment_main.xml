@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/blueChiaro"
     tools:context=".MainActivity$PlaceholderFragment">
 
@@ -18,7 +14,8 @@
         android:background="@null"
         android:layout_marginTop="70dp"
         android:layout_below="@+id/chiediAiuto"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"/>
 
     <ImageButton
         android:layout_width="120dp"
@@ -29,7 +26,8 @@
         android:scaleType="fitXY"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"/>
 
     <Button
         android:layout_width="250dp"
@@ -67,7 +65,20 @@
         android:layout_alignLeft="@+id/chiediAiutoString"
         android:layout_alignStart="@+id/chiediAiutoString"
         android:layout_alignTop="@+id/buttonTextPremi"
-        android:layout_marginStart="0px"/>
+        android:layout_marginStart="0px"
+        android:layout_marginLeft="0px"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/divider1"
+        android:layout_alignBottom="@+id/guanxy"
+        android:layout_alignTop="@+id/guanxy"
+        android:layout_alignEnd="@+id/guanxy"
+        android:layout_alignRight="@+id/guanxy"
+        android:background="@drawable/divider"/>
+
 
     <Button
         android:text="@string/title_section1"
@@ -79,6 +90,7 @@
         android:background="@drawable/button_selector"
         android:id="@+id/guanxy"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true" />
 
     <ImageButton
@@ -88,6 +100,7 @@
         android:layout_alignBottom="@+id/guanxy"
         android:layout_alignTop="@+id/guanxy"
         android:layout_alignEnd="@+id/guanxy"
+        android:layout_alignRight="@+id/guanxy"
         android:background="@drawable/divider"/>
 
     <Button
@@ -104,7 +117,8 @@
         android:shadowRadius="5"
         android:id="@+id/punti"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/divider1" />
+        android:layout_toEndOf="@+id/divider1"
+        android:layout_toRightOf="@+id/divider1"/>
 
     <Button
         android:text="@string/title_section3"
@@ -122,7 +136,9 @@
         android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/divider2"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/divider2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -131,6 +147,7 @@
         android:background="@drawable/divider"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/punti"
+        android:layout_toRightOf="@+id/punti"
         android:layout_alignTop="@+id/punti" />
 
 </RelativeLayout>

@@ -31,7 +31,9 @@
         android:gravity="center"
 
         android:layout_alignStart="@+id/NewUsernameText"
-        android:layout_alignEnd="@+id/NewUsernameText" />
+        android:layout_alignLeft="@+id/NewUsernameText"
+        android:layout_alignEnd="@+id/NewUsernameText"
+        android:layout_alignRight="@+id/NewUsernameText"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -72,6 +74,7 @@
 
         android:layout_below="@+id/textNumeroTelefono"
         android:layout_alignEnd="@+id/NewUsername"
+        android:layout_alignRight="@+id/NewUsername"
         android:gravity="center" />
 
     <EditText
@@ -84,6 +87,7 @@
 
         android:layout_above="@+id/buttonInizia"
         android:layout_toStartOf="@+id/buttonInizia"
+        android:layout_toLeftOf="@+id/buttonInizia"
         android:hint="+39"
         android:gravity="center" />
 

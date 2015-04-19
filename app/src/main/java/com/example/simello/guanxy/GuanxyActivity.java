@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.simello.classiServer.AuthenticateUserInput;
 import com.example.simello.classiServer.FindUserInput;
 import com.example.simello.controller.varie.Position;
 import com.example.simello.controller.varie.User;
@@ -139,7 +138,7 @@ public class GuanxyActivity extends ActionBarActivity
         public void onClick(View v){
 
                 // chiamo l'accordion dinamico
-                Intent myIntent = new Intent(GuanxyActivity.this, HelloAccordion_JAVA.class);
+                Intent myIntent = new Intent(GuanxyActivity.this, AiutaGliAltri.class);
                 GuanxyActivity.this.startActivity(myIntent);
                 overridePendingTransition(0,0);
             }

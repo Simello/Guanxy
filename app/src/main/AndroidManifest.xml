@@ -117,16 +117,18 @@
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".StackAiuti"
+        <activity
+            android:name="com.example.simello.aiuta.gli.altri.CompletaRichiesta"
+            android:label="Guanxy"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.simello.aiuta.gli.altri.RichiestaCompletata"
             android:label="Guanxy"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".HelloAccordion_JAVA"
-            android:label="Guanxy"
-            android:parentActivityName=".GuanxyActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" />
+
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

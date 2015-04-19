@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/blueChiaro">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/richiesta"
-        android:id="@+id/scriviRichiesta"
-        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Grazie"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textGrazie"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-        android:textSize="25sp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:background="@drawable/richiesta_completata"
+        android:layout_below="@+id/textGrazie"
+        android:layout_centerHorizontal="true" />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:id="@+id/textRichiestaCompletata"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
     <Button
         android:text="@string/title_section1"
         android:textColor="#FFFFFF"
@@ -89,42 +106,13 @@
         android:layout_toRightOf="@+id/punti"
         android:layout_alignTop="@+id/punti" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/richiesta"
-        android:layout_below="@+id/scriviRichiesta"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/white"
-        android:lines="4"
-        android:maxLength="150"
-        android:maxLines="4"
-        android:gravity="start"
-        />
-
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Invia"
-        android:id="@+id/buttonInviaRichiesta"
-        android:textSize="20dp"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="OK"
         android:textColor="@color/white"
         android:background="@drawable/button_invia_tondo"
-        android:layout_below="@+id/richiesta"
-        android:layout_alignEnd="@+id/richiesta"
-        android:layout_alignRight="@+id/richiesta"
-        android:layout_marginTop="38dp"
-        android:textStyle="bold"
-        android:layout_toEndOf="@+id/divider2"
-        android:layout_toRightOf="@+id/divider2"/>
-
+        android:id="@+id/buttonOk"
+        android:layout_below="@+id/textRichiestaCompletata"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -22,7 +22,8 @@ android:textColor="@color/white"
 android:padding="10dp"
 android:background="@drawable/button_segnala_abuso_tondo"
     android:layout_alignTop="@+id/annullaAiuto"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"/>
 
     <Button
         android:id="@+id/annullaAiuto"

@@ -114,9 +114,8 @@ public class HelloBubblesActivity extends Fragment {
 
     private void controllaMessaggi()
     {
+
         Thread thread;
-
-
         thread = new Thread(new Runnable(){
             public void run() {
                 boolean newMessages = false;
@@ -125,7 +124,7 @@ public class HelloBubblesActivity extends Fragment {
                 {
                     try {
                         newMessages = Gc.controlla();
-                        Thread.sleep(3000);
+                        Thread.sleep(500); // forse cosi non abbiamo più problemi con la chat "lenta"
 
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -152,6 +151,7 @@ public class HelloBubblesActivity extends Fragment {
                                             }
                                         }
 
+
                                         messagesReceived.add(key);
                                         adapter.add(new OneComment(true, messages.get(key)));
                                         lv.setSelection(lv.getAdapter().getCount() - 1);
@@ -163,11 +163,33 @@ public class HelloBubblesActivity extends Fragment {
                         newMessages = false;
                     }
 
+                    if(isVisibile)
+                    {
+                        if(badgeView.isShown())
+                        {
+                            getActivity().runOnUiThread(new Runnable() {
+                                public void run() {
+                                    badgeView.hide();
+                                    badgeView.setText(""+ 0);
+                                }
+
+                                });
+
+                            }
+
+                    }
+
                 }
 
             }
         });
         thread.start();
+    }
+
+    public void reset()
+    {
+        badgeView.setText("" + 0);
+        badgeView.hide();
     }
 
 
