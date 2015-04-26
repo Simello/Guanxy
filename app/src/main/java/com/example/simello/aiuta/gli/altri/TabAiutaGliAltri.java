@@ -43,7 +43,7 @@ public class TabAiutaGliAltri extends FragmentActivity
 {
     public static FragmentManager fragmentManager;
     private ViewPager mViewPager;
-    private Socket socket;
+    private Socket socket = new Socket();
     String host = "5.249.151.38";
     int port = 5000;
 
