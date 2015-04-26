@@ -11,17 +11,32 @@ import android.view.inputmethod.InputMethodManager;
 import com.example.simello.guanxy.R;
 import com.viewpagerindicator.TabPageIndicator;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
 /**
  * Created by Sunfury on 10/04/15.
  */
 public class TabChiediAiuto extends FragmentActivity {
     public static FragmentManager fragmentManager;
     private ViewPager mViewPager;
+    private Socket socket;
+    String host = "5.249.151.38";
+    int port = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_chiedi_aiuto);
+        try
+        {
+            socket.connect(new InetSocketAddress(host, port));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
@@ -74,6 +89,20 @@ public class TabChiediAiuto extends FragmentActivity {
 
 
 
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        try
+        {
+            socket.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 

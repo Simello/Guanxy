@@ -30,8 +30,11 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 /**
  * Created by Sunfury e Simello on 04/03/15.
@@ -40,11 +43,23 @@ public class TabAiutaGliAltri extends FragmentActivity
 {
     public static FragmentManager fragmentManager;
     private ViewPager mViewPager;
+    private Socket socket;
+    String host = "5.249.151.38";
+    int port = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_aiuta_gli_altri);
+
+        try
+        {
+            socket.connect(new InetSocketAddress(host,port));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
@@ -125,6 +140,19 @@ private boolean stop = false;
             }
         }).start();
         super.onStart();
+    }
+    @Override
+    protected void onStop()
+    {
+       super.onStop();
+        try
+        {
+            socket.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
