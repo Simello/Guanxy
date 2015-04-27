@@ -28,7 +28,7 @@ import java.net.Socket;
 public class TabChiediAiuto extends FragmentActivity {
     public static FragmentManager fragmentManager;
     private ViewPager mViewPager;
-    private Socket socket = new Socket();
+    private static Socket socket;
     String host = "5.249.151.38";
     int port = 5000;
     PrintWriter socketOutput = null;
@@ -106,12 +106,22 @@ public class TabChiediAiuto extends FragmentActivity {
         }
     }
 
-    private class SocketTask extends AsyncTask<Void ,Void, Void> {
+    public static Socket getSocket()
+    {
+        if(socket != null)
+            return socket;
+        else
+            return null;
+    }
 
+    private class SocketTask extends AsyncTask<Void ,Void, Void> {
+//Si potrebbe mettere un get PrintWriter o getSocket per ottenerlo nel fragment della chat
+        //inoltre c'è da controllare il != da null
 
         @Override
         protected Void doInBackground(Void... arg0)
         {
+            socket = new Socket();
             try
             {
                 socket.connect(new InetSocketAddress(host,port));

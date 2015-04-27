@@ -17,6 +17,7 @@ import com.example.simello.utils.GestoreChat;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -37,6 +38,7 @@ public class HelloBubblesActivity extends Fragment {
     public TabPageIndicator indicator;
     public static boolean isVisibile;
     public static boolean aiutato = false;
+    private static Socket socket;
 
 
 
@@ -57,11 +59,12 @@ public class HelloBubblesActivity extends Fragment {
         Gc = new GestoreChat( richiesta.getIdRichiesta());
         if(aiutato) {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
+            socket = TabChiediAiuto.getSocket();
         }
         else
         {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
-
+            socket = TabAiutaGliAltri.getSocket();
         }
         badgeView = new BadgeView(getActivity() , indicator);
 

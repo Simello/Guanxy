@@ -45,7 +45,7 @@ public class TabAiutaGliAltri extends FragmentActivity
 {
     public static FragmentManager fragmentManager;
     private ViewPager mViewPager;
-    private Socket socket = new Socket();
+    private static Socket socket;
     String host = "5.249.151.38";
     int port = 5000;
     PrintWriter socketOutput = null;
@@ -203,6 +203,7 @@ private boolean stop = false;
         @Override
         protected Void doInBackground(Void... arg0)
         {
+            socket = new Socket();
             try
             {
                 socket.connect(new InetSocketAddress(host,port));
@@ -225,6 +226,14 @@ private boolean stop = false;
             return null;
         }
 
+    }
+
+    public static Socket getSocket()
+    {
+        if(socket != null)
+            return socket;
+        else
+            return null;
     }
 
 
