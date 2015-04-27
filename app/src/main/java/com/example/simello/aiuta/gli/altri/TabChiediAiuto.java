@@ -1,17 +1,24 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
+import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
 import com.viewpagerindicator.TabPageIndicator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -24,19 +31,13 @@ public class TabChiediAiuto extends FragmentActivity {
     private Socket socket = new Socket();
     String host = "5.249.151.38";
     int port = 5000;
+    PrintWriter socketOutput = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_chiedi_aiuto);
-        try
-        {
-            socket.connect(new InetSocketAddress(host, port));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        new SocketTask().execute();
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
@@ -103,6 +104,36 @@ public class TabChiediAiuto extends FragmentActivity {
         {
             e.printStackTrace();
         }
+    }
+
+    private class SocketTask extends AsyncTask<Void ,Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... arg0)
+        {
+            try
+            {
+                socket.connect(new InetSocketAddress(host,port));
+                socketOutput = new PrintWriter( socket.getOutputStream(), true);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("IdRichiesta", Richiesta.getRichiesta().getIdRichiesta().toString());
+                socketOutput.println(jsonObject.toString());
+                socketOutput.flush();
+                Log.i("Socket","Connesso");
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
     }
 
 

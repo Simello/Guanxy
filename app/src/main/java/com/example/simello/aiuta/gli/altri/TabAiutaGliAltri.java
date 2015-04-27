@@ -27,11 +27,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -46,20 +48,13 @@ public class TabAiutaGliAltri extends FragmentActivity
     private Socket socket = new Socket();
     String host = "5.249.151.38";
     int port = 5000;
+    PrintWriter socketOutput = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_aiuta_gli_altri);
-
-        try
-        {
-            socket.connect(new InetSocketAddress(host,port));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        new SocketTask().execute();
 
 
         // initialising the object of the FragmentManager. Here I'm passing getSupportFragmentManager(). You can pass getFragmentManager() if you are coding for Android 3.0 or above.
@@ -200,6 +195,36 @@ private boolean stop = false;
         public int getCount() {
             return 3;
         }
+    }
+
+    private class SocketTask extends AsyncTask<Void ,Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... arg0)
+        {
+            try
+            {
+                socket.connect(new InetSocketAddress(host,port));
+                socketOutput = new PrintWriter( socket.getOutputStream(), true);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("IdRichiesta", Richiesta.getRichiesta().getIdRichiesta().toString());
+                socketOutput.println(jsonObject.toString());
+                socketOutput.flush();
+                Log.i("Socket","Connesso");
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
     }
 
 
