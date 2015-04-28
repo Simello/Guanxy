@@ -3,7 +3,6 @@ package com.example.simello.aiuta.gli.altri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 
 import com.example.simello.controller.varie.Richiesta;
 import com.example.simello.guanxy.R;
-import com.example.simello.utils.GestoreChat;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -33,10 +31,8 @@ import java.util.TreeMap;
 public class HelloBubblesActivity extends Fragment {
     private DiscussArrayAdapter adapter;
     private ListView lv;
-    private String ipsum;
     private EditText editText1;
     private Button btnSend;
-    private GestoreChat Gc;
     private ArrayList<Double> messagesReceived;
     public BadgeView badgeView;
     public TabPageIndicator indicator;
@@ -62,7 +58,6 @@ public class HelloBubblesActivity extends Fragment {
 
         Richiesta richiesta = Richiesta.getRichiesta();
 
-        Gc = new GestoreChat( richiesta.getIdRichiesta());
         if(aiutato) {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
             socket = TabChiediAiuto.getSocket();
