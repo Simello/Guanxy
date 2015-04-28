@@ -92,8 +92,6 @@ public class HelloBubblesActivity extends Fragment {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
                     adapter.add(new OneComment(false, editText1.getText().toString()));
-
-                    receiveMessage();
                     editText1.setText("");
                     return true;
                 }
@@ -111,7 +109,6 @@ public class HelloBubblesActivity extends Fragment {
                     //Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
                     socketOutput.println(editText1.getText().toString());
                     socketOutput.flush();
-                    receiveMessage();
                     editText1.setText("");
                     lv.setSelection(lv.getAdapter().getCount() - 1);
 
@@ -120,95 +117,13 @@ public class HelloBubblesActivity extends Fragment {
         });
 
 
-        controllaMessaggi();
+        //controllaMessaggi();
+        ReadAsync readAsync = new ReadAsync();
+        readAsync.execute();
         return  view;
     }
 
     private boolean stop = false;
-    private TreeMap<Double,String> messages;
-
-    private void controllaMessaggi()
-    {
-
-        Thread thread;
-        thread = new Thread(new Runnable(){
-            public void run() {
-                boolean newMessages = false;
-                // TODO Auto-generated method stub
-                while(!stop)
-                {
-                    try {
-                        newMessages = Gc.controlla();
-                        Thread.sleep(500); // forse cosi non abbiamo più problemi con la chat "lenta"
-
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                    if(newMessages)
-                    {
-
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                messages = Gc.getMessages();
-                                for(Double key : messages.keySet())
-                                {
-                                    if(!messagesReceived.contains(key))
-                                    {
-                                        if(!isVisibile) {
-                                            if (badgeView.isShown()) {
-                                                badgeView.increment(1);
-                                            } else {
-                                                badgeView.setText("1");
-                                                badgeView.show();
-                                            }
-                                        }
-
-
-                                        messagesReceived.add(key);
-                                        adapter.add(new OneComment(true, messages.get(key)));
-                                        lv.setSelection(lv.getAdapter().getCount() - 1);
-                                    }
-                                }
-
-                            }
-                        });
-                        newMessages = false;
-                    }
-
-                    if(isVisibile)
-                    {
-                        if(badgeView.isShown())
-                        {
-                            getActivity().runOnUiThread(new Runnable() {
-                                public void run() {
-                                    badgeView.hide();
-                                    badgeView.setText(""+ 0);
-                                }
-
-                                });
-
-                            }
-
-                    }
-
-                }
-
-            }
-        });
-        thread.start();
-    }
-
-
-
-    public void reset()
-    {
-        badgeView.setText("" + 0);
-        badgeView.hide();
-    }
-
 
 
     @Override
@@ -219,20 +134,6 @@ public class HelloBubblesActivity extends Fragment {
     }
 
 
-    private void receiveMessage(){
-        String msg = editText1.getText().toString();
-        lv.setSelection(lv.getAdapter().getCount()-1);
-
-        //new ChatDAO().receiveMessage("");
-    }
-
-
-    /** recebe msg */
-    private void addItems() {
-        adapter.add(new OneComment(true, "Hello bubbles!"));
-    }
-
-
     String risposta = "";
     private class ReadAsync extends AsyncTask<Void,Void,Void>
     {
@@ -240,7 +141,7 @@ public class HelloBubblesActivity extends Fragment {
         protected Void doInBackground(Void... params)
         {
             try {
-                while(true)
+                while(!stop)
                 {
                     risposta = socketInput.readLine();
                     if(risposta != null) {
@@ -248,11 +149,34 @@ public class HelloBubblesActivity extends Fragment {
                             @Override
                             public void run() {
                                 // change UI elements here
+                                if(!isVisibile) {
+                                    if (badgeView.isShown()) {
+                                        badgeView.increment(1);
+                                    } else {
+                                        badgeView.setText("1");
+                                        badgeView.show();
+                                    }
+                                }
                                 adapter.add(new OneComment(true, risposta));
                                 lv.setSelection(lv.getAdapter().getCount() - 1);
 
                             }
                         });
+                    }
+                    if(isVisibile)
+                    {
+                        if(badgeView.isShown())
+                        {
+                            getActivity().runOnUiThread(new Runnable() {
+                                public void run() {
+                                    badgeView.hide();
+                                    badgeView.setText(""+ 0);
+                                }
+
+                            });
+
+                        }
+
                     }
                 }
 
