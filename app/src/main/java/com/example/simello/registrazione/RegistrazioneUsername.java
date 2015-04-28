@@ -80,6 +80,10 @@ public class RegistrazioneUsername extends Activity
                     Toast.makeText(RegistrazioneUsername.this, "Non hai inserito un preefisso corretto", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                else if(prefix.contains("+"))
+                {
+                    prefix = prefix.replace("+","");
+                }
 
 
 

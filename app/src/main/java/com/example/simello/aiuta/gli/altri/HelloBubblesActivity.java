@@ -17,6 +17,8 @@ import com.example.simello.utils.GestoreChat;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
 
+import java.io.DataInputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +41,8 @@ public class HelloBubblesActivity extends Fragment {
     public static boolean isVisibile;
     public static boolean aiutato = false;
     private static Socket socket;
+    private static DataInputStream socketInput = null;
+    private static PrintWriter socketOutput = null;
 
 
 

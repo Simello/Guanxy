@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -45,7 +46,8 @@ public class TabAiutaGliAltri extends FragmentActivity
     private static Socket socket;
     String host = "5.249.151.38";
     int port = 5000;
-    PrintWriter socketOutput = null;
+    static PrintWriter socketOutput = null;
+    static DataInputStream socketInput = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +207,7 @@ private boolean stop = false;
             {
                 socket.connect(new InetSocketAddress(host,port));
                 socketOutput = new PrintWriter( socket.getOutputStream(), true);
+                socketInput = new DataInputStream(socket.getInputStream());
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("IdRichiesta", Richiesta.getRichiesta().getIdRichiesta().toString());
                 socketOutput.println(jsonObject.toString());
@@ -231,6 +234,18 @@ private boolean stop = false;
             return socket;
         else
             return null;
+    }
+
+    public static PrintWriter getPrintWriter()
+    {
+        if(socketOutput != null) return socketOutput;
+        return null;
+    }
+
+    public static DataInputStream getDataInputStream()
+    {
+        if(socketInput != null) return socketInput;
+        return null;
     }
 
 
