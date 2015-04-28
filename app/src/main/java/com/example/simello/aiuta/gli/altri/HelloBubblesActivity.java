@@ -1,5 +1,6 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -64,11 +66,15 @@ public class HelloBubblesActivity extends Fragment {
         if(aiutato) {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
             socket = TabChiediAiuto.getSocket();
+            socketInput = TabChiediAiuto.getDataInputStream();
+            socketOutput = TabChiediAiuto.getPrintWriter();
         }
         else
         {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicator);
             socket = TabAiutaGliAltri.getSocket();
+            socketInput = TabAiutaGliAltri.getDataInputStream();
+            socketOutput = TabAiutaGliAltri.getPrintWriter();
         }
         badgeView = new BadgeView(getActivity() , indicator);
 
@@ -102,7 +108,9 @@ public class HelloBubblesActivity extends Fragment {
                 //Se il campo testo è vuoto, non invia isi
                 if(editText1.getText().toString().trim().length() > 0) {
                     adapter.add(new OneComment(false, editText1.getText().toString()));
-                    Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
+                    //Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
+                    socketOutput.println(editText1.getText().toString());
+                    socketOutput.flush();
                     receiveMessage();
                     editText1.setText("");
                     lv.setSelection(lv.getAdapter().getCount() - 1);
@@ -193,6 +201,8 @@ public class HelloBubblesActivity extends Fragment {
         thread.start();
     }
 
+
+
     public void reset()
     {
         badgeView.setText("" + 0);
@@ -221,5 +231,40 @@ public class HelloBubblesActivity extends Fragment {
     private void addItems() {
         adapter.add(new OneComment(true, "Hello bubbles!"));
     }
+
+
+    String risposta = "";
+    private class ReadAsync extends AsyncTask<Void,Void,Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try {
+                while(true)
+                {
+                    risposta = socketInput.readLine();
+                    if(risposta != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // change UI elements here
+                                adapter.add(new OneComment(true, risposta));
+                                lv.setSelection(lv.getAdapter().getCount() - 1);
+
+                            }
+                        });
+                    }
+                }
+
+
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
 
 }
