@@ -16,8 +16,10 @@ import com.example.simello.guanxy.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class HelloBubblesActivity extends Fragment {
     private static Socket socket;
     private static DataInputStream socketInput = null;
     private static PrintWriter socketOutput = null;
+    BufferedReader bufferUser = null;
+
 
 
 
@@ -72,6 +76,7 @@ public class HelloBubblesActivity extends Fragment {
             socketOutput = TabAiutaGliAltri.getPrintWriter();
         }
         badgeView = new BadgeView(getActivity() , indicator);
+
 
 
         messagesReceived = new ArrayList<Double>();
@@ -136,28 +141,10 @@ public class HelloBubblesActivity extends Fragment {
         protected Void doInBackground(Void... params)
         {
             try {
+                bufferUser = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
                 while(!stop)
                 {
-                    risposta = socketInput.readLine();
-                    if(risposta != null) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // change UI elements here
-                                if(!isVisibile) {
-                                    if (badgeView.isShown()) {
-                                        badgeView.increment(1);
-                                    } else {
-                                        badgeView.setText("1");
-                                        badgeView.show();
-                                    }
-                                }
-                                adapter.add(new OneComment(true, risposta));
-                                lv.setSelection(lv.getAdapter().getCount() - 1);
-
-                            }
-                        });
-                    }
                     if(isVisibile)
                     {
                         if(badgeView.isShown())
@@ -173,6 +160,30 @@ public class HelloBubblesActivity extends Fragment {
                         }
 
                     }
+                    //Questo darà altri problemi.... Da sostituire con la versione del server isi pisi
+                    if(bufferUser.ready()) {
+                        risposta = socketInput.readLine();
+                        if (risposta != null) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // change UI elements here
+                                    if (!isVisibile) {
+                                        if (badgeView.isShown()) {
+                                            badgeView.increment(1);
+                                        } else {
+                                            badgeView.setText("1");
+                                            badgeView.show();
+                                        }
+                                    }
+                                    adapter.add(new OneComment(true, risposta));
+                                    lv.setSelection(lv.getAdapter().getCount() - 1);
+
+                                }
+                            });
+                        }
+                    }
+
                 }
 
 
