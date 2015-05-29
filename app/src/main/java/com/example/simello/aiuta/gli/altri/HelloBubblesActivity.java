@@ -12,9 +12,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.simello.controller.varie.Richiesta;
+import com.example.simello.controller.varie.User;
 import com.example.simello.guanxy.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 import com.viewpagerindicator.TabPageIndicator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -44,6 +48,7 @@ public class HelloBubblesActivity extends Fragment {
     private static DataInputStream socketInput = null;
     private static PrintWriter socketOutput = null;
     BufferedReader bufferUser = null;
+    public JSONObject invio = null;
 
 
 
@@ -61,6 +66,16 @@ public class HelloBubblesActivity extends Fragment {
         lv = (ListView)view.findViewById(R.id.listView1);
 
         Richiesta richiesta = Richiesta.getRichiesta();
+        invio = new JSONObject();
+        try {
+            invio.put("Invia", User.getUser().getIdUser().toString());
+            invio.put("IdRichiesta", Richiesta.getRichiesta().getIdRichiesta());
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+
 
         if(aiutato) {
             indicator = (TabPageIndicator) getActivity().findViewById(R.id.indicatorChiediAiuto);
@@ -106,9 +121,18 @@ public class HelloBubblesActivity extends Fragment {
                 //Se il campo testo è vuoto, non invia isi
                 if(editText1.getText().toString().trim().length() > 0) {
                     adapter.add(new OneComment(false, editText1.getText().toString()));
-                    //Gc.nuovoMessaggio(editText1.getText().toString());//invio msg al servere lelled lelling bicces madaffakka
-                    socketOutput.println(editText1.getText().toString());
+                    //Invio messaggio
+                    try{
+                        invio.put("Text",editText1.getText().toString());
+                    }
+                    catch(JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    socketOutput.println(invio.toString());
                     socketOutput.flush();
+                    invio.remove("Text"); //Pulisco il JSON
+                    //Inviato
                     editText1.setText("");
                     lv.setSelection(lv.getAdapter().getCount() - 1);
 
