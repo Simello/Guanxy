@@ -106,8 +106,26 @@ public class HelloBubblesActivity extends Fragment {
                 // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    adapter.add(new OneComment(false, editText1.getText().toString()));
-                    editText1.setText("");
+                    if(editText1.getText().toString().trim().length() > 0)
+                    {
+                        adapter.add(new OneComment(false, editText1.getText().toString()));
+                        //Invio messaggio
+                        try{
+                            invio.put("Text",editText1.getText().toString());
+                        }
+                        catch(JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        socketOutput.println(invio.toString());
+                        socketOutput.flush();
+                        invio.remove("Text"); //Pulisco il JSON
+                        //Inviato
+                        editText1.setText("");
+                        lv.setSelection(lv.getAdapter().getCount() - 1);
+
+
+                    }
                     return true;
                 }
                 return false;
