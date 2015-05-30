@@ -40,6 +40,7 @@ public class UpdatePositionReceiver extends BroadcastReceiver
             UpdatePositionInput updatePositionInput = new UpdatePositionInput(idUser, gpsManager.getLatitude(),  gpsManager.getLongitude());
             connectAsyncTask connectAsyncTask = new connectAsyncTask("http://5.249.151.38:8080/guanxy/user/updatePosition");
             connectAsyncTask.execute(updatePositionInput);
+            Log.i("BroadCastPos","Sto aggiornando");
         }
         else
         {

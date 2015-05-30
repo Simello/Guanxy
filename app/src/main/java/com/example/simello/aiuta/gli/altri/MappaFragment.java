@@ -2,6 +2,8 @@ package com.example.simello.aiuta.gli.altri;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,11 +49,13 @@ import java.util.List;
 /**
  * Created by Sunfury e Simello on 04/03/15.
  */
-public class MappaFragment extends Fragment
+public class MappaFragment extends Fragment implements LocationListener
 {
 
     MapView mMapView;
     private GoogleMap mMap;
+    private Marker mf = null;
+    private GPSManager gpsManager = null;
 
 
 
@@ -82,7 +86,7 @@ public class MappaFragment extends Fragment
 
 
         User user = User.getUser();
-        GPSManager gpsManager = new GPSManager(getActivity());
+        gpsManager = new GPSManager(getActivity());
 
         //Posizione primo markè
         LatLng posPrimoMarke = new LatLng( gpsManager.getLatitude(), gpsManager.getLongitude());
@@ -90,7 +94,7 @@ public class MappaFragment extends Fragment
 
         MarkerOptions primomark = new MarkerOptions().position(posPrimoMarke).title(user.getNickname());
         primomark.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_map));
-        Marker mf = mMap.addMarker(primomark);
+        mf = mMap.addMarker(primomark);
         mf.showInfoWindow();
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -124,8 +128,36 @@ public class MappaFragment extends Fragment
         return v;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.i("LocationChanged","Cambio");
+        if(mf != null)
+        {
+            mf.remove();
+        }
+        double latitude = location.getLatitude();
 
+        double longitude = location.getLongitude();
 
+        LatLng latLng = new LatLng(latitude, longitude);
+        mf = mMap.addMarker(new MarkerOptions().position(latLng));
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
 
     public class JSONParser {
