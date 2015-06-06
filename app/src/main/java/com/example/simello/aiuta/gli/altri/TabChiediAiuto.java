@@ -98,6 +98,7 @@ public class TabChiediAiuto extends FragmentActivity {
     protected void onStop()
     {
         super.onStop();
+        /*
         try
         {
             socket.close();
@@ -106,6 +107,7 @@ public class TabChiediAiuto extends FragmentActivity {
         {
             e.printStackTrace();
         }
+        */
     }
 
     public static Socket getSocket()

@@ -1,5 +1,6 @@
 package com.example.simello.aiuta.gli.altri;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -205,6 +206,14 @@ public class HelloBubblesActivity extends Fragment {
                     //Questo darà altri problemi.... Da sostituire con la versione del server isi pisi
                     if(bufferUser.ready()) {
                         risposta = socketInput.readLine();
+                        if(!aiutato && risposta.compareTo("___RichiestaCompletata_-_@_-_TermineOperazione!___") == 0)
+                        {
+                            Intent i = new Intent(getActivity(), RichiestaCompletata.class);
+                            startActivity(i);
+                            socket.close();
+                        }
+
+
                         if (risposta != null) {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
