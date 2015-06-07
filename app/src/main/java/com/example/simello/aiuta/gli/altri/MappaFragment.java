@@ -140,6 +140,7 @@ public class MappaFragment extends Fragment implements LocationListener
         double longitude = location.getLongitude();
 
         LatLng latLng = new LatLng(latitude, longitude);
+        mf.remove();
         mf = mMap.addMarker(new MarkerOptions().position(latLng));
 
     }
