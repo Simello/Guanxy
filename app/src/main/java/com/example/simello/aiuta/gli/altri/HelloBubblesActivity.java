@@ -40,7 +40,6 @@ public class HelloBubblesActivity extends Fragment {
     private ListView lv;
     private EditText editText1;
     private Button btnSend;
-    private ArrayList<Double> messagesReceived;
     public BadgeView badgeView;
     public TabPageIndicator indicator;
     public static boolean isVisibile;
@@ -50,7 +49,7 @@ public class HelloBubblesActivity extends Fragment {
     private static PrintWriter socketOutput = null;
     BufferedReader bufferUser = null;
     public JSONObject invio = null;
-
+    private static HashMap<String,String> chat; //Da salvare la chat, x quando si cambia di fragment
 
 
 
@@ -65,8 +64,8 @@ public class HelloBubblesActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_discuss, container, false);
         lv = (ListView)view.findViewById(R.id.listView1);
+        chat = new HashMap<String,String>();
 
-        Richiesta richiesta = Richiesta.getRichiesta();
         invio = new JSONObject();
         try {
             invio.put("Invia", User.getUser().getIdUser().toString());
@@ -93,9 +92,6 @@ public class HelloBubblesActivity extends Fragment {
         }
         badgeView = new BadgeView(getActivity() , indicator);
 
-
-
-        messagesReceived = new ArrayList<Double>();
 
 
         adapter = new DiscussArrayAdapter(getActivity(), R.layout.listitem_discuss);
@@ -203,14 +199,18 @@ public class HelloBubblesActivity extends Fragment {
                         }
 
                     }
-                    //Questo darà altri problemi.... Da sostituire con la versione del server isi pisi
+                    //Risolto con bufferUser.ready()
                     if(bufferUser.ready()) {
                         risposta = socketInput.readLine();
+                        //Non ottimizzato...
                         if(!aiutato && risposta.compareTo("___RichiestaCompletata_-_@_-_TermineOperazione!___") == 0)
                         {
-                            Intent i = new Intent(getActivity(), RichiestaCompletata.class);
-                            startActivity(i);
                             socket.close();
+                            Intent i = new Intent(getActivity(), RichiestaCompletata.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+
+
                         }
 
 
