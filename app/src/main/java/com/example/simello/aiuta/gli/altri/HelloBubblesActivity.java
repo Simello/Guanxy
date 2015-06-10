@@ -49,7 +49,7 @@ public class HelloBubblesActivity extends Fragment {
     private static PrintWriter socketOutput = null;
     BufferedReader bufferUser = null;
     public JSONObject invio = null;
-    private static HashMap<String,String> chat; //Da salvare la chat, x quando si cambia di fragment
+    private static HashMap<String,String> chat; //Non credo vada bene un HashMap... Forse una struttura di tipo LIFO?
 
 
 
@@ -64,7 +64,6 @@ public class HelloBubblesActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_discuss, container, false);
         lv = (ListView)view.findViewById(R.id.listView1);
-        chat = new HashMap<String,String>();
 
         invio = new JSONObject();
         try {
